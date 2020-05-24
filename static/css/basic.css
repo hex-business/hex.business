@@ -1,0 +1,285 @@
+
+
+/*
+.gallery .controls {
+	width:1000px;
+	height: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 10;
+	position:relative;
+} */
+.openButton {
+	float: right;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	Height: auto;
+	padding: 0px;
+}
+
+.openButton img {
+
+}
+.closeButton {
+	margin-right: 20px;
+	Height: auto;
+	padding: 0px;
+	float:right;
+}
+.closeButton img  {
+	max-width: 50px;
+}
+.hex-business
+{
+	width: 150px;
+}
+.hb-left{
+	float:left;
+}
+.data
+{
+	float:left;
+	padding:10px;
+	position:relative;
+}
+.datacell {
+	display:block;
+	float:left;
+	/*max-width: 33.333333%;*/
+	min-width: 250px!important;
+	border: 1px blue;
+	margin: 3px;
+	background-color: #fff;
+	color: black;
+	font-size: 15px;
+	padding: 4px;
+}
+
+.currLabel{
+	width:140px;
+	float:left;
+}
+
+.currAmount{
+	width:150px;
+	float:left;
+}
+
+.currArrow{
+	width:42px;
+	float:left;
+}
+.percent-text-up, .percent-text-down {
+	width:85px;
+	float:left;
+}
+.datarow{
+	width:100%;
+	padding:0;
+	display:block;
+	clear:both;
+}
+ .d-md-block {
+	 clear: both;
+ }
+
+.table-cell .stat-text .row
+{
+	background-color: transparent;
+}
+.hex-business-text{
+	width:140px;
+	height:96px;
+	float:left;
+	position:relative;
+	top: -50px;
+}
+
+.menu{
+	display:none;
+	width: auto;
+	background: inherit;
+	height:auto;
+	margin: 0;
+	padding: 5px;
+}
+.menu-item{
+	font-size: 15px;
+	padding:2px;
+	line-height: 1.1;
+	text-align: left;
+}
+
+.menu-title {
+	font-size : 30px;
+	line-height: 1.1;
+	padding:2px;
+}
+
+.expand {
+	display: none;
+}
+.menu:target {
+	display: block;
+}
+
+.col-md-6
+{
+	float: left;
+}
+.youtubeEmbed {
+	width: 1145px;
+	height: 644px;
+	margin: auto;
+}
+
+@media only screen and (max-width: 2400px)  {
+	.youtubeEmbed {
+		width: 859px;
+		height: 483px;
+	}
+	.currLabel{
+		width:140px;
+	}
+
+	.currAmount{
+		width:150px;
+	}
+
+	.currArrow{
+		width:42px;
+	}
+	.percent-text-up, .percent-text-down {
+		width:85px;
+	}
+}
+@media only screen and (max-width: 1860px) and (min-width: 1601px) {
+	.currLabel{
+		width:140px;
+		float:left;
+	}
+
+	.currAmount{
+		width:130px;
+		float:left;
+	}
+
+	.currArrow{
+		width:45px;
+		float:left;
+	}
+	.percent-text-up, .percent-text-down {
+		width:70px;
+		float:left;
+	}
+}
+
+@media only screen and (max-width: 1600px) and (min-width: 1281px)  {
+	.youtubeEmbed {
+		width: 859px;
+		height: 483px;
+	}
+
+	.currLabel{
+		width:110px;
+		float:left;
+	}
+
+	.currAmount{
+		width:120px;
+		float:left;
+	}
+
+	.currArrow{
+		width:40px;
+		float:left;
+	}
+	.percent-text-up, .percent-text-down {
+		width:70px;
+		float:left;
+	}
+}
+
+@media only screen and (max-width: 1280px) and (min-width: 961px)  {
+	.youtubeEmbed {
+		width: 859px;
+		height: 483px;
+	}
+
+	.currLabel{
+		width:110px;
+		float:left;
+	}
+
+	.currAmount{
+		width:120px;
+		float:left;
+	}
+
+	.currArrow{
+		width:40px;
+		float:left;
+	}
+	.percent-text-up, .percent-text-down {
+		width:70px;
+		float:left;
+	}
+}
+@media only screen and (max-width: 960px) {
+	.youtubeEmbed {
+		width: 760px;
+		height: 427px;
+	}
+
+	.currLabel{
+			width: 80px;
+		float:left;
+	}
+
+	.currAmount{
+		width: 105px;
+		float:left;
+	}
+
+	.currArrow{
+		width: 35px;
+		float:left;
+	}
+	.percent-text-up, .percent-text-down {
+		width:50px;
+		float:left;
+	}
+}
+
+
+@media only screen and (max-width: 800px) {
+	.youtubeEmbed {
+		width: 620px;
+		height: 400px;
+	}
+}
+@media only screen and (max-width: 640px) {
+	.youtubeEmbed {
+		width: 480px;
+		height: 320px;
+	}}
+@media only screen and (max-width: 480px) {
+	.youtubeEmbed {
+		width: 356px;
+		height: 240px;
+	}}
+@media only screen and (max-width: 360px) {
+	.youtubeEmbed {
+		width: 300px;
+		height: 200px;
+	}}
+@media only screen and (max-width: 320px) {
+	.youtubeEmbed {
+		display:none;
+	}
+	/*When the player and gallery disappear the layout gets wonky*/
+	.project-icons{
+		padding-bottom: 50px;
+	}
+}
