@@ -47,25 +47,28 @@ body {
 	width: 150px;
 }
 .hb-left{
-	float:left;
+	/*float:left;*/
 }
 .data
 {
-	float:left;
-	padding:10px;
+	/*float:left;*/
+	/*padding:10px;*/
 	position:relative;
 }
+
 .datacell {
-	display:block;
 	float:left;
 	/*max-width: 33.333333%;*/
 	min-width: 250px!important;
 	border: 1px blue;
-	margin: 3px;
+/*	margin: 3px;*/
+	width: 33%;
 	background-color: #fff;
 	color: black;
 	font-size: 15px;
 	padding: 4px;
+	display: flex;
+	align-items: center;
 }
 
 .currLabel{
@@ -96,16 +99,45 @@ body {
 	 clear: both;
  }
 
+.flex-wrap {
+	display: flex;
+	align-items: center;
+}
+
+
+
+.stat-text {
+	font-family: "Arial";
+    font-size: 15px;	
+    /*background-color: #fff;*/
+    margin-top: 7px!important;
+    color: grey;
+    text-align: left;
+}
+
+.table-title {
+    margin-top: 8px;
+    padding: 5px;
+    color: #fff;
+    text-align: left;
+    background-color: #49a9ff;	
+}
+
 .table-cell .stat-text .row
 {
 	background-color: transparent;
 }
 .hex-business-text{
-	width:140px;
-	height:96px;
-	float:left;
-	position:relative;
-	top: -50px;
+    width: 140px;
+    height: 96px;
+    float: left;
+    position: relative;
+    margin-top: 0px;
+}
+.inline-blocks {
+	display: flex !important;
+	align-items: center;
+	justify-content: flex-start;
 }
 
 .menu{
@@ -158,6 +190,12 @@ body {
     right: 15px;
     width: 25px;	
 }
+
+.inline-tables .table-cell {
+	display: flex;
+	align-items: center;
+}
+
 
 @media only screen and (max-width: 2400px)  {
 	.youtubeEmbed {
@@ -251,6 +289,72 @@ body {
 		float:left;
 	}
 }
+
+
+@media only screen and (max-width: 1024px)  {
+	.inline-blocks {
+		display: block !important;
+	}
+	.data {
+		padding: 0px;
+	}
+}
+
+@media only screen and (max-width: 870px)  {
+	.datacell {
+		width: 49%;
+		margin-right: 5px;
+	}
+}
+
+@media only screen and (max-width: 870px)  {
+	.datacell {
+		width: 100%;
+		padding: 5px 10px;
+	}
+	.datacell .currLabel {
+		width: 50%;
+		font-size: 22px;
+	}
+
+	.datacell .currAmount {
+		width: 30%;
+		font-size: 22px;
+	}	
+
+	.datacell .currArrow {
+		width: 10%;
+	}		
+
+	.datacell .currArrow .img{
+		margin-top: 7px;
+	}			
+
+	.inline-tables {
+		padding-top: 10px;
+	}
+
+	.inline-tables .table-margin {
+		margin-right: -15px !important;
+	}
+
+	.inline-tables .col-md-6 {
+		float: none;
+		width: 100%;
+		max-width: 100%;
+	}
+	.flex-wrap {
+		display: block !important;
+	}
+	.flex-wrap .no-padding {
+		float: none;
+		width: 100%;
+		max-width: 100%;
+	}	
+}
+
+
+
 @media only screen and (max-width: 960px) {
 	.youtubeEmbed {
 		width: 760px;

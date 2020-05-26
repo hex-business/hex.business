@@ -6772,11 +6772,9 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
 	.d-md-inline-block {
 		display: inline-block !important
 	}
-
 	.d-md-block {
-		display: block !important
-	}
-
+	    display: block!important;
+	}	
 	.d-md-table {
 		display: table !important
 	}

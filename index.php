@@ -23,8 +23,8 @@ $rateData = $rates->getRateData();
 	<link href="./static/css/main.css" rel="stylesheet">
 	<link rel="stylesheet" href="./static/css/gallery.prefixed.css">
 	<link rel="stylesheet" href="./static/css/gallery.theme.css?v=6">
-	<link rel="stylesheet" href="./static/css/basic.css?v=6">
 	<link rel="stylesheet" href="./static/css/modal.css?v=6">
+	<link rel="stylesheet" href="./static/css/basic.css?v=0.0.1">
 	<script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
 	<script src="./assets/js/contractABI.js"></script>
 	<script src="./assets/js/etherscan.js"></script>
@@ -112,7 +112,8 @@ $rateData = $rates->getRateData();
 
 <body>
 
-<div id="root"   >
+
+<div id="root">
 	<a name="outsideMenu"></a>
 	<div class="App">
 		<div class="menu" id="menu"><a name="menu"></a>
@@ -313,7 +314,7 @@ $rateData = $rates->getRateData();
 					</div>
 
 
-					<div class="d-md-block">
+					<div class="d-md-block inline-blocks">
 
 						<div class="hb-left">
 							<div class="hex-business">
@@ -325,7 +326,7 @@ $rateData = $rates->getRateData();
 
 							<div class="datarow">
 
-								<div class="datacell">
+								<div class="datacell stat-text">
 
 
 									<div class="currLabel" lang="en">
@@ -333,7 +334,7 @@ $rateData = $rates->getRateData();
 									</div>
 
 									<div class="currAmount">
-										<strong>$<?php echo number_format($rateData['hexUsd'], 8) ?></strong>
+										<strong><?php echo number_format($rateData['hexUsd'], 8) ?></strong>
 									</div>
 
 
@@ -359,7 +360,7 @@ $rateData = $rates->getRateData();
 								</div>
 
 
-								<div class="datacell">
+								<div class="datacell stat-text">
 
 
 									<div class="currLabel" lang="en">
@@ -389,7 +390,7 @@ $rateData = $rates->getRateData();
 								</div>
 
 
-								<div class="datacell">
+								<div class="datacell stat-text">
 
 
 									<div class="currLabel" lang="en">
@@ -417,9 +418,8 @@ $rateData = $rates->getRateData();
 
 								</div>
 
-							</div>
-							<div class="datarow">
-								<div class="datacell">
+
+								<div class="datacell stat-text">
 									<div class="currLabel" lang="en"><strong>BTC</strong>/USD</div>
 									<div class="currAmount">
 										<strong>$<?php echo round(floatval($rateData['btcUsd']) / 1000, 4) ?>
@@ -440,7 +440,7 @@ $rateData = $rates->getRateData();
 										<?php echo $rateData['btcUsd24Change'] ?>%
 									</div>
 								</div>
-								<div class="datacell">
+								<div class="datacell stat-text">
 									<div class="currLabel" lang="en"><strong>ETH</strong>/USD</div>
 									<div class="currAmount">
 										<strong>$<?php echo $rateData['ethUsd'] ?></strong></div>
@@ -464,7 +464,7 @@ $rateData = $rates->getRateData();
 							</div>
 						</div>
 					</div>
-					<div class="d-md-block">
+					<div class="d-md-block inline-tables">
 						<div class="col-md-6 col-12">
 							<div class="table-title stat-text table-margin row"><strong>总览 </strong></div>
 							<div class="table-cell stat-text table-margin row">
