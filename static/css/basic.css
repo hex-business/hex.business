@@ -170,9 +170,6 @@ body {
 .expand {
 	display: none;
 }
-.menu:target {
-	display: block;
-}
 
 .col-md-6
 {

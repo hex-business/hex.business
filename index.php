@@ -630,49 +630,49 @@ $rateData = $rates->getRateData();
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6">总供应量</div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="total_supply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6">已冻结HXY量</div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="frzoneTokenBalance">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6">流动供应量</div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id ="calculating_supply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6">已批准的金额</div>
-								<div class="col-6"><strong lang="en">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="approved_amount">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6">总空投金额</div>
-								<div class="col-6"><strong lang="en">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="total_approved">0 HEX</strong></div>
 							</div>
 						</div>
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6">已锁定的HXY</div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="locked_tokens">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6">您的HXY利息</div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="interest">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6">您已冻结的HXY</div>
-								<div class="col-6"><strong>0 HXY</strong></div>
+								<div class="col-6"><strong id="tokenFrozenBalances">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6">最大供应量</div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="maxSupply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6">您已空投的股利</div>
-								<div class="col-6"><strong lang="en">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="your_airdropped_divs">0 HEX</strong></div>
 							</div>
 						</div>
 					</div>
-					<p class="referral-text">您的转介连结：<span> https://hexbusiness.net/?r=</span> <br></p></div>
+					<p class="referral-text">您的转介连结：<span id="referal_url"></span> <br></p></div>
 			</div>
 			<div class=" bottom-shadow row">
 				<div class="col">
