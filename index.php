@@ -662,6 +662,10 @@ else
 								<div class="col-6"><?php echo $phrases['total_airdrop_amount'] ?></div>
 								<div class="col-6"><strong lang="en" id="total_approved">0 HEX</strong></div>
 							</div>
+							<div class="table-cell stat-text stat-cell row">
+								<div class="col-6"><?php echo $phrases['total_hxy_conversion'] ?></div>
+								<div class="col-6"><strong id="total_hxy_conversion">0 HXY</strong></div>
+							</div>							
 						</div>
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
@@ -684,6 +688,10 @@ else
 								<div class="col-6"><?php echo $phrases['Your_airdropped_dividends'] ?></div>
 								<div class="col-6"><strong lang="en" id="your_airdropped_divs">0 HEX</strong></div>
 							</div>
+							<div class="table-cell stat-text stat-cell row">
+								<div class="col-6"><?php echo $phrases['total_hex_conversion'] ?></div>
+								<div class="col-6"><strong id="total_hex_conversion">0 HEX</strong></div>
+							</div>							
 						</div>
 					</div>
 					<p class="referral-text">您的转介连结：<span id="referal_url"></span> <br></p></div>
