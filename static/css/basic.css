@@ -6,10 +6,10 @@
 
 body {
 	font-weight: 400;
-    line-height: 1.5;	
+    line-height: 1.5;
 	margin: 0;
     font-family: "Palanquin";
-    -webkit-font-smoothing: antialiased;    
+    -webkit-font-smoothing: antialiased;
 }
 
 /*
@@ -108,7 +108,7 @@ body {
 
 .stat-text {
 	font-family: "Arial";
-    font-size: 15px;	
+    font-size: 15px;
     /*background-color: #fff;*/
     margin-top: 7px!important;
     color: grey;
@@ -120,7 +120,7 @@ body {
     padding: 5px;
     color: #fff;
     text-align: left;
-    background-color: #49a9ff;	
+    background-color: #49a9ff;
 }
 
 .table-cell .stat-text .row
@@ -188,7 +188,7 @@ body {
     position: fixed;
     top: 10px;
     right: 15px;
-    width: 25px;	
+    width: 25px;
 }
 
 .inline-tables .table-cell {
@@ -320,15 +320,15 @@ body {
 	.datacell .currAmount {
 		width: 30%;
 		font-size: 22px;
-	}	
+	}
 
 	.datacell .currArrow {
 		width: 10%;
-	}		
+	}
 
 	.datacell .currArrow .img{
 		margin-top: 7px;
-	}			
+	}
 
 	.inline-tables {
 		padding-top: 10px;
@@ -350,7 +350,7 @@ body {
 		float: none;
 		width: 100%;
 		max-width: 100%;
-	}	
+	}
 }
 
 
@@ -411,4 +411,8 @@ body {
 	.project-icons{
 		padding-bottom: 50px;
 	}
+}
+.langImage
+{
+	margin-bottom: 7px;
 }
