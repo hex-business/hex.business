@@ -6,10 +6,12 @@ $rateData = $rates->getRateData();
 if (!empty($_GET['lang']) and ($_GET['lang'] == 'en'))
 {
 	require_once __DIR__ . '/includes/enlang.php';
+	$language = 'en';
 }
 else
 {
 	require_once __DIR__ . '/includes/cnlang.php';
+	$language = 'cn';
 }
 ?>
 
@@ -873,16 +875,16 @@ else
 		</div>
 
 
-		<!--
 		<div class="section bottom-shadow row">
 			<div class="col">
-				<div class="row"><p class="title"> 欲知更多信息请<strong>订阅</strong></p></div>
-				<div class="justify-content-center mb-5 mt-3 d-flex flex-wrap">
-					<div class="col-sm-5 col-10"><input class="email-input w-100" type="text" placeholder="电子邮件">
-					</div>
-					<div class="col-sm-2 col-4">
-						<button type="button" class="sign-up btn btn-light"><strong>订阅</strong></button>
-					</div>
+				<div class="row"><p class="title"> <?php echo $phrases['for_more_information_subscribe'] ?></p></div>
+				<div class="justify-content-center emailform">
+					<form action="./handlesubscription.php?lang=<?php echo $language?>" method="post">
+						<div ><input class="email-input" type="text" name="email" placeholder="<?php echo $phrases['email'] ?>"></div>
+						<div class="sign-up">
+							<button type="submit" class="sign-up btn btn-light"><strong><?php echo $phrases['subscription'] ?></strong></button>
+						</div>
+					</form>
 				</div>
 				<div class="justify-content-center row">
 					<div class="col-md-1 col-sm-2 col-4"><a href="https://t.me/hexmobileapp"><img
@@ -894,7 +896,6 @@ else
 				</div>
 			</div>
 		</div>
-		-->
 
 
 		<div class="section bottom-shadow  row">

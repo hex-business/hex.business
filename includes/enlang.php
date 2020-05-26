@@ -51,5 +51,17 @@
 	'freeze'                           => 'Freeze',
 	'thaw'                             => 'Thaw',
 	'project'                          => 'Project',
-	'on' => 'On',
+	'on'                               => 'On',
+	'for_more_information_subscribe'   => 'For more information please <strong> subscribe </strong>' ,
+	'email'	=> 'Email',
+	'subscription' => 'Subscription',
+	'subscription' =>  '订阅',
+	'subscribe_no_email' => 'You did not include an email.  Please use your browser to go back, or click <a href="./index.php?lang=en"> HERE </a> and enter one',
+	'subscribe_invalid_email' => 'That is not a valid email.  Please use your browser to go back, or click <a href="./index.php?lang=en"> HERE </a> and enter one.',
+	'subscribe_good' => 'Thank you for subscribing to our notification service.  You will soon get an email, confirming your interest. 
+	Please reply to that and you will be signed up for our notifications.
+	You can use your browser back button or click <a href="./index.php?lang=en"> HERE </a> to return to the site.',
+	'subscribe_error' => '<h3>Ouch&#46; That send failed. We are sorry, and ask you to come back in a few hours<br/>
+	You can use your browser back button or click <a href="./index.php?lang=en"> HERE </a> to return to the site.',
+
 ];

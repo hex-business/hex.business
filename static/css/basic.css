@@ -416,3 +416,32 @@ body {
 {
 	margin-bottom: 7px;
 }
+.email-input{
+	width:600px;
+}
+.emailform{
+	width:auto;
+	background-color: transparent;
+	color: #98cef5;
+	font-weight: bold;
+	margin: auto;
+	padding: 10px;
+}
+.sign-up {
+	border: 5px solid #98cef5;
+	width: 250px !important;
+	margin:auto;
+
+}
+.email-input, .sign-up  {
+	border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-radius-topright: 6px;
+	border-top-right-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-moz-border-radius-bottomright: 6px;
+	border-bottom-right-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	border-bottom-left-radius: 6px;
+}
