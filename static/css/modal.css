@@ -1,3 +1,4 @@
+
 .modal-content {
     background-image: linear-gradient(0deg,#45b8ff,#8941fc);
 }
@@ -130,6 +131,10 @@ img {
 }
 .hand{
 	cursor: pointer;
+}
+.ismodal{
+	opacity: 20%;
+	display: block!important;
 }
 @media (min-width: 576px)
 {
