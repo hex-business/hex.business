@@ -30,8 +30,6 @@
 											web3.eth.getBalance(accounts[0])
 											.then(function ( metamaskEthBalance ) {
 
-												var formData = new FormData();
-
 
 												allowance = (allowance / 100000000) ?? 0;
 												let interest = (tokenFrozenBalances == 0 ? 0 : (freezingReward / 100000000) ?? 0);
@@ -65,28 +63,6 @@
 												document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
 												document.getElementById("referal_url").innerHTML = refereal_url;
 												
-
-												// document.getElementById("total_supply").text = totalSupply + " HXY";
-												formData.append("totalSupply", totalSupply);
-												formData.append("maxSupply", maxSupply);
-												formData.append("tokenFrozenBalances", tokenFrozenBalances);
-												formData.append("balanceOf", balanceOf);
-												formData.append("freezingReward", freezingReward);
-												formData.append("lockedToken", lockedToken);
-												formData.append("frzoneTokenBalance", frzoneTokenBalance);
-												formData.append("allowance", allowance);
-												formData.append("metamaskEthBalance", metamaskEthBalance);									
-
-											    var xmlHttp = new XMLHttpRequest();
-											        xmlHttp.onreadystatechange = function()
-											        {
-											            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
-											            {
-											                //alert(xmlHttp.responseText);
-											            }
-											        }
-											        xmlHttp.open("post", "server.php"); 
-											        xmlHttp.send(formData); 
 
 											});
 
