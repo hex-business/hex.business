@@ -1,33 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@shaunnewsum2020 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-amirisbrown
-/
-testhexbiz
-3
-00
- Code
- Issues 0
- Pull requests 0 Actions
- Projects 0
- Wiki
- Security 0
- Insights
-testhexbiz/static/css/modal.css
-@talentdevsilvio talentdevsilvio Show Popup
-76d25c2 30 minutes ago
-143 lines (142 sloc)  2.92 KB
-  
  .modal-content {
     background-image: linear-gradient(0deg,#45b8ff,#8941fc);
 }
@@ -164,6 +134,10 @@ img {
 .hand{
 	cursor: pointer;
 }
+.ismodal{
+	opacity: 20%;
+	display: block!important;
+}
 @media (min-width: 576px)
 {
 .modal-dialog {
@@ -171,15 +145,3 @@ img {
     margin: 1.75rem auto;
 }
 }
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
