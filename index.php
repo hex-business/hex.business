@@ -61,11 +61,11 @@ $rateData = $rates->getRateData();
 			</div>
 
 			<!-- add >>> lang="en-US" <<< inline, not sure the correct way pls help -->
-			<span class="menu-item ">
+			<div class="menu-item ">
 				<a href="https://hex.win/" lang="en">
 					hex
 				</a>
-			</span>
+			</div>
 
 			<!-- how to partially declair BOTH the en-US and the zh-Hans without messing it up? I set zh-Hans as the overall document default btw -->
 			<div class="menu-item " >
