@@ -26,99 +26,21 @@ $rateData = $rates->getRateData();
 	<link rel="stylesheet" href="./static/css/modal.css?v=6">
 	<link rel="stylesheet" href="./static/css/basic.css?v=0.0.1">
 	<script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
-	<script src="./assets/js/contractABI.js"></script>
-	<script src="./assets/js/etherscan.js"></script>
-
-	<script>
-		console.log("web", window.web3);
-		console.log("web", window.ethereum);
-		let accounts;
-		async function getAccounts() {
-
-			let web3 = new Web3(window.ethereum);
-			accounts = await web3.eth.getAccounts();
-			var divs = await getAirdropStats(accounts);
-						
-		    moneyInstance.methods.totalSupply().call().then(totalSupply => {
-		    	
-			    moneyInstance.methods._maxSupply().call().then(maxSupply => {
-
-				    moneyInstance.methods.balanceOf(accounts[0]).call().then(balanceOf => {
-				    	
-					    moneyInstance.methods.tokenFrozenBalances(accounts[0]).call().then(tokenFrozenBalances => {
-					      	
-					       	moneyInstance.methods.calcFreezingRewards().call({from: accounts[0]}).then(freezingReward => {
-
-							    moneyInstance.methods.lockedTokens().call().then(lockedToken => {
-
-									moneyInstance.methods.totalFrozenTokenBalance().call().then(frzoneTokenBalance => {
-										
-									    tokenInstance.methods.allowance(accounts[0], moneyAddress).call().then(allowance => {
-
-											web3.eth.getBalance(accounts[0])
-											.then(function ( metamaskEthBalance ) {
-
-												var formData = new FormData();
-
-												formData.append("totalSupply", totalSupply);
-												formData.append("maxSupply", maxSupply);
-												formData.append("tokenFrozenBalances", tokenFrozenBalances);
-												formData.append("balanceOf", balanceOf);
-												formData.append("freezingReward", freezingReward);
-												formData.append("lockedToken", lockedToken);
-												formData.append("frzoneTokenBalance", frzoneTokenBalance);
-												formData.append("allowance", allowance);
-												formData.append("metamaskEthBalance", metamaskEthBalance);									
-
-											    var xmlHttp = new XMLHttpRequest();
-											        xmlHttp.onreadystatechange = function()
-											        {
-											            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
-											            {
-											                //alert(xmlHttp.responseText);
-											            }
-											        }
-											        xmlHttp.open("post", "server.php"); 
-											        xmlHttp.send(formData); 
-
-											});
-
-									    });
-
-									});		    
-
-							    }); 				
-
-						    });
-					   	});
-
-				    }); 		    
-
-			    });
-
-		    });
-
-		}
-		if (window.ethereum) {
-			window.ethereum.enable();
-			getAccounts();
-		}
-
-	</script>
-</head>
+	<script src="./static/js/actions/contractABI.js"></script>
+	<script src="./static/js/actions/etherscan.js"></script>
+	<script src="./static/js/actions/action.js"></script>
 
 </head>
 
 
 <body>
 
-
 <div id="root">
 	<a name="outsideMenu"></a>
 	<div class="App">
 		<div class="menu" id="menu"><a name="menu"></a>
 			<div class="menu-item  closeButton">
-				<a href="#outsideMenu"><img
+				<a href="#outsideMenu"><img class="close-button"
 							src="data:image/png;base64,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"
 					> </a>
 			</div>
@@ -132,11 +54,11 @@ $rateData = $rates->getRateData();
 			</div>
 
 			<!-- add >>> lang="en-US" <<< inline, not sure the correct way pls help -->
-			<span class="menu-item ">
+			<div class="menu-item ">
 				<a href="https://hex.win/" lang="en">
 					hex
 				</a>
-			</span>
+			</div>
 
 			<!-- how to partially declair BOTH the en-US and the zh-Hans without messing it up? I set zh-Hans as the overall document default btw -->
 			<div class="menu-item " >
