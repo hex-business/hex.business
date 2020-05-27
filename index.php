@@ -194,10 +194,10 @@ else
 
 					<ul class="navbar-nav ml-auto">
 						<li class="my-auto hand">
-							<a href="./index.php?lang=en"><img src="./static/media/entranslation.jpg" alt="Use English" class="langImage"> </a>
+							<a href="./index.php?lang=en"><img src="./static/media/entranslation.png" alt="Use English" class="langImage"> </a>
 						</li>
 						<li class="my-auto hand">
-							<a href="./index.php?lang=cn"><img src="./static/media/cntranslation.jpg" alt="使用中文" class="langImage"> </a>
+							<a href="./index.php?lang=cn"><img src="./static/media/cntranslation.png" alt="使用中文" class="langImage"> </a>
 						</li>
 
 						<li class="my-auto hand" id='approve'>
