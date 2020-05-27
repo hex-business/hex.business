@@ -49,7 +49,7 @@ else
 	<div class="App">
 		<div class="menu" id="menu"><a name="menu"></a>
 			<div class="menu-item  closeButton">
-				<a href="#outsideMenu"><img class="close-button"
+				<a href="#" id="menuclose"><img class="close-button"
 							src="data:image/png;base64,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"
 					> </a>
 			</div>
@@ -208,7 +208,7 @@ else
 						<li class="my-auto">
 							<div>
 
-								<a href="#menu" class="openButton">
+								<a href="#" class="openButton" id="menuopen">
 									<!-- will clean this mess up later -->
 									<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG0AAABVCAYAAABD0WqWAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kTtIw0Acxr8+pKIVQTuIOGSoThZ8IY5ahSJUCLVCqw4ml76gSUOS4uIouBYcfCxWHVycdXVwFQTBB4iTo5Oii5T4v6TQIsaD4358d9/H3XeAv15mqhkcA1TNMlKJuJDJrgqhVwTRh26MIywxU58TxSQ8x9c9fHy9i/Es73N/jh4lZzLAJxDPMt2wiDeIpzctnfM+cYQVJYX4nHjUoAsSP3JddvmNc8FhP8+MGOnUPHGEWCi0sdzGrGioxFPEUUXVKN+fcVnhvMVZLVdZ8578heGctrLMdZpDSGARSxAhQEYVJZRhIUarRoqJFO3HPfyDjl8kl0yuEhg5FlCBCsnxg//B727N/OSEmxSOAx0vtv0xDIR2gUbNtr+PbbtxAgSegSut5a/UgZlP0mstLXoE9G4DF9ctTd4DLneAgSddMiRHCtD05/PA+xl9UxbovwW61tzemvs4fQDS1FXyBjg4BEYKlL3u8e7O9t7+PdPs7wdVH3KbR7qlWwAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+QEEg0eKkmzr7oAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAABxUlEQVR42u3bsWoUURyF8e9EsA0ItmkjphSsFAsrYUEEC0EEq4ASyBsIQp5BMY1g4QMIC1ZCGsUiIAQCVkKqtIFAwObajMNkUdJEcv/y/WCbne4c7szswgGVk79daK3dAVaN6ML8BHaS/DiztNbaM2ALuGJuXfgCPE/y7Y+ltdbeAU/MqTsnwL0kO6dKG07YK/Pp1gGwluR4aSjsEvDSXLq2ArwAWBq+uAlcNZfuPZiWtmIeZU7bWNqxeZRwNC1tzzxK2BtLS3IAzM2ke9uLr/yrwFdg2Wy69CHJ/entkSTfgdveKrs9YY/HrhavttYuAxvALeCGb5YXZnf4vP/9T4gkSZIkSZIkSZIkSZIk6Tw53+2X893CnO8W5Xy3KOe7BTnfLcr5btHT5ny3GOe7BTnfLcj5bjHOdwueMOe7BTjflSRJkiRJkiRJkiRJkqR/yvluv5zvFnbmfPct8NScunMCzJJ8OlVaa20deGM+3ToCriU5nM53t8yla8vAJjjfrebhtDRHFjU43y36M8D5bjG7Y2nDfPejmXTv9eIr/3XgM853ezVPMpveHkmyD9wF9s2nO9vAo7GrxavOd7t6fjnf/V/8AkkMlOopfThoAAAAAElFTkSuQmCC"
 									     class="menu-icon" alt="menu">
@@ -845,6 +845,41 @@ else
 </body>
 
 <script>
+
+    var menuArea = document.getElementById('menu');
+
+	document.getElementById("menuopen").addEventListener("click", function(e){
+		e.stopPropagation();
+		document.getElementById('menu').style.display = "block";
+	});
+
+	document.getElementById("menuclose").addEventListener("click", function(e){
+		e.stopPropagation();
+		document.getElementById('menu').style.display = "none";
+	});
+
+    document.addEventListener('click', function(event) {
+        var isClickInside = menuArea.contains(event.target);
+        if (isClickInside) {
+        	var menuClose = document.getElementById('menuclose');
+
+        	if (menuClose.contains(event.target)) {
+        		document.getElementById('menu').style.display = "block";
+        	}
+        }
+        else {
+        	var menuOpen = document.getElementById('menuopen');
+
+        	if (!menuOpen.contains(event.target)) {
+        		document.getElementById('menu').style.display = "none";	
+        	}
+        	else {
+        		document.getElementById('menu').style.display = "block";	
+        	}
+        }
+    });
+
+
 	document.getElementById("approve").addEventListener("click", function(e){
 		e.stopPropagation();
 		showModal();
