@@ -240,6 +240,23 @@ body {
 	display: none;
 }
 
+.gallery .controls {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    border: 0px;
+    bottom: 10vh;
+}
+
+.slider-dot {
+	margin: 0 10px;
+}
+
+.slider-dot img {
+	width: 20px;
+}
+
 @media only screen and (max-width: 2400px)  {
 	.youtubeEmbed {
 		width: 859px;
@@ -305,6 +322,9 @@ body {
 		width:70px;
 		float:left;
 	}
+	.gallery .controls {
+	    bottom: 6vh;
+	}	
 }
 
 @media only screen and (max-width: 1280px) and (min-width: 961px)  {
@@ -331,6 +351,10 @@ body {
 		width:70px;
 		float:left;
 	}
+	.gallery .controls {
+	    bottom: 4vh;
+	}
+
 }
 
 
@@ -343,11 +367,54 @@ body {
 	}
 }
 
+@media only screen and (max-width: 960px) {
+	.youtubeEmbed {
+		width: 760px;
+		height: 427px;
+	}
+
+	.currLabel{
+			width: 80px;
+		float:left;
+	}
+
+	.currAmount{
+		width: 105px;
+		float:left;
+	}
+
+	.currArrow{
+		width: 35px;
+		float:left;
+	}
+	.percent-text-up, .percent-text-down {
+		width:50px;
+		float:left;
+	}
+	.gallery .controls {
+	    bottom: 6vh;
+	}	
+}
+
 @media only screen and (max-width: 870px)  {
 	.datacell {
 		width: 49%;
 		margin-right: 5px;
 	}
+
+	.slider-dot {
+		margin: 0 6px;
+	}
+	.gallery .controls {
+	    bottom: 2vh;
+	}
+
+	.slider-dot img {
+		width: 15px;
+	}	
+	.gallery .controls {
+	    bottom: 4vh;
+	}		
 }
 
 @media only screen and (max-width: 870px)  {
@@ -403,31 +470,7 @@ body {
 
 
 
-@media only screen and (max-width: 960px) {
-	.youtubeEmbed {
-		width: 760px;
-		height: 427px;
-	}
 
-	.currLabel{
-			width: 80px;
-		float:left;
-	}
-
-	.currAmount{
-		width: 105px;
-		float:left;
-	}
-
-	.currArrow{
-		width: 35px;
-		float:left;
-	}
-	.percent-text-up, .percent-text-down {
-		width:50px;
-		float:left;
-	}
-}
 
 
 @media only screen and (max-width: 800px) {
@@ -435,6 +478,11 @@ body {
 		width: 620px;
 		height: 400px;
 	}
+
+	.gallery .controls {
+	    bottom: 4vh;
+	}	
+
 }
 @media only screen and (max-width: 640px) {
 	.youtubeEmbed {
@@ -445,6 +493,13 @@ body {
 		width: 100% !important;
 		border: 1px solid #ccc !important;
 	}
+
+	.sign-up {
+		border: 1px solid #ccc !important;	
+	}
+	.gallery .controls {
+	    bottom: 2vh;
+	}		
 }
 @media only screen and (max-width: 480px) {
 	.youtubeEmbed {
@@ -455,6 +510,13 @@ body {
 		widows: 100% !important;
 		border: 1px solid #ccc !important;
 	}
+	.sign-up {
+		border: 1px solid #ccc !important;	
+	}
+	.gallery .controls {
+	    bottom: 2vh;
+	}			
+
 }
 @media only screen and (max-width: 360px) {
 	.youtubeEmbed {
@@ -465,6 +527,13 @@ body {
 		width: 100% !important;
 		border: 1px solid #ccc !important;
 	}
+	.sign-up {
+		border: 1px solid #ccc !important;	
+	}	
+
+	.gallery .controls {
+	    bottom: 2vh;
+	}			
 }
 @media only screen and (max-width: 320px) {
 	.youtubeEmbed {
@@ -478,5 +547,11 @@ body {
 		width:250px!important;
 		border: 1px solid #ccc !important;
 	}
+	.sign-up {
+		border: 1px solid #ccc !important;	
+	}
 
+	.gallery .controls {
+	    bottom: 1vh;
+	}				
 }

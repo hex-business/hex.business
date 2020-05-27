@@ -811,14 +811,14 @@ else
 								<img class="slider_img" src="./static/media/3HEXBanner_1524.jpg"/>
 							</figure>
 							<div class="controls">
-								<a href="#no-autoplay-1" class="control-button">.</a>
-								<a href="#no-autoplay-2" class="control-button">.</a>
-								<a href="#no-autoplay-3" class="control-button">.</a>
-								<a href="#no-autoplay-4" class="control-button">.</a>
-								<a href="#no-autoplay-5" class="control-button">.</a>
-								<a href="#no-autoplay-6" class="control-button">.</a>
-								<a href="#no-autoplay-7" class="control-button">.</a>
-								<a href="#no-autoplay-8" class="control-button">.</a>
+								<a href="#no-autoplay-1" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
+								<a href="#no-autoplay-2" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
+								<a href="#no-autoplay-3" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
+								<a href="#no-autoplay-4" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
+								<a href="#no-autoplay-5" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
+								<a href="#no-autoplay-6" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
+								<a href="#no-autoplay-7" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
+								<a href="#no-autoplay-8" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
 							</div>
 						</div>
 					</div>
