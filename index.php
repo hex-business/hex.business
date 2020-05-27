@@ -626,10 +626,10 @@ else
 								<div class="my-auto money-text money-col col-md-auto col-12"><strong><?php echo $phrases['i_want'] ?></strong></div>
 								<div class="my-auto money-col col">
 									<div role="group" class="w-100 btn-group btn-group-toggle"><label
-												class="my-auto select-button btn active btn-light"><input
+												class="my-auto select-button btn active btn-light" id='freeze'><input
 													name="freeze-unfreeze" type="radio" autocomplete="off" value="0"
 													checked=""><?php echo $phrases['freeze'] ?></label><label
-												class="my-auto select-button btn btn-light"><input
+												class="my-auto select-button btn btn-light" id='unfreeze'><input
 													name="freeze-unfreeze"
 													type="radio"
 													autocomplete="off"
@@ -848,6 +848,14 @@ else
 	document.getElementById("approve").addEventListener("click", function(e){
 		e.stopPropagation();
 		showModal();
+	});
+	document.getElementById("freeze").addEventListener("click", function(e){
+		document.getElementById("freeze").classList.add("active");
+		document.getElementById("unfreeze").classList.remove("active");
+	});
+	document.getElementById("unfreeze").addEventListener("click", function(e){
+		document.getElementById("unfreeze").classList.add("active");
+		document.getElementById("freeze").classList.remove("active");
 	});
 	document.getElementById("modal_close").addEventListener("click", hideModal);
 	document.getElementById("modal-back").addEventListener("click", hideModal);
