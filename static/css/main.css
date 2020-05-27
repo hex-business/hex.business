@@ -368,6 +368,7 @@ a {
 label.select-button.btn.btn-light {
 	font-size: 26px !important;
 	background-color: #dae0e5;
+	color: #6582a9;
 }
 
 .enter-amount::-webkit-input-placeholder {
@@ -432,12 +433,12 @@ label.select-button.btn.btn-light {
 label.select-button.btn.active.btn-light
 {
 	background-color: unset;
+	color:white;
 	background-image: linear-gradient(90deg, #45b8ff, #8941fc);
 }
 label.select-button.btn.active.btn-light, label.select-button.btn.btn-light {
 	width: 100%;
 	margin-bottom: 10px;
-	color: #6582a9;
 	font-size: 2vw;
 	font-weight: 700
 }
