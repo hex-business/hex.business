@@ -237,7 +237,7 @@ else
 
 
 						<ul class="navbar-nav ml-auto">
-							 
+
 							<li class="my-auto hand" id='approvemobile'>
 
 								<img src="./static/media/metamask.2c92daf3.png" class="metamask-button"
@@ -653,7 +653,7 @@ else
 						                                 class="section-icon img-fluid" alt="hex money"></div>
 					</div>
 					<div class="justify-content-center row">
-						<div class="col-9"><p class="title"><?php echo $phrases['put'] ?>strong><?php echo $phrases['convert_to'] ?></strong><span
+						<div class="col-9"><p class="title"><?php echo $phrases['put'] ?><strong><?php echo $phrases['convert_to'] ?></strong><span
 											lang="en">hex money</span></strong>
 								(HXY) </p></div>
 					</div>
@@ -825,7 +825,7 @@ else
 				</div>
 			</div>
 		</div>
-		<div class="section bottom-shadow row"><a name="hexplay"></a>
+		<div class="section bottom-shadow row" style="margin: auto; padding: 10px 0; "><a name="hexplay"></a>
 			<div class="col">
 				<div class="justify-content-center row">
 					<div class="col-md-2 col-4"><img src="./static/media/HEXPlay.502fd8be.png"
@@ -834,7 +834,7 @@ else
 				</div>
 				<div class="row"><p class="title"> <?php echo $phrases['on'] ?>  <strong lang="en">HEX</strong></p></div>
 
-				<div class="justify-content-center row" style="height:auto">
+				<div class="justify-content-center row" style="height:auto; margin: auto;">
 					<iframe allowfullscreen="1"
 					        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					        title="YouTube video player"
@@ -902,8 +902,8 @@ else
 	document.getElementById("approvemobile").addEventListener("click", function(e){
 		e.stopPropagation();
 		showModal();
-	});	
-	
+	});
+
 	document.getElementById("freeze").addEventListener("click", function(e){
 		document.getElementById("freeze").classList.add("active");
 		document.getElementById("unfreeze").classList.remove("active");
