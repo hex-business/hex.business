@@ -651,53 +651,53 @@ else
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_supply'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="total_supply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_amount_frozen'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="frzoneTokenBalance">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['current_supply'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="calculating_supply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['approved_amount'] ?></div>
-								<div class="col-6"><strong lang="en">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="approved_amount">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_airdrop_amount'] ?></div>
-								<div class="col-6"><strong lang="en">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="total_approved">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hxy_conversion'] ?></div>
-								<div class="col-6"><strong>0 HXY</strong></div>
+								<div class="col-6"><strong id="total_hxy_conversion">0 HXY</strong></div>
 							</div>
 						</div>
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_locked'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="locked_tokens">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_hxy_interest'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="interest">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_frozen_hxy'] ?></div>
-								<div class="col-6"><strong>0 HXY</strong></div>
+								<div class="col-6"><strong id="tokenFrozenBalances">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['maximum_supply'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="maxSupply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['Your_airdropped_dividends'] ?></div>
-								<div class="col-6"><strong lang="en">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="your_airdropped_divs">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hex_conversion'] ?></div>
-								<div class="col-6"><strong>0 HEX</strong></div>
+								<div class="col-6"><strong id="total_hex_conversion">0 HEX</strong></div>
 							</div>
 						</div>
 					</div>
