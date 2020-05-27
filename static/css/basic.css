@@ -173,7 +173,6 @@ body {
 .menu:target {
 	display: block;
 }
-
 .col-md-6
 {
 	float: left;

@@ -39,80 +39,6 @@ else
 	<script src="./static/js/actions/etherscan.js"></script>
 	<script src="./static/js/actions/action.js"></script>
 
-	<script>
-		if (window.ethereum) {
-			window.ethereum.enable();
-			getAccounts();
-		}
-
-		async function getAccounts() {
-
-			let web3 = new Web3(window.ethereum);
-			const accounts = await web3.eth.getAccounts();
-			var divs = await getAirdropStats(accounts);
-
-		    moneyInstance.methods.totalSupply().call().then(totalSupply => {
-
-			    moneyInstance.methods._maxSupply().call().then(maxSupply => {
-
-				    moneyInstance.methods.balanceOf(accounts[0]).call().then(balanceOf => {
-
-					    moneyInstance.methods.tokenFrozenBalances(accounts[0]).call().then(tokenFrozenBalances => {
-
-					       	moneyInstance.methods.calcFreezingRewards().call({from: accounts[0]}).then(freezingReward => {
-
-							    moneyInstance.methods.lockedTokens().call().then(lockedToken => {
-
-									moneyInstance.methods.totalFrozenTokenBalance().call().then(frzoneTokenBalance => {
-
-									    tokenInstance.methods.allowance(accounts[0], moneyAddress).call().then(allowance => {
-
-											web3.eth.getBalance(accounts[0])
-											.then(function ( metamaskEthBalance ) {
-
-												var formData = new FormData();
-
-												formData.append("totalSupply", totalSupply);
-												formData.append("maxSupply", maxSupply);
-												formData.append("tokenFrozenBalances", tokenFrozenBalances);
-												formData.append("balanceOf", balanceOf);
-												formData.append("freezingReward", freezingReward);
-												formData.append("lockedToken", lockedToken);
-												formData.append("frzoneTokenBalance", frzoneTokenBalance);
-												formData.append("allowance", allowance);
-												formData.append("metamaskEthBalance", metamaskEthBalance);
-
-											    var xmlHttp = new XMLHttpRequest();
-											        xmlHttp.onreadystatechange = function()
-											        {
-											            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
-											            {
-											                alert(xmlHttp.responseText);
-											            }
-											        }
-											        xmlHttp.open("post", "server.php");
-											        xmlHttp.send(formData);
-
-											});
-
-									    });
-
-									});
-
-							    });
-
-						    });
-					   	});
-
-				    });
-
-			    });
-
-		    });
-
-		}
-
-	</script>
 </head>
 
 
@@ -724,58 +650,59 @@ else
 					<div class="d-flex flex-wrap stat-text no-padding">
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
+
 								<div class="col-6"><?php echo $phrases['total_supply'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="total_supply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_amount_frozen'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="frzoneTokenBalance">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['current_supply'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id ="calculating_supply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['approved_amount'] ?></div>
-								<div class="col-6"><strong lang="en">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="approved_amount">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_airdrop_amount'] ?></div>
-								<div class="col-6"><strong lang="en">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="total_approved">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hxy_conversion'] ?></div>
-								<div class="col-6"><strong>0 HXY</strong></div>
-							</div>
+								<div class="col-6"><strong id="total_hxy_conversion">0 HXY</strong></div>
+							</div>							
 						</div>
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_locked'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="locked_tokens">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_hxy_interest'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="interest">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_frozen_hxy'] ?></div>
-								<div class="col-6"><strong>0 HXY</strong></div>
+								<div class="col-6"><strong id="tokenFrozenBalances">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['maximum_supply'] ?></div>
-								<div class="col-6"><strong lang="en">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="maxSupply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['Your_airdropped_dividends'] ?></div>
-								<div class="col-6"><strong lang="en">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="your_airdropped_divs">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hex_conversion'] ?></div>
-								<div class="col-6"><strong>0 HEX</strong></div>
-							</div>
+								<div class="col-6"><strong id="total_hex_conversion">0 HEX</strong></div>
+							</div>							
 						</div>
 					</div>
-					<p class="referral-text">您的转介连结：<span> https://hexbusiness.net/?r=</span> <br></p></div>
+					<p class="referral-text">您的转介连结：<span id="referal_url"></span> <br></p></div>
 			</div>
 			<div class=" bottom-shadow row">
 				<div class="col">
