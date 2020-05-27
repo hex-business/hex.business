@@ -246,7 +246,7 @@ else
 							<li class="my-auto">
 								<div>
 
-									<a href="#" class="openButton" id="menuopen">
+									<a href="#" class="openButton" id="mobilemenuopen">
 										<!-- will clean this mess up later -->
 										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG0AAABVCAYAAABD0WqWAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kTtIw0Acxr8+pKIVQTuIOGSoThZ8IY5ahSJUCLVCqw4ml76gSUOS4uIouBYcfCxWHVycdXVwFQTBB4iTo5Oii5T4v6TQIsaD4358d9/H3XeAv15mqhkcA1TNMlKJuJDJrgqhVwTRh26MIywxU58TxSQ8x9c9fHy9i/Es73N/jh4lZzLAJxDPMt2wiDeIpzctnfM+cYQVJYX4nHjUoAsSP3JddvmNc8FhP8+MGOnUPHGEWCi0sdzGrGioxFPEUUXVKN+fcVnhvMVZLVdZ8578heGctrLMdZpDSGARSxAhQEYVJZRhIUarRoqJFO3HPfyDjl8kl0yuEhg5FlCBCsnxg//B727N/OSEmxSOAx0vtv0xDIR2gUbNtr+PbbtxAgSegSut5a/UgZlP0mstLXoE9G4DF9ctTd4DLneAgSddMiRHCtD05/PA+xl9UxbovwW61tzemvs4fQDS1FXyBjg4BEYKlL3u8e7O9t7+PdPs7wdVH3KbR7qlWwAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+QEEg0eKkmzr7oAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAABxUlEQVR42u3bsWoUURyF8e9EsA0ItmkjphSsFAsrYUEEC0EEq4ASyBsIQp5BMY1g4QMIC1ZCGsUiIAQCVkKqtIFAwObajMNkUdJEcv/y/WCbne4c7szswgGVk79daK3dAVaN6ML8BHaS/DiztNbaM2ALuGJuXfgCPE/y7Y+ltdbeAU/MqTsnwL0kO6dKG07YK/Pp1gGwluR4aSjsEvDSXLq2ArwAWBq+uAlcNZfuPZiWtmIeZU7bWNqxeZRwNC1tzzxK2BtLS3IAzM2ke9uLr/yrwFdg2Wy69CHJ/entkSTfgdveKrs9YY/HrhavttYuAxvALeCGb5YXZnf4vP/9T4gkSZIkSZIkSZIkSZIk6Tw53+2X893CnO8W5Xy3KOe7BTnfLcr5btHT5ny3GOe7BTnfLcj5bjHOdwueMOe7BTjflSRJkiRJkiRJkiRJkqR/yvluv5zvFnbmfPct8NScunMCzJJ8OlVaa20deGM+3ToCriU5nM53t8yla8vAJjjfrebhtDRHFjU43y36M8D5bjG7Y2nDfPejmXTv9eIr/3XgM853ezVPMpveHkmyD9wF9s2nO9vAo7GrxavOd7t6fjnf/V/8AkkMlOopfThoAAAAAElFTkSuQmCC"
 											class="menu-icon" alt="menu">
@@ -896,6 +896,10 @@ else
     var menuArea = document.getElementById('menu');
 
 	document.getElementById("menuopen").addEventListener("click", function(e){
+		e.stopPropagation();
+		document.getElementById('menu').style.display = "block";
+	});
+	document.getElementById("mobilemenuopen").addEventListener("click", function(e){
 		e.stopPropagation();
 		document.getElementById('menu').style.display = "block";
 	});

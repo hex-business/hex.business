@@ -416,7 +416,10 @@ body {
 	margin-bottom: 7px;
 }
 .email-input{
-	width:600px;
+	max-width:600px;
+	width:100%;
+	min-height:40px;
+	padding-left:10px;
 }
 .emailform{
 	width:auto;
