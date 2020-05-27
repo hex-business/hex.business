@@ -225,7 +225,7 @@ else
 				<nav class="App-header bottom-shadow navbar navbar-expand navbar-light mobile-nav">
 
 					<div class='d-flex mobile-hamb'>
-						<a href="#" class="navbar-brand">
+						<a href="#menu" class="navbar-brand">
 
 
 							<!-- will clean this mess up later -->
@@ -237,8 +237,9 @@ else
 
 
 						<ul class="navbar-nav ml-auto">
+							 
+							<li class="my-auto hand" id='approvemobile'>
 
-							<li class="my-auto hand" id='approve'>
 								<img src="./static/media/metamask.2c92daf3.png" class="metamask-button"
 									alt="Connect MetaMask">
 							</li>
@@ -897,6 +898,12 @@ else
 		e.stopPropagation();
 		showModal();
 	});
+
+	document.getElementById("approvemobile").addEventListener("click", function(e){
+		e.stopPropagation();
+		showModal();
+	});	
+	
 	document.getElementById("freeze").addEventListener("click", function(e){
 		document.getElementById("freeze").classList.add("active");
 		document.getElementById("unfreeze").classList.remove("active");
