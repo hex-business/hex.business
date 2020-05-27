@@ -459,3 +459,37 @@ body {
 	-moz-border-radius-bottomleft: 6px;
 	border-bottom-left-radius: 6px;
 }
+@media only screen and (max-width: 870px){
+
+	.project-icons .flex-wrap, .col-md-2 .col-sm-2 .col-4 {
+		flex: none;
+		display: block;
+		justify-content: center;
+		margin: auto;
+		width: 100px;
+		padding: 0;
+		clear: both;
+	}
+}
+@media (min-width: 768px){
+	.project-icons  .col-sm-2 {
+		flex: none;
+		display: block;
+		justify-content: center;
+		margin: auto;
+		width: 100px;
+		padding: 0;
+		clear: both;
+	}
+}
+@media (min-width: 300px) {
+	.project-icons .col-sm-2 {
+		flex: none;
+		display: block;
+		justify-content: center;
+		margin: auto;
+		width: 100px;
+		padding: 0;
+		clear: both;
+	}
+}
