@@ -872,7 +872,7 @@ else
 		</div>
 
 
-		<div class="section bottom-shadow  row">
+		<div class="section bottom-shadow row hidden">
 			<div class="col">
 				<div class="justify-content-center row"><p> <?php echo $phrases['welcome_donations_to'] ?>: 0x1EF0Bab01329a6CE39e92eA6B88828430B1Cd91f </p>
 				</div>

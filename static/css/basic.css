@@ -200,6 +200,7 @@ body {
 }
 
 
+
 @media only screen and (max-width: 2400px)  {
 	.youtubeEmbed {
 		width: 859px;
@@ -458,4 +459,12 @@ body {
 	-webkit-border-bottom-left-radius: 6px;
 	-moz-border-radius-bottomleft: 6px;
 	border-bottom-left-radius: 6px;
+}
+
+.project-icons {
+	display: flex !important;
+}
+
+.hidden {
+	display: none;
 }
