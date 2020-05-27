@@ -6,10 +6,12 @@ $rateData = $rates->getRateData();
 if (!empty($_GET['lang']) and ($_GET['lang'] == 'en'))
 {
 	require_once __DIR__ . '/includes/enlang.php';
+	$language = 'en';
 }
 else
 {
 	require_once __DIR__ . '/includes/cnlang.php';
+	$language = 'cn';
 }
 ?>
 
@@ -191,6 +193,12 @@ else
 
 
 					<ul class="navbar-nav ml-auto">
+						<li class="my-auto hand">
+							<a href="./index.php?lang=en"><img src="./static/media/entranslation.jpg" alt="Use English" class="langImage"> </a>
+						</li>
+						<li class="my-auto hand">
+							<a href="./index.php?lang=cn"><img src="./static/media/cntranslation.jpg" alt="使用中文" class="langImage"> </a>
+						</li>
 
 						<li class="my-auto hand" id='approve'>
 							<img src="./static/media/metamask.2c92daf3.png" class="metamask-button"
@@ -642,56 +650,55 @@ else
 					<div class="d-flex flex-wrap stat-text no-padding">
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
-
 								<div class="col-6"><?php echo $phrases['total_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="total_supply">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_amount_frozen'] ?></div>
-								<div class="col-6"><strong lang="en" id="frzoneTokenBalance">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['current_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id ="calculating_supply">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['approved_amount'] ?></div>
-								<div class="col-6"><strong lang="en" id="approved_amount">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_airdrop_amount'] ?></div>
-								<div class="col-6"><strong lang="en" id="total_approved">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hxy_conversion'] ?></div>
-								<div class="col-6"><strong id="total_hxy_conversion">0 HXY</strong></div>
-							</div>							
+								<div class="col-6"><strong>0 HXY</strong></div>
+							</div>
 						</div>
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_locked'] ?></div>
-								<div class="col-6"><strong lang="en" id="locked_tokens">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_hxy_interest'] ?></div>
-								<div class="col-6"><strong lang="en" id="interest">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_frozen_hxy'] ?></div>
-								<div class="col-6"><strong id="tokenFrozenBalances">0 HXY</strong></div>
+								<div class="col-6"><strong>0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['maximum_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="maxSupply">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['Your_airdropped_dividends'] ?></div>
-								<div class="col-6"><strong lang="en" id="your_airdropped_divs">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hex_conversion'] ?></div>
-								<div class="col-6"><strong id="total_hex_conversion">0 HEX</strong></div>
-							</div>							
+								<div class="col-6"><strong>0 HEX</strong></div>
+							</div>
 						</div>
 					</div>
 					<p class="referral-text">您的转介连结：<span id="referal_url"></span> <br></p></div>
@@ -794,16 +801,16 @@ else
 		</div>
 
 
-		<!--
 		<div class="section bottom-shadow row">
 			<div class="col">
-				<div class="row"><p class="title"> 欲知更多信息请<strong>订阅</strong></p></div>
-				<div class="justify-content-center mb-5 mt-3 d-flex flex-wrap">
-					<div class="col-sm-5 col-10"><input class="email-input w-100" type="text" placeholder="电子邮件">
-					</div>
-					<div class="col-sm-2 col-4">
-						<button type="button" class="sign-up btn btn-light"><strong>订阅</strong></button>
-					</div>
+				<div class="row"><p class="title"> <?php echo $phrases['for_more_information_subscribe'] ?></p></div>
+				<div class="justify-content-center emailform">
+					<form action="./handlesubscription.php?lang=<?php echo $language?>" method="post">
+						<div ><input class="email-input" type="text" name="email" placeholder="<?php echo $phrases['email'] ?>"></div>
+						<div class="sign-up">
+							<button type="submit" class="sign-up btn btn-light"><strong><?php echo $phrases['subscription'] ?></strong></button>
+						</div>
+					</form>
 				</div>
 				<div class="justify-content-center row">
 					<div class="col-md-1 col-sm-2 col-4"><a href="https://t.me/hexmobileapp"><img
@@ -815,7 +822,6 @@ else
 				</div>
 			</div>
 		</div>
-		-->
 
 
 		<div class="section bottom-shadow  row">

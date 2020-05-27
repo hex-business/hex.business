@@ -51,5 +51,19 @@
 	'freeze'                           => '冻结',
 	'thaw'                             => '解冻',
 	'project'                          => '项目',
-	'on' => '关于',
+	'on'                               => '关于',
+	'for_more_information_subscribe'   => '欲知更多信息请<strong>订阅</strong>',
+	'email'                            => '电子邮件' ,
+	'subscription' =>  '订阅',
+	'subscribe_no_email' => 'You did not include an email.  Please use your browser to go back, or click <a href="./index.php?lang=cn"> HERE </a> and enter one',
+	'subscribe_invalid_email' => 'That is not a valid email.  Please use your browser to go back, or click <a href="./index.php?lang=cn"> HERE </a> and enter one.',
+	'subscribe_good' => 'Thank you for subscribing to our notification service.  You will soon get an email, confirming your interest. 
+	Please reply to that and you will be signed up for our notifications.
+	You can use your browser back button or click <a href="./index.php?lang=cn"> HERE </a> to return to the site.',
+	'subscribe_error' => '<h3>这儿存在一个问题&#46; 该发送失败。 很抱歉，请您几个小时后再回来<br/>
+	You can use your browser back button or click <a href="./index.php?lang=cn"> HERE </a> to return to the site.',
+
+
+
+
 ];
