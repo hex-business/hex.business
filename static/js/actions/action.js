@@ -65,7 +65,7 @@
 														document.getElementById("locked_tokens").innerHTML = lockedToken + " HXY";
 														document.getElementById("frzoneTokenBalance").innerHTML = frzoneTokenBalance + " HXY";
 														document.getElementById("calculating_supply").innerHTML = calculating_supply + " HXY";
-														document.getElementById("approved_amount").innerHTML = allowance + " HXY";
+														document.getElementById("approved_amount").innerHTML = allowance + " HEX";
 														document.getElementById("total_approved").innerHTML = total + " HXY";
 														document.getElementById("interest").innerHTML = interest + " HXY";
 														document.getElementById("tokenFrozenBalances").innerHTML = tokenFrozenBalances + " HXY";
