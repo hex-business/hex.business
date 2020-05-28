@@ -747,7 +747,7 @@ else
 							</div>
 						</div>
 					</div>
-					<p class="referral-text">您的转介连结：<span id="referal_url"></span> <br></p></div>
+					<p class="referral-text"><?php echo $phrases['referral_link'] ?>：<span id="referal_url"></span> <br></p></div>
 			</div>
 			<div class=" bottom-shadow row">
 				<div class="col">

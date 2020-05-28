@@ -44,6 +44,7 @@
 	'beta_use_at_your_risk'            => '此网站仍在Beta试用阶段。使用风险请自负',
 	'total_hxy_conversion'             => '總HXY轉換',
 	'total_hex_conversion'             => '總HEX轉換',
+	'referral_link'          		   => '您的转介连结',
 	'overview'                         => '总览',
 	'put'                              => '把',
 	'convert_to'                       => '转换成',

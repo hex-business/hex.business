@@ -44,6 +44,7 @@
 	'beta_use_at_your_risk'            => 'This is a beta website.  Use at your own risk.',
 	'total_hxy_conversion'             => 'Total HXY Conversion',
 	'total_hex_conversion'             => 'Total HEX Conversion',
+	'referral_link'             	   => 'Referal Link',
 	'overview'                         => 'Overview',
 	'put'                              => 'Put',
 	'convert_to'                       => 'Convert to',
