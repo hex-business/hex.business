@@ -37,6 +37,7 @@
 														hxyTransformed = (hxyTransformed / 100000000) ?? 0;
 														heartsTransformed = (heartsTransformed / 100000000) ?? 0;
 														tokenFrozenBalances = (tokenFrozenBalances /100000000)??0;
+														balanceOf = (balanceOf /100000000)??0;
 														let interest = (tokenFrozenBalances == 0 ? 0 : (freezingReward / 100000000) ?? 0);
 														interest = interest.toLocaleString('en-GB');
 														let calculating_supply = ((totalSupply / 100000000) ?? 0) - ((frzoneTokenBalance / 100000000) ?? 0)  - ((lockedToken / 100000000) ?? 0);
