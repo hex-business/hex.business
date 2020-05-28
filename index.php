@@ -46,7 +46,7 @@ else
 
 <div id="root">
 	<a name="outsideMenu"></a>
-	<div class="App">
+	<div class="App mobilestickyback">
 		<div class="menu" id="menu"><a name="menu"></a>
 			<div class="menu-item  closeButton">
 				<a href="#outsideMenu" id="menuclose"><img class="close-button"
@@ -276,7 +276,7 @@ else
 		</div>
 
 
-		<div class="container-fluid">
+		<div class="container-fluid  stickyback">
 
 			<div class="section main-section bottom-shadow row">
 
