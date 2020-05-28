@@ -661,13 +661,13 @@ else
 						<div class="col-9">
 							<div class="justify-content-center mb-5 mt-5 d-flex flex-wrap">
 								<div class="my-auto money-col money-text col-md-auto col-12"><strong><?php echo $phrases['send'] ?></strong></div>
-								<div class="my-auto money-col col"><input class="enter-amount" placeholder="<?php echo $phrases['enter_amount'] ?>"
+								<div class="my-auto money-col col"><input class="enter-amount" id='enter-amount' placeholder="<?php echo $phrases['enter_amount'] ?>"
 								                                          type="text"></div>
 								<div class="my-auto money-text money-col col"><strong lang="en">HEX</strong></div>
-								<div class="my-auto money-col money-text col-sm-auto"><strong><?php echo $phrases['can_receive'] ?> 0 <span
-												lang="en">HXY.</span></strong></div>
+								<div class="my-auto money-col money-text col-sm-auto"><strong><?php echo $phrases['can_receive'] ?>  <span
+												lang="en" id="canreceive">0 HXY.</span></strong></div>
 								<div class="my-auto money-col col-sm-auto">
-									<button type="button" class="action-button btn btn-light"><?php echo $phrases['convert'] ?></button>
+									<button type="button" class="action-button btn btn-light" id='transform'><?php echo $phrases['convert'] ?></button>
 								</div>
 							</div>
 							<div class="justify-content-center mb-5 d-flex flex-wrap">
@@ -684,16 +684,16 @@ else
 													value="1"><?php echo $phrases['thaw'] ?></label>
 									</div>
 								</div>
-								<div class="my-auto money-col col"><input class="enter-amount" placeholder="<?php echo $phrases['enter_amount'] ?>"
+								<div class="my-auto money-col col"><input class="enter-amount" id='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>"
 								                                          type="text"></div>
 								<div class="my-auto money-col money-text col"><strong lang="en">HXY.</strong></div>
 								<div class="my-auto money-col col">
-									<button type="button" class="action-button btn btn-light">进行</button>
+									<button type="button" class="action-button btn btn-light" id='proceed'>进行</button>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row"><p class="mb-5 title"><strong><?php echo $phrases['your_wallet_balance'] ?>： 0 <span lang="en">HXY</span> </strong></p>
+					<div class="row"><p class="mb-5 title"><strong><?php echo $phrases['your_wallet_balance'] ?>： <span lang="en" id='balance'>0 HXY</span> </strong></p>
 					</div>
 					<div class="d-flex flex-wrap stat-text no-padding">
 						<div class="no-padding col-md-6 col-12">
@@ -888,7 +888,31 @@ else
 </body>
 
 <script>
+	let  isFreeze = true;
+	document.getElementById("transform").addEventListener("click", function(){
+	 const amount = document.getElementById("enter-amount").value;
+ 	  moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]})
+	});
+	document.getElementById("enter-amount").addEventListener("keyup", function(e){
+		const amount = document.getElementById("enter-amount").value;
+		document.getElementById("canreceive").innerHTML = (parseInt(amount || 0) / 1000) || 0 + " HXY";
+	});
+	document.getElementById("proceed").addEventListener("click", function(){
+		const amount = parseInt(document.getElementById("freeze-amount").value*100000000);
+ 		if(isFreeze){
+		freeze(amount);
+		} else {
+		isFreeze(amount);
+		}
+	});
+	 
+	function freeze(amount)  {
+		moneyInstance.methods.FreezeTokens(amount).send({from:accounts[0]});
+	}
 
+	function unfreeze(amount){
+		moneyInstance.methods.UnfreezeTokens().send({from:accounts[0]});
+	}
 	document.getElementById("approve").addEventListener("click", function(e){
 		e.stopPropagation();
 		showModal();
@@ -901,9 +925,11 @@ else
 	
 	document.getElementById("freeze").addEventListener("click", function(e){
 		document.getElementById("freeze").classList.add("active");
+		isFreeze = true;
 		document.getElementById("unfreeze").classList.remove("active");
 	});
 	document.getElementById("unfreeze").addEventListener("click", function(e){
+		isFreeze = false;
 		document.getElementById("unfreeze").classList.add("active");
 		document.getElementById("freeze").classList.remove("active");
 	});

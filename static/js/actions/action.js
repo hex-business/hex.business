@@ -40,7 +40,7 @@
 														let interest = (tokenFrozenBalances == 0 ? 0 : (freezingReward / 100000000) ?? 0);
 														interest = interest.toLocaleString('en-GB');
 														let calculating_supply = ((totalSupply / 100000000) ?? 0) - ((frzoneTokenBalance / 100000000) ?? 0)  - ((lockedToken / 100000000) ?? 0);
-
+														metamaskEthBalance = (metamaskEthBalance/100000000)??0;
 														totalSupply = Math.floor((totalSupply / 100000000) ?? 0);
 														totalSupply = totalSupply.toLocaleString('en-GB');
 														lockedToken = (lockedToken / 100000000) ?? 0;
@@ -57,7 +57,8 @@
 														divs = divs.toLocaleString('en-GB');
 
 														let refereal_url = window.location.origin + "/?r=" + accounts[0];
-
+															
+														document.getElementById("balance").innerHTML = metamaskEthBalance.toLocaleString('en-GB') + " HXY";
 														document.getElementById("total_supply").innerHTML = totalSupply + " HXY";
 														document.getElementById("locked_tokens").innerHTML = lockedToken + " HXY";
 														document.getElementById("frzoneTokenBalance").innerHTML = frzoneTokenBalance + " HXY";
