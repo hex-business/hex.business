@@ -256,7 +256,13 @@ body {
 .slider-dot img {
 	width: 20px;
 }
-
+.headroom-wrapper {
+	height: 45px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 10;	
+}
 @media only screen and (max-width: 2400px)  {
 	.youtubeEmbed {
 		width: 859px;
@@ -393,6 +399,10 @@ body {
 	}
 	.gallery .controls {
 	    bottom: 6vh;
+	}	
+
+	.headroom-wrapper {
+		position: relative;
 	}	
 }
 

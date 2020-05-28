@@ -878,6 +878,18 @@ else
 				</div>
 			</div>
 		</div>
+
+		<div class="section bottom-shadow row">
+			<div class="col">
+				<div class="justify-content-center row"><p> <?php echo $phrases['welcome_donations_to'] ?>: 0x1EF0Bab01329a6CE39e92eA6B88828430B1Cd91f </p>
+				</div>
+				<div class="justify-content-center row">
+					<div class="col-md-8 col-sm-5 col-6"><img
+								src="./static/media/policy.png" class="img-fluid"
+								alt=""></div>
+				</div>
+			</div>			
+		</div>
 		<p> <?php echo $phrases['beta_use_at_your_risk'] ?> </p>
 	</div>
 </div>
