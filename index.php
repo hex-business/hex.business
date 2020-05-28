@@ -617,7 +617,7 @@ else
 						<div class="col-10"><p class="title"><?php echo $phrases['click_link_below_to_download_app'] ?></p></div>
 					</div>
 					<div class="d-flex flex-wrap no-padding justify-content-center">
-						<div class="col-sm-6 col-12"><img src="./static/media/hex-mobie-assetsl.7c611557.png"
+						<div class="col-sm-6 col-12 mobile-screens"><img src="./static/media/hex-mobie-assetsl.7c611557.png"
 						                                  class="mobile-image" alt="hex mobile app on smart phones">
 						</div>
 						<div class="download-buttons col-sm-4 col-12">
