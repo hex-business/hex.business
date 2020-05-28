@@ -46,7 +46,7 @@ else
 
 <div id="root">
 	<a name="outsideMenu"></a>
-	<div class="App mobilestickyback">
+	<div class="App">
 		<div class="menu" id="menu"><a name="menu"></a>
 			<div class="menu-item  closeButton">
 				<a href="#outsideMenu" id="menuclose"><img class="close-button"
@@ -171,7 +171,7 @@ else
 		</div>
 
 
-		<div class="headroom-wrapper" style="height: 45px;">
+		<div class="headroom-wrapper " style="height: 45px;">
 
 
 			<div style="position: relative; top: 0px; left: 0px; right: 0px; z-index: 1; transform: translate3d(0px, 0px, 0px);"

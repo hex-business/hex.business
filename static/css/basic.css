@@ -11,7 +11,19 @@ body {
     font-family: "Palanquin";
     -webkit-font-smoothing: antialiased;
 }
-
+.stickyback{
+	background-image: linear-gradient(90deg, #45b8ff, #8941fc);
+	padding-top:45px;
+}
+.mobilestickyback{
+	background-image: unset;
+}
+.headroom-wrapper{
+	position: fixed;
+    top: 0px;
+	width: 100%;
+	z-index: 100;
+}
 /*
 .gallery .controls {
 	width:1000px;
@@ -259,13 +271,7 @@ body {
 .slider-dot img {
 	width: 20px;
 }
-.headroom-wrapper {
-	height: 45px;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 10;	
-}
+ 
 @media only screen and (max-width: 2400px)  {
 	.youtubeEmbed {
 		width: 859px;
@@ -404,9 +410,7 @@ body {
 	    bottom: 6vh;
 	}	
 
-	.headroom-wrapper {
-		position: relative;
-	}	
+ 
 }
 
 @media only screen and (max-width: 870px)  {
@@ -548,6 +552,7 @@ body {
 	    bottom: 2vh;
 	}			
 }
+
 @media only screen and (max-width: 320px) {
 	.youtubeEmbed {
 		display:none;
@@ -567,4 +572,15 @@ body {
 	.gallery .controls {
 	    bottom: 1vh;
 	}				
+}
+@media (max-width: 576px)
+{
+	 
+ .headroom-wrapper {
+	position: relative;
+}
+.stickyback{
+	 
+	padding-top:unset;
+}
 }
