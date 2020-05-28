@@ -53,6 +53,7 @@
 	'freeze'                           => 'Freeze',
 	'thaw'                             => 'Thaw',
 	'project'                          => 'Project',
+	'proceed'                          => 'Proceed',
 	'on'                               => 'On',
 	'for_more_information_subscribe'   => 'For more information please <strong> subscribe </strong>' ,
 	'email'	=> 'Email',

@@ -692,7 +692,7 @@ else
 								<div class="my-auto money-col col"><input type="text" class="enter-amount" onkeypress="validate(event)" maxlength="12" id='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
 								<div class="my-auto money-col money-text col"><strong lang="en">HXY.</strong></div>
 								<div class="my-auto money-col col">
-									<button type="button" class="action-button btn btn-light" id='proceed'>进行</button>
+									<button type="button" class="action-button btn btn-light" id='proceed'><?php echo $phrases['proceed'] ?></button>
 								</div>
 							</div>
 						</div>

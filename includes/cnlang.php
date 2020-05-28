@@ -28,6 +28,7 @@
 	'decentralized_credit_platform'    => '分散式信贷平台',
 	'send'                             => '传送',
 	'can_receive'                      => '可收到',
+	'proceed'                    	   => '进行',
 	'i_want'                           => '我想要',
 	'enter_amount'                     => '输入数量',
 	'your_wallet_balance'              => '您的钱包余额',
