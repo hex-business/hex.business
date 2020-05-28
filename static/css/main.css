@@ -25,7 +25,7 @@ body, html {
 
 .App {
 	text-align: center;
-	
+	background-image: linear-gradient(90deg, #45b8ff, #8941fc);
 	color: #fff;
 	font-size: 2vw;
 }
@@ -34,13 +34,7 @@ body, html {
 	-ms-scroll-snap-type: y mandatory;
 	scroll-snap-type: y mandatory
 }
-.stickyback{
-	background-image: linear-gradient(90deg, #45b8ff, #8941fc);
-	padding-top:45px;
-}
-.mobilestickyback{
-	background-image: unset;
-}
+
 a {
 	color: #fff;
 	text-decoration: none
@@ -503,18 +497,8 @@ label.select-button.btn.active.btn-light, label.select-button.btn.btn-light {
 .margin-5{
 	margin-right: 5px;
 }
-.headroom-wrapper{
-	position: fixed;
-    top: 0px;
-	width: 100%;
-	z-index: 100;
-}
 @media (max-width: 576px)
 {
-	.headroom-wrapper{
-		position: relative;
-		 
-	}
  .mobile-hamb{
  	margin-top:-8px;
  	margin-bottom:10px;
@@ -525,11 +509,5 @@ label.select-button.btn.active.btn-light, label.select-button.btn.btn-light {
  .mobile-nav {
  	display: block;
  }
- .mobilestickyback{
-	background-image: linear-gradient(90deg, #45b8ff, #8941fc);
-}
-.stickyback{
-	background-image: unset;
-}
 }
 /*# sourceMappingURL=main.86f2eb9e.chunk.css.map */

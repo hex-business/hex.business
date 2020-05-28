@@ -878,6 +878,7 @@ else
 				</div>
 			</div>
 		</div>
+		<br/>
 		<p> <?php echo $phrases['beta_use_at_your_risk'] ?> </p>
 
 		<footer>
