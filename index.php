@@ -465,7 +465,7 @@ else
 						<div class="col-md-6 col-12">
 							<div class="table-title stat-text table-margin row"><strong><?php echo $phrases['overview'] ?></strong></div>
 							<div class="table-cell stat-text table-margin row">
-								<div class="stat-cell col-4">总供应量</div>
+								<div class="stat-cell col-4"><?php echo $phrases['total_supply'] ?></div>
 								<div class="stat-cell col-3">
 									<strong><?php echo round(floatval($rateData['hexTotalSupply']) / 1E9, 3) ?>
 										B</strong></div>
