@@ -879,6 +879,16 @@ else
 			</div>
 		</div>
 		<p> <?php echo $phrases['beta_use_at_your_risk'] ?> </p>
+
+		<footer>
+		  <hr>
+		  <p class="footerDisclaimer"><span>Copyright &#169; 2020 Hex Business &#45; All Rights Reserved&#46;</span>
+		<br/>
+		<a href="http://hexbusiness.net/privacypolicy.html" target="_blank" rel="noopener noreferrer" class="footerDisclaimer">PRIVACY&nbsp;POLICY</a>
+		<br/>
+		<br/>
+		<span id="donate" class="hidden">Donations are welcome&#58;<br/>0x1EF0Bab01329a6CE39e92eA6B88828430B1Cd91f</span></p>
+		</footer>		
 	</div>
 </div>
 <div style="display: none;width:100vw;height:100vh;position:fixed;top:0;left:0;background-color: black" class="" id='modal-back'>
