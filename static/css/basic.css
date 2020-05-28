@@ -576,8 +576,8 @@ body {
 @media (max-width: 576px)
 {
 	 
- .mobilestickyback{
-	
+ .headroom-wrapper {
+	position: relative;
 }
 .stickyback{
 	 
