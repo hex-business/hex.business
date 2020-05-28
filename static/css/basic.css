@@ -11,7 +11,13 @@ body {
     font-family: "Palanquin";
     -webkit-font-smoothing: antialiased;
 }
-
+.stickyback{
+	background-image: linear-gradient(90deg, #45b8ff, #8941fc);
+	padding-top:45px;
+}
+.mobilestickyback{
+	background-image: unset;
+}
 /*
 .gallery .controls {
 	width:1000px;
@@ -535,6 +541,7 @@ body {
 	    bottom: 2vh;
 	}			
 }
+
 @media only screen and (max-width: 320px) {
 	.youtubeEmbed {
 		display:none;
@@ -554,4 +561,15 @@ body {
 	.gallery .controls {
 	    bottom: 1vh;
 	}				
+}
+@media (max-width: 576px)
+{
+	 
+ .mobilestickyback{
+	background-image: linear-gradient(90deg, #45b8ff, #8941fc);
+}
+.stickyback{
+	background-image: unset;
+	padding-top:unset;
+}
 }
