@@ -881,7 +881,6 @@ else
 		<p> <?php echo $phrases['beta_use_at_your_risk'] ?> </p>
 
 		<footer>
-		  <hr>
 		  <p class="footerDisclaimer"><span>Copyright &#169; 2020 Hex Business &#45; All Rights Reserved&#46;</span>
 		<br/>
 		<a href="http://hexbusiness.net/privacypolicy.html" target="_blank" rel="noopener noreferrer" class="footerDisclaimer">PRIVACY&nbsp;POLICY</a>
