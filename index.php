@@ -847,7 +847,7 @@ else
 				<div class="row"><p class="title"> <?php echo $phrases['for_more_information_subscribe'] ?></p></div>
 				<div class="justify-content-center emailform">
 					<form action="./handlesubscription.php?lang=<?php echo $language?>" method="post">
-						<div ><input class="email-input" type="text" name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50"/></div>
+						<div ><input class="email-input" type="email" name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50"/></div>
 						<div class="sign-up">
 							<button type="submit" class="sign-up btn btn-light"><strong><?php echo $phrases['subscription'] ?></strong></button>
 						</div>
