@@ -237,7 +237,10 @@ body {
 }
 
 .hidden {
-	display: none;
+	display: none !important;
+}
+.footerDisclaimer {
+	margin-bottom: 0px !important;
 }
 
 .gallery .controls {
