@@ -55,7 +55,6 @@
 	'for_more_information_subscribe'   => 'For more information please <strong> subscribe </strong>' ,
 	'email'	=> 'Email',
 	'subscription' => 'Subscription',
-	'subscription' =>  '订阅',
 	'subscribe_no_email' => 'You did not include an email.  Please use your browser to go back, or click <a href="./index.php?lang=en"> HERE </a> and enter one',
 	'subscribe_invalid_email' => 'That is not a valid email.  Please use your browser to go back, or click <a href="./index.php?lang=en"> HERE </a> and enter one.',
 	'subscribe_good' => 'Thank you for subscribing to our notification service.  You will soon get an email, confirming your interest. 
