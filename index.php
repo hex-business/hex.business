@@ -784,10 +784,6 @@ else
 							<div id="no-autoplay-5" class="control-operator"></div>
 							<div id="no-autoplay-6" class="control-operator"></div>
 							<div id="no-autoplay-7" class="control-operator"></div>
-							<div id="no-autoplay-8" class="control-operator"></div>
-							<figure class="item">
-								<img class="slider_img" src="./static/media/3HEXBanner_1524.jpg"/>
-							</figure>
 							<figure class="item">
 								<img class="slider_img" src="./static/media/hex-credit-update_1524.jpg"/>
 							</figure>
@@ -818,7 +814,6 @@ else
 								<a href="#no-autoplay-5" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
 								<a href="#no-autoplay-6" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
 								<a href="#no-autoplay-7" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
-								<a href="#no-autoplay-8" class="control-button"><div class="slider-dot"><img src="./static/media/white-dot-png.png" /></div></a>
 							</div>
 						</div>
 					</div>
