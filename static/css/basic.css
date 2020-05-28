@@ -3,6 +3,17 @@
   font-family: Palanquin;
   src: url(../fonts/Palanquin/Palanquin-Medium.ttf);
 }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 body {
 	font-weight: 400;
