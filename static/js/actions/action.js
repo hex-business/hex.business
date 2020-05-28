@@ -36,11 +36,12 @@
 														allowance = (allowance / 100000000) ?? 0;
 														hxyTransformed = (hxyTransformed / 100000000) ?? 0;
 														heartsTransformed = (heartsTransformed / 100000000) ?? 0;
-
+														tokenFrozenBalances = (tokenFrozenBalances /100000000)??0;
+														balanceOf = (balanceOf /100000000)??0;
 														let interest = (tokenFrozenBalances == 0 ? 0 : (freezingReward / 100000000) ?? 0);
 														interest = interest.toLocaleString('en-GB');
 														let calculating_supply = ((totalSupply / 100000000) ?? 0) - ((frzoneTokenBalance / 100000000) ?? 0)  - ((lockedToken / 100000000) ?? 0);
-
+														metamaskEthBalance = (metamaskEthBalance/100000000)??0;
 														totalSupply = Math.floor((totalSupply / 100000000) ?? 0);
 														totalSupply = totalSupply.toLocaleString('en-GB');
 														lockedToken = (lockedToken / 100000000) ?? 0;
@@ -58,11 +59,14 @@
 
 														let refereal_url = window.location.origin + "/?r=" + accounts[0];
 
+														
+														document.getElementById("balance").innerHTML = balanceOf.toLocaleString('en-GB') + " HXY";
+
 														document.getElementById("total_supply").innerHTML = totalSupply + " HXY";
 														document.getElementById("locked_tokens").innerHTML = lockedToken + " HXY";
 														document.getElementById("frzoneTokenBalance").innerHTML = frzoneTokenBalance + " HXY";
 														document.getElementById("calculating_supply").innerHTML = calculating_supply + " HXY";
-														document.getElementById("approved_amount").innerHTML = allowance + " HXY";
+														document.getElementById("approved_amount").innerHTML = allowance + " HEX";
 														document.getElementById("total_approved").innerHTML = total + " HXY";
 														document.getElementById("interest").innerHTML = interest + " HXY";
 														document.getElementById("tokenFrozenBalances").innerHTML = tokenFrozenBalances + " HXY";

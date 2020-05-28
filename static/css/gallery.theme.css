@@ -27,7 +27,6 @@
   width: 100%;
   text-align: center;
   height:25px;
-  top: 600px;
   z-index: 10;
 }
 .gallery .control-button {
@@ -72,7 +71,6 @@
   }
   .gallery .controls {
     height:25px;
-    top: 600px;
   }
 }
 
@@ -92,7 +90,6 @@
   }
   .gallery .controls {
     height:20px;
-    top: 490px;
   }
 }
 @media only screen and (max-width: 1280px) {
@@ -111,7 +108,6 @@
   }
   .gallery .controls {
     height:20px;
-    top: 390px;
   }
 }
 
@@ -131,7 +127,6 @@
   }
   .gallery .controls {
     height:15px;
-    top: 340px;
   }
 }
 
@@ -151,7 +146,6 @@
   }
   .gallery .controls {
     height:15px;
-    top: 275px;
   }
 }
 
@@ -171,7 +165,6 @@
   }
   .gallery .controls {
     height:10px;
-    top: 250px;
   }
 }
 @media only screen and (max-width: 640px) {
@@ -190,7 +183,6 @@
   }
   .gallery .controls {
     height:8px;
-    top: 175px;
   }
 }
 @media only screen and (max-width: 480px) {
@@ -209,7 +201,6 @@
   }
   .gallery .controls {
     height:8px;
-    top: 130px;
   }
 }
 @media only screen and (max-width: 360px) {
@@ -228,7 +219,6 @@
   }
   .gallery .controls {
     height:6px;
-    top: 128px;
   }
 }
 @media only screen and (max-width: 320px) {

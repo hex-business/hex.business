@@ -120,13 +120,12 @@ img {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .modal-dialog {
-       position: fixed;
+    position: fixed;
     width: auto;
-    
     left: 50%;
     transform: translateX(-50%);
     margin: auto;
-    top: 50px;
+    top: 90px;
     pointer-events: none;
 }
 .hand{
