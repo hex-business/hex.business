@@ -77,6 +77,12 @@ else
 			<div class="menu-title row">
 				<?php echo $phrases['our_project'] ?>
 			</div>
+			<!-- add >>> lang="en-US" <<< inline, not sure the correct way pls help -->
+			<div class="menu-item ">
+				<a href="./static/media/hxylitepaper.pdf" lang="en">
+					<?php echo $phrases['litepaper'] ?>
+				</a>
+			</div>
 
 			<!-- add >>> lang="en-US" <<< inline, not sure the correct way pls help -->
 			<div class="menu-item ">
@@ -145,7 +151,7 @@ else
 				</a>
 			</div>
 			<div class="menu-item " lang="en">
-				<a href="./static/media/hex.businesslitepaper1_1.pdf">
+				<a href="https://hex.academy/">
 					<?php echo $phrases['hex_academy'] ?>
 				</a>
 			</div>

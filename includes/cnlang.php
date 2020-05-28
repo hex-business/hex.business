@@ -7,6 +7,7 @@
 	'hex_lotto_rocket'                 => 'hex lotto rocket',
 	'our_project'                      => '我们的项目',
 	'hex_mobile'                       => 'hex mobile',
+	'litepaper'                        => 'Litepaper',
 	'hex_lotto_stake'                  => 'hex lotto stake',
 	'hex_bet_coming_soon'              => 'hex bet (coming soon) (即将推出)',
 	'hex_play'                         => 'hex play',
