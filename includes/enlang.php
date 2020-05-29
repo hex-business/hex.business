@@ -48,7 +48,7 @@
 	'referral_link'             	   => 'Your referral URL',
 	'overview'                         => 'OVERVIEW',
 	'put'                              => 'Transform',
-	'convert_to'                       => 'HEX to',
+	'convert_to'                       => '<strong>HEX</strong> to',
 	'convert'                          => 'Transform',
 	'freeze'                           => 'freeze',
 	'thaw'                             => 'thaw',
