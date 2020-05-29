@@ -9,7 +9,7 @@
 	'hex_mobile'                       => 'hex mobile',
 	'litepaper'                        => 'litepaper',
 	'hex_lotto_stake'                  => 'hex lotto stake',
-	'hex_bet_coming_soon'              => 'hex bet (coming soon) (即将推出)',
+	'hex_bet_coming_soon'              => 'hex bet (即将推出)',
 	'hex_play'                         => 'hex play',
 	'hextra'                           => 'hextra',
 	'hex_academy'                      => 'hex academy',
