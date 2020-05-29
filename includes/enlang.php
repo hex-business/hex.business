@@ -22,7 +22,6 @@
 	'number_of_locks'                  => 'LOCKED',
 	'circulation_quantity'             => 'CIRCULATING',
 	'universal_amplifier'              => 'ADOPTION AMPLIFIER ',
-	'aa_pool_val'                      => 'AA POOL val',
 	'aa_pool_price'                    => 'AA POOL cost',
 	'uniswap_price'                    => 'UNISWAP cost',
 	'click_link_below_to_download_app' => 'Click <strong>here</strong> To Download the App',
