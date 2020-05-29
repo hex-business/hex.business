@@ -758,9 +758,7 @@ else
 			<div class=" bottom-shadow row">
 				<div class="col">
 					<div class="justify-content-center row">
-						<div class="col-10"><p class="project-title title"><?php echo $phrases['refer_to_other'] ?> <strong
-										lang="en">hex.business</strong> <?php echo $phrases['project'] ?>
-							</p></div>
+						<div class="col-10"><p class="project-title title"><?php echo $phrases['refer_to_other'] ?></p></div>
 					</div>
 					<div class="project-icons justify-content-center d-flex flex-wrap">
 						<div class="col-md-2 col-sm-2 col-4"><img src="./static/media/HEXRocket.23bb336d.png"
