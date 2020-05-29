@@ -659,8 +659,8 @@ else
 						                                 class="section-icon img-fluid" alt="hex money"></div>
 					</div>
 					<div class="justify-content-center row">
-						<div class="col-9"><p class="title"><?php echo $phrases['put'] ?><strong> <?php echo $phrases['convert_to'] ?></strong><span
-											lang="en"> hex money</span></strong>
+						<div class="col-9"><p class="title"><?php echo $phrases['put'] ?> <?php echo $phrases['convert_to'] ?><span
+											lang="en"> <strong>hex money</strong></span>
 								(HXY) </p></div>
 					</div>
 					<div class="justify-content-center row">
