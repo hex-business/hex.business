@@ -884,9 +884,9 @@ else
 		<p> <?php echo $phrases['beta_use_at_your_risk'] ?> </p>
 
 		<footer>
-		  <p class="footerDisclaimer"><span>Copyright &#169; 2020 Hex Business &#45; All Rights Reserved&#46;</span>
+		  <p class="footerDisclaimer"><span><?php echo $phrases['copy_right'] ?></span>
 		<br/>
-		<a href="http://hexbusiness.net/privacypolicy.html" target="_blank" rel="noopener noreferrer" class="footerDisclaimer">PRIVACY&nbsp;POLICY</a>
+		<a href="http://hexbusiness.net/privacypolicy.html" target="_blank" rel="noopener noreferrer" class="footerDisclaimer"><?php echo $phrases['privacypolicy'] ?></a>
 		<br/>
 		<br/>
 		<span id="donate" class="hidden">Donations are welcome&#58;<br/>0x1EF0Bab01329a6CE39e92eA6B88828430B1Cd91f</span></p>
