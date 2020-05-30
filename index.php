@@ -541,7 +541,7 @@ else
 							<div class="table-title stat-text row"><strong><?php echo $phrases['universal_amplifier'] ?></strong>
 							</div>
 							<div class="table-cell stat-text row">
-								<div class="stat-cell col-4"><span lang="en"><?php echo $phrases['aa_pool_price'] ?></div>
+								<div class="stat-cell col-4"><span lang="en"><?php echo $phrases['aa_pool_val'] ?></div>
 								<div class="stat-cell col-6">
 									<strong><?php echo number_format(floatval($rateData['adoptionAmplifierCurrentEth']) / 1000, 3) ?>
 										k ETH </strong></div>

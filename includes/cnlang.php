@@ -22,6 +22,7 @@
 	'number_of_locks'                  => '锁定数量',
 	'circulation_quantity'             => '流通数量',
 	'universal_amplifier'              => '普及放大器 AA ',
+	'aa_pool_val'                      => 'AA POOL 总价值',
 	'aa_pool_price'                    => 'AA POOL 价格',
 	'uniswap_price'                    => 'UNISWAP 价格',
 	'click_link_below_to_download_app' => '点击以下的<strong>连结</strong>下载我们的APP',
