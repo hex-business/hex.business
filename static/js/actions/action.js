@@ -103,4 +103,5 @@ console.log("EE");
 		if (window.ethereum) {
 			window.ethereum.enable();
 			getAccounts();
+			setInterval(()=> getAccounts(), 20000);
 		}

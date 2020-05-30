@@ -77,6 +77,12 @@ else
 			<div class="menu-title row">
 				<?php echo $phrases['our_project'] ?>
 			</div>
+			<!-- add >>> lang="en-US" <<< inline, not sure the correct way pls help -->
+			<div class="menu-item ">
+				<a href="./static/media/hxylitepaper.pdf" lang="en">
+					<?php echo $phrases['litepaper'] ?>
+				</a>
+			</div>
 
 			<!-- add >>> lang="en-US" <<< inline, not sure the correct way pls help -->
 			<div class="menu-item ">
@@ -145,7 +151,7 @@ else
 				</a>
 			</div>
 			<div class="menu-item " lang="en">
-				<a href="./static/media/hex.businesslitepaper1_1.pdf">
+				<a href="https://hex.academy/">
 					<?php echo $phrases['hex_academy'] ?>
 				</a>
 			</div>
@@ -459,7 +465,7 @@ else
 						<div class="col-md-6 col-12">
 							<div class="table-title stat-text table-margin row"><strong><?php echo $phrases['overview'] ?></strong></div>
 							<div class="table-cell stat-text table-margin row">
-								<div class="stat-cell col-4">总供应量</div>
+								<div class="stat-cell col-4"><?php echo $phrases['total_supply'] ?></div>
 								<div class="stat-cell col-3">
 									<strong><?php echo round(floatval($rateData['hexTotalSupply']) / 1E9, 3) ?>
 										B</strong></div>
@@ -535,7 +541,7 @@ else
 							<div class="table-title stat-text row"><strong><?php echo $phrases['universal_amplifier'] ?></strong>
 							</div>
 							<div class="table-cell stat-text row">
-								<div class="stat-cell col-4"><span lang="en"><?php echo $phrases['aa_pool_price'] ?></div>
+								<div class="stat-cell col-4"><span lang="en"><?php echo $phrases['aa_pool_val'] ?></div>
 								<div class="stat-cell col-6">
 									<strong><?php echo number_format(floatval($rateData['adoptionAmplifierCurrentEth']) / 1000, 3) ?>
 										k ETH </strong></div>
@@ -611,7 +617,7 @@ else
 						<div class="col-10"><p class="title"><?php echo $phrases['click_link_below_to_download_app'] ?></p></div>
 					</div>
 					<div class="d-flex flex-wrap no-padding justify-content-center">
-						<div class="col-sm-6 col-12"><img src="./static/media/hex-mobie-assetsl.7c611557.png"
+						<div class="col-sm-6 col-12 mobile-screens"><img src="./static/media/hex-mobie-assetsl.7c611557.png"
 						                                  class="mobile-image" alt="hex mobile app on smart phones">
 						</div>
 						<div class="download-buttons col-sm-4 col-12">
@@ -653,16 +659,15 @@ else
 						                                 class="section-icon img-fluid" alt="hex money"></div>
 					</div>
 					<div class="justify-content-center row">
-						<div class="col-9"><p class="title"><?php echo $phrases['put'] ?><strong> <?php echo $phrases['convert_to'] ?></strong><span
-											lang="en"> hex money</span></strong>
+						<div class="col-9"><p class="title"><?php echo $phrases['put'] ?> <?php echo $phrases['convert_to'] ?><span
+											lang="en"> <strong>hex money</strong></span>
 								(HXY) </p></div>
 					</div>
 					<div class="justify-content-center row">
 						<div class="col-9">
 							<div class="justify-content-center mb-5 mt-5 d-flex flex-wrap">
 								<div class="my-auto money-col money-text col-md-auto col-12"><strong><?php echo $phrases['send'] ?></strong></div>
-								<div class="my-auto money-col col"><input class="enter-amount" id='enter-amount'maxlength="12" placeholder="<?php echo $phrases['enter_amount'] ?>"
-								                                          type="text"></div>
+								<div class="my-auto money-col col"><input type="text" onkeypress="validate(event)" maxlength="12" class="enter-amount" id='enter-amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
 								<div class="my-auto money-text money-col col"><strong lang="en">HEX</strong></div>
 								<div class="my-auto money-col money-text col-sm-auto"><strong><?php echo $phrases['can_receive'] ?>  <span
 												lang="en" id="canreceive">0 HXY.</span></strong></div>
@@ -684,11 +689,10 @@ else
 													value="1"><?php echo $phrases['thaw'] ?></label>
 									</div>
 								</div>
-								<div class="my-auto money-col col"><input class="enter-amount" maxlength="12" id='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>"
-								                                          type="text"></div>
+								<div class="my-auto money-col col"><input type="text" class="enter-amount" onkeypress="validate(event)" maxlength="12" id='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
 								<div class="my-auto money-col money-text col"><strong lang="en">HXY.</strong></div>
 								<div class="my-auto money-col col">
-									<button type="button" class="action-button btn btn-light" id='proceed'>进行</button>
+									<button type="button" class="action-button btn btn-light" id='proceed'><?php echo $phrases['proceed'] ?></button>
 								</div>
 							</div>
 						</div>
@@ -749,14 +753,12 @@ else
 							</div>
 						</div>
 					</div>
-					<p class="referral-text">您的转介连结：<span id="referal_url"></span> <br></p></div>
+					<p class="referral-text"><?php echo $phrases['referral_link'] ?>：<span id="referal_url"></span> <br></p></div>
 			</div>
 			<div class=" bottom-shadow row">
 				<div class="col">
 					<div class="justify-content-center row">
-						<div class="col-10"><p class="project-title title"><?php echo $phrases['refer_to_other'] ?> <strong
-										lang="en">hex.business</strong> <?php echo $phrases['project'] ?>
-							</p></div>
+						<div class="col-10"><p class="project-title title"><?php echo $phrases['refer_to_other'] ?></p></div>
 					</div>
 					<div class="project-icons justify-content-center d-flex flex-wrap">
 						<div class="col-md-2 col-sm-2 col-4"><img src="./static/media/HEXRocket.23bb336d.png"
@@ -849,7 +851,7 @@ else
 				<div class="row"><p class="title"> <?php echo $phrases['for_more_information_subscribe'] ?></p></div>
 				<div class="justify-content-center emailform">
 					<form action="./handlesubscription.php?lang=<?php echo $language?>" method="post">
-						<div ><input class="email-input" type="text" name="email" placeholder="<?php echo $phrases['email'] ?>"></div>
+						<div ><input class="email-input" type="email" name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50"/></div>
 						<div class="sign-up">
 							<button type="submit" class="sign-up btn btn-light"><strong><?php echo $phrases['subscription'] ?></strong></button>
 						</div>
@@ -894,7 +896,7 @@ else
 <div style="display: none;width:100vw;height:100vh;position:fixed;top:0;left:0;background-color: black" class="" id='modal-back'>
 	</div>
 <div class='modal-dialog' id="modal" style='display: none'>
-<div class="modal-content"><div class="modal-header"><div class="modal-title h4"><strong>Approve Tokens</strong></div><button type="button" class="close"><span aria-hidden="true" id='modal_close'>×</span><span class="sr-only">Close</span></button></div><div class="modal-body"><div class="justify-content-center row mobile-approvemodal"><div class="col-md-4"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAGECAMAAAC77O3EAAAC+lBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////86i/ucAAAA/XRSTlMAAAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gIiMkJSYnKCkqKywtLi8wMTIzNDU2Nzg5Ojs8PT4/QEFCQ0RFRkdISUpLTE1OT1BRUlNU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" class="img-fluid"></div><div class='mobile-approvediv'><div class="my-auto "><input class="enter-amount" placeholder="Enter amount" type="text" id='modal-amount' maxlength="12"></div><div class="my-auto col-md-auto"><strong>HEX</strong></div></div></div></div><div class="modal-footer"><button type="button" id="btn_approve" class="action-button btn btn-light">Approve</button></div></div></div>
+<div class="modal-content"><div class="modal-header"><div class="modal-title h4"><strong>Approve Tokens</strong></div><button type="button" class="close"><span aria-hidden="true" id='modal_close'>×</span><span class="sr-only">Close</span></button></div><div class="modal-body"><div class="justify-content-center row mobile-approvemodal"><div class="col-md-4"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAGECAMAAAC77O3EAAAC+lBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////86i/ucAAAA/XRSTlMAAAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gIiMkJSYnKCkqKywtLi8wMTIzNDU2Nzg5Ojs8PT4/QEFCQ0RFRkdISUpLTE1OT1BRUlNU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" class="img-fluid"></div><div class='mobile-approvediv'><div class="my-auto "><input type="text" class="enter-amount" placeholder="Enter amount" id='modal-amount' onkeypress="validate(event)" maxlength="12" /></div><div class="my-auto col-md-auto"><strong>HEX</strong></div></div></div></div><div class="modal-footer"><button type="button" id="btn_approve" class="action-button btn btn-light">Approve</button></div></div></div>
 </body>
 
 <script>
@@ -963,6 +965,23 @@ else
 		document.getElementById("modal").style.display = "none";
 	}
 
+	function validate(evt) {
+	  var theEvent = evt || window.event;
+
+	  // Handle paste
+	  if (theEvent.type === 'paste') {
+	      key = event.clipboardData.getData('text/plain');
+	  } else {
+	  // Handle key press
+	      var key = theEvent.keyCode || theEvent.which;
+	      key = String.fromCharCode(key);
+	  }
+	  var regex = /[0-9]|\./;
+	  if( !regex.test(key) ) {
+	    theEvent.returnValue = false;
+	    if(theEvent.preventDefault) theEvent.preventDefault();
+	  }
+	}
 </script>
 
 </html>
