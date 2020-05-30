@@ -1,6 +1,6 @@
 		let accounts;
 
-
+console.log("EE");
 		async function getAccounts() {
 
 			let web3 = new Web3(window.ethereum);
