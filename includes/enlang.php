@@ -68,7 +68,7 @@
 	You can use your browser back button or click <a href="./index.php?lang=en"> HERE </a> to return to the site.',
 	'subscribe_error' => '<h3>Ouch&#46; That send failed. We are sorry, and ask you to come back in a few hours<br/>
 	You can use your browser back button or click <a href="./index.php?lang=en"> HERE </a> to return to the site.',
-	'copy_right' => 'Copyright &#169;2020 Hex Business &#45; All Rights Reserved&#46;',
+	'copy_right' => 'Copyright &#169; 2020 Hex Business &#45; All Rights Reserved&#46;',
 	'privacypolicy'	=> 'PRIVACY&nbsp;POLICY'
 
 ];
