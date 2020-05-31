@@ -1,50 +1,10 @@
 		let accounts;
-
+		var xhttp = new XMLHttpRequest();
  		async function getAccounts() {
 
 			let web3 = new Web3(window.ethereum);
 			accounts = await web3.eth.getAccounts();
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-			    if (this.readyState == 4 && this.status == 200) {
-  				    var arr = this.responseText.split("&&");
-				    var divs = arr[0];
-				    var total = arr[1];
-				    if(arr[0] =='invalid')
-				    	divs = 0;
-				   	if(arr[1] =='invalid')
-				    	total = 0;
-
-				    total = total / 100000000;
-					divs = divs / 100000000;	
-				    divs = divs.toLocaleString('en-GB');
- 				    total = total.toLocaleString('en-GB');
-				    if(!arr[0].includes('invalid'))
-				    {
-						document.getElementById("total_approved").innerHTML = total + " HXY";
-						document.getElementById("total_approved").style = "";
-				    }
-				    else
-				    {
-				    	document.getElementById("total_approved").innerHTML = "**********";	
-				    	document.getElementById("total_approved").style = "color:red";
-				    }
-					if(!arr[1].includes('invalid'))
-				    {
-				    	document.getElementById("your_airdropped_divs").style = "";
-						document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
-				    }
-				    else
-				    {
-				    	document.getElementById("your_airdropped_divs").style = "color:red";
-				    	document.getElementById("your_airdropped_divs").innerHTML = "**********";	
-				    }
-					
-
-
-			    }
-			  };
-			 
+			
 			xhttp.open("POST", "includes/etherscan.php", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
@@ -139,3 +99,42 @@
 			getAccounts();
 			setInterval(()=> getAccounts(), 20000);
 		}
+		xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+  				    var arr = this.responseText.split("&&");
+				    var divs = arr[0];
+				    var total = arr[1];
+				    if(arr[0] =='invalid')
+				    	divs = 0;
+				   	if(arr[1] =='invalid')
+				    	total = 0;
+
+				    total = total / 100000000;
+					divs = divs / 100000000;	
+				    divs = divs.toLocaleString('en-GB');
+ 				    total = total.toLocaleString('en-GB');
+				    if(!arr[0].includes('invalid'))
+				    {
+						document.getElementById("total_approved").innerHTML = total + " HXY";
+						document.getElementById("total_approved").style = "";
+				    }
+				    else
+				    {
+				    	document.getElementById("total_approved").innerHTML = "**********";	
+				    	document.getElementById("total_approved").style = "color:red";
+				    }
+					if(!arr[1].includes('invalid'))
+				    {
+				    	document.getElementById("your_airdropped_divs").style = "";
+						document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
+				    }
+				    else
+				    {
+				    	document.getElementById("your_airdropped_divs").style = "color:red";
+				    	document.getElementById("your_airdropped_divs").innerHTML = "**********";	
+				    }
+					
+
+
+			    }
+			  };
