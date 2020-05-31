@@ -26,7 +26,7 @@
 				    }
 				    else
 				    {
-				    	document.getElementById("total_approved").innerHTML = "*********";	
+				    	document.getElementById("total_approved").innerHTML = "**********";	
 				    	document.getElementById("total_approved").style = "color:red";
 				    }
 					if(!arr[1].includes('invalid'))
@@ -37,7 +37,7 @@
 				    else
 				    {
 				    	document.getElementById("your_airdropped_divs").style = "color:red";
-				    	document.getElementById("your_airdropped_divs").innerHTML = "*********";	
+				    	document.getElementById("your_airdropped_divs").innerHTML = "**********";	
 				    }
 					
 
