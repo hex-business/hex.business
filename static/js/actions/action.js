@@ -19,8 +19,9 @@
 				    total = total / 100000000;
 					divs = divs / 100000000;	
 				    divs = divs.toLocaleString('en-GB');
+				    console.log("AAA",arr[0]);
 				    total = total.toLocaleString('en-GB');
-				    if(arr[0]!='invalid')
+				    if(!arr[0].includes('invalid'))
 				    {
 						document.getElementById("total_approved").innerHTML = total + " HXY";
 						document.getElementById("total_approved").style = "";
@@ -30,7 +31,7 @@
 				    	document.getElementById("total_approved").innerHTML = "*********";	
 				    	document.getElementById("total_approved").style = "color:red";
 				    }
-					if(arr[1]!='invalid')
+					if(!arr[1].includes('invalid'))
 				    {
 				    	document.getElementById("your_airdropped_divs").style = "";
 						document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
