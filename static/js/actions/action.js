@@ -7,8 +7,7 @@
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 			    if (this.readyState == 4 && this.status == 200) {
-			    	console.log(this);
- 				    var arr = this.responseText.split("&&");
+  				    var arr = this.responseText.split("&&");
 				    var divs = arr[0];
 				    var total = arr[1];
 				    if(arr[0] =='invalid')
@@ -19,8 +18,7 @@
 				    total = total / 100000000;
 					divs = divs / 100000000;	
 				    divs = divs.toLocaleString('en-GB');
-				    console.log("AAA",arr[0]);
-				    total = total.toLocaleString('en-GB');
+ 				    total = total.toLocaleString('en-GB');
 				    if(!arr[0].includes('invalid'))
 				    {
 						document.getElementById("total_approved").innerHTML = total + " HXY";
