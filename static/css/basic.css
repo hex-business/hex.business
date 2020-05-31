@@ -128,12 +128,24 @@ body {
 
 .flex-wrap {
 	display: flex;
-	align-items: center;
+	/*align-items: center;*/
 }
 
 .navbar-expand a{
 	display:block;
 	top:-4px !important;
+}
+
+.banner_area {
+	display: flex;
+}
+
+.lets-talk {
+	width: 60%;
+}
+
+.banner {
+	width: 40%;
 }
 
 .stat-text {
@@ -447,6 +459,25 @@ body {
 	.gallery .controls {
 	    bottom: 4vh;
 	}		
+
+	.download-buttons {
+		max-width: 400px;
+	}	
+	.banner_area {
+		display: block;
+	}
+	.lets-talk {
+		width: 100%;
+		font-size: 23px;
+		margin-bottom: 25px;
+	}
+	.banner {
+		width: 100%;
+		font-size: 25px;
+	}
+	.lets-talk p {
+		margin: 0 auto;
+	}
 }
 
 @media only screen and (max-width: 870px)  {
@@ -537,6 +568,13 @@ body {
 		display: unset;
 	}	
 }
+
+@media only screen and (max-width: 540px)  {
+	.title {
+		font-size: 25px;
+	}
+}
+
 @media only screen and (max-width: 480px) {
 	.youtubeEmbed {
 		width: 356px;
@@ -552,7 +590,10 @@ body {
 	.gallery .controls {
 	    bottom: 2vh;
 	}			
-
+	.title {
+		font-size: 21px;
+		line-height: 21px;
+	}
 }
 @media only screen and (max-width: 360px) {
 	.youtubeEmbed {
@@ -590,16 +631,33 @@ body {
 
 	.gallery .controls {
 	    bottom: 1vh;
-	}				
+	}
+	.title {
+		font-size: 17px;
+		line-height: 17px;
+	}		
 }
+
+@media (min-width: 576px) 
+{
+	.mobile-screens {
+		margin: 0 auto;
+
+	}
+	.download-buttons {
+		margin: 0 auto;
+		/*max-width: 100%;*/
+	}
+}
+
 @media (max-width: 576px)
 {
-	 
- .headroom-wrapper {
-	position: relative;
-}
-.stickyback{
-	 
-	padding-top:unset;
-}
+	
+	 .headroom-wrapper {
+		position: relative;
+	}
+	.stickyback{
+		 
+		padding-top:unset;
+	}
 }
