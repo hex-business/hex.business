@@ -242,7 +242,7 @@ else
 
 
 						<ul class="navbar-nav ml-auto">
-							 
+
 							<li class="my-auto hand" id='approvemobile'>
 
 								<img src="./static/media/metamask.2c92daf3.png" class="metamask-button"
@@ -847,8 +847,8 @@ else
 			<div class="col">
 				<div class="row"><p class="title"> <?php echo $phrases['for_more_information_subscribe'] ?></p></div>
 				<div class="justify-content-center emailform">
-					<form action="./handlesubscription.php?lang=<?php echo $language?>" method="post">
-						<div ><input class="email-input" type="email" name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50"/></div>
+					<form action="./handlesubscription.php?lang=<?php echo $language?>" method="post" id="emailForm">
+						<div ><input class="email-input" type="email" name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50" id="email" ></div>
 						<div class="sign-up">
 							<button type="submit" class="sign-up btn btn-light"><strong><?php echo $phrases['subscription'] ?></strong></button>
 						</div>
@@ -887,7 +887,7 @@ else
 		<br/>
 		<br/>
 		<span id="donate" class="hidden">Donations are welcome&#58;<br/>0x1EF0Bab01329a6CE39e92eA6B88828430B1Cd91f</span></p>
-		</footer>		
+		</footer>
 	</div>
 </div>
 <div style="display: none;width:100vw;height:100vh;position:fixed;top:0;left:0;background-color: black" class="" id='modal-back'>
@@ -914,7 +914,7 @@ else
 		isFreeze(amount);
 		}
 	});
-	 
+
 	function freeze(amount)  {
 		moneyInstance.methods.FreezeTokens(amount).send({from:accounts[0]});
 	}
@@ -930,8 +930,8 @@ else
 	document.getElementById("approvemobile").addEventListener("click", function(e){
 		e.stopPropagation();
 		showModal();
-	});	
-	
+	});
+
 	document.getElementById("freeze").addEventListener("click", function(e){
 		document.getElementById("freeze").classList.add("active");
 		isFreeze = true;
@@ -979,6 +979,23 @@ else
 	    if(theEvent.preventDefault) theEvent.preventDefault();
 	  }
 	}
+
+	ValidateEmail = function (evt)
+	{
+		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById ('email').value))
+		{
+			return (true)
+		}
+		alert("<?php echo $phrases['entered_invalid_email'] ?>")
+		evt.preventDefault() ;
+		return (false)
+	}
+	document.getElementById('emailForm').addEventListener('submit',ValidateEmail);
+
+	document.getElementById('email').addEventListener('change', function(){
+		document.getElementById ('email').value = document.getElementById ('email').value.replace(' ', '');
+	}) ;
+
 </script>
 
 </html>

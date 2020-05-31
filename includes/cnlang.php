@@ -69,6 +69,6 @@
 	'subscribe_error' => '<h3>这儿存在一个问题&#46; 该发送失败。 很抱歉，请您几个小时后再回来<br/>
 	You can use your browser back button or click <a href="./index.php?lang=cn"> HERE </a> to return to the site.',
 	'copy_right' => 'Copyright &#169; 2020 Hex Business版权所有 - 保留所有权利',
-	'privacypolicy'	=> '私隱政策'
-
+	'privacypolicy'	=> '私隱政策',
+	'entered_invalid_email' 	=> 'You have entered an invalid email address!',
 ];
