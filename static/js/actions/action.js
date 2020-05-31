@@ -7,15 +7,40 @@
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 			    if (this.readyState == 4 && this.status == 200) {
+			    	console.log(this);
  				    var arr = this.responseText.split("&&");
 				    var divs = arr[0];
 				    var total = arr[1];
+				    if(arr[0] =='invalid')
+				    	divs = 0;
+				   	if(arr[1] =='invalid')
+				    	total = 0;
+
 				    total = total / 100000000;
 					divs = divs / 100000000;	
 				    divs = divs.toLocaleString('en-GB');
 				    total = total.toLocaleString('en-GB');
-					document.getElementById("total_approved").innerHTML = total + " HXY";
-					document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
+				    if(arr[0]!='invalid')
+				    {
+						document.getElementById("total_approved").innerHTML = total + " HXY";
+						document.getElementById("total_approved").style = "";
+				    }
+				    else
+				    {
+				    	document.getElementById("total_approved").innerHTML = "*********";	
+				    	document.getElementById("total_approved").style = "color:red";
+				    }
+					if(arr[1]!='invalid')
+				    {
+				    	document.getElementById("your_airdropped_divs").style = "";
+						document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
+				    }
+				    else
+				    {
+				    	document.getElementById("your_airdropped_divs").style = "color:red";
+				    	document.getElementById("your_airdropped_divs").innerHTML = "*********";	
+				    }
+					
 
 
 			    }
@@ -24,7 +49,7 @@
 			xhttp.open("POST", "includes/etherscan.php", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-			xhttp.send("account="+accounts[0]+"&type=stats");
+			xhttp.send("account="+accounts[0]);
 		    moneyInstance.methods.totalSupply().call().then(totalSupply => {
 		    	
 			    moneyInstance.methods._maxSupply().call().then(maxSupply => {

@@ -1,22 +1,30 @@
 
   <?php 
-  $airdropContract = '0xc4e1b40cf87bd8a7a1d785276c42113e0ff50f3d';
-  $hexTokenAddress = '0x8c6fB3075D144C2C1877A2fcd92297729fBE8b80';
-  $transferTopic = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef';
-  $apiKey = '48H8MJEP5FA5WMVMVF599PSQX287QAZX46';
-  $address = '0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39';
-  $topic = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef';
+require_once  __DIR__ . '/config.php';
 
    function toHexAddress($add){
     return '0x000000000000000000000000' . substr($add,2);
   }
+  if(isset($_POST['account']) ){
+    $acc = $_POST['account'];
+    $config = Config::getEtherConfig();
+    $airdropContract = $config['airdropContract'];
+    $hexTokenAddress = $config['hexTokenAddress'];
+    $transferTopic = $config['transferTopic'];
+    $apiKey = $config['apiKey'];
+    $address= $config['address'];
+    $topic = $config['topic'];
+    
+    $stats = getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
+    $total = getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
+    echo $stats . '&&' . $total;
+    exit();
+  }
+  else
+  {
+    die("It's not authorized");
+  }
 
-  $acc = $_POST['account'];
-  $type = $_POST['type'];
-   
-  $stats = getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
-  $total = getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
-  echo $stats . '&&' . $total;
 
  function getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey) {
     $_totalAirdropped = 0;
@@ -27,16 +35,39 @@
     curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Content-Type: application/json' ));
     $res = curl_exec($cURLConnection);
-    curl_close($cURLConnection);
+    
+    if (curl_errno($cURLConnection)) {
+        // this would be your first hint that something went wrong
 
-    $jsonArrayResponse = json_decode($res);
+        return "invalid";
+    } else {
+      
+        // check the HTTP status code of the request
+        $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
+        curl_close($cURLConnection);
+
+        if ($resultStatus != 200) {
+           return "invalid";
+        }
+        else
+        {
+           $jsonArrayResponse = json_decode($res);
    
-    $arr = $jsonArrayResponse->result;
-    foreach($arr as $item)
-    {
-      $_totalAirdropped += hexdec($item->data);
+          $arr = $jsonArrayResponse->result;
+          if(is_array($arr))
+          {
+            foreach($arr as $item)
+            {
+              if($item->data)
+                $_totalAirdropped += hexdec($item->data);
+              else return "invalid";
+            }
+            return $_totalAirdropped;
+          }
+         return "invalid";
+        }
     }
-    return $_totalAirdropped;
+   
 }
 
 
@@ -49,15 +80,36 @@
     curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Content-Type:application/json' ));
     $res = curl_exec($cURLConnection);
-    curl_close($cURLConnection);
 
-    $jsonArrayResponse = json_decode($res);
-    
-    foreach($jsonArrayResponse->result as $item)
-    {
-      $_totalAirdropped += hexdec($item->data);
+      if (curl_errno($cURLConnection)) {
+        // this would be your first hint that something went wrong
+        return "invalid";
+      } else {
+        // check the HTTP status code of the request
+
+        $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
+        curl_close($cURLConnection);
+
+        if ($resultStatus != 200) {
+           return "invalid";
+        }
+        else
+        {
+           $jsonArrayResponse = json_decode($res);
+   
+          $arr = $jsonArrayResponse->result;
+          if(is_array($arr))
+          {
+             foreach($jsonArrayResponse->result as $item)
+              {
+                $_totalAirdropped += hexdec($item->data);
+              }
+              return $_totalAirdropped;
+          }
+          return "invalid";
+        }
     }
-    return $_totalAirdropped;
+   
   }
 
  
