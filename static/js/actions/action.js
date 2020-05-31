@@ -1,16 +1,30 @@
 		let accounts;
 
-console.log("EE");
-		async function getAccounts() {
+ 		async function getAccounts() {
 
 			let web3 = new Web3(window.ethereum);
 			accounts = await web3.eth.getAccounts();
-			var divs = await getAirdropStats(accounts);
-			divs = divs / 100000000;
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+ 				    var arr = this.responseText.split("&&");
+				    var divs = arr[0];
+				    var total = arr[1];
+				    total = total / 100000000;
+					divs = divs / 100000000;	
+				    divs = divs.toLocaleString('en-GB');
+				    total = total.toLocaleString('en-GB');
+					document.getElementById("total_approved").innerHTML = total + " HXY";
+					document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
 
-		    var total = await getTotalAirdropped();
-		    total = total / 100000000;
-						
+
+			    }
+			  };
+			 
+			xhttp.open("POST", "includes/etherscan.php", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+			xhttp.send("account="+accounts[0]+"&type=stats");
 		    moneyInstance.methods.totalSupply().call().then(totalSupply => {
 		    	
 			    moneyInstance.methods._maxSupply().call().then(maxSupply => {
@@ -52,11 +66,9 @@ console.log("EE");
 														tokenFrozenBalances = tokenFrozenBalances.toLocaleString('en-GB');
 														hxyTransformed = hxyTransformed.toLocaleString('en-GB');
 														heartsTransformed = heartsTransformed.toLocaleString('en-GB');
-														total = total.toLocaleString('en-GB');
-														maxSupply = (maxSupply / 100000000) ?? 0;
+ 														maxSupply = (maxSupply / 100000000) ?? 0;
 														maxSupply = maxSupply.toLocaleString('en-GB');
-														divs = divs.toLocaleString('en-GB');
-
+ 
 														let refereal_url = window.location.origin + "/?r=" + accounts[0];
 
 														
@@ -67,11 +79,9 @@ console.log("EE");
 														document.getElementById("frzoneTokenBalance").innerHTML = frzoneTokenBalance + " HXY";
 														document.getElementById("calculating_supply").innerHTML = calculating_supply + " HXY";
 														document.getElementById("approved_amount").innerHTML = allowance + " HEX";
-														document.getElementById("total_approved").innerHTML = total + " HXY";
 														document.getElementById("interest").innerHTML = interest + " HXY";
 														document.getElementById("tokenFrozenBalances").innerHTML = tokenFrozenBalances + " HXY";
 														document.getElementById("maxSupply").innerHTML = maxSupply + " HXY";
-														document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
 														document.getElementById("total_hxy_conversion").innerHTML = hxyTransformed + " HXY";
 														document.getElementById("total_hex_conversion").innerHTML = heartsTransformed + " HXY";
 														

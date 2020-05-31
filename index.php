@@ -36,8 +36,7 @@ else
 	<link rel="stylesheet" href="./static/css/basic.css?v=0.0.2">
 	<script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
 	<script src="./static/js/actions/contractABI.js"></script>
-	<script src="./static/js/actions/etherscan.js"></script>
-	<script src="./static/js/actions/action.js"></script>
+ 	<script src="./static/js/actions/action.js"></script>
 
 </head>
 
