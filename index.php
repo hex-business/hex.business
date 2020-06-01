@@ -584,7 +584,7 @@ else
 							<div class="table-cell stat-text row">
 								<div class="stat-cell col-4"><?php echo $phrases['uniswap_price'] ?></div>
 								<div class="stat-cell col-6">
-									<strong><?php echo round(floatval($rateData['uniswapHexEth']) / 1000, 3) ?>k
+									<strong><?php echo round(floatval($rateData['uniswapHexEth']) / 1000, 3) ?> k
 										H/E </strong></div>
 								<div class="stat-cell col-1"><?php
 									if ($rateData['uniswapHexEth24Change'] > 0)
@@ -898,9 +898,10 @@ else
 
 <script>
 	let  isFreeze = true;
-	document.getElementById("transform").addEventListener("click", function(){
-	 const amount = document.getElementById("enter-amount").value;
- 	  moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]})
+	document.getElementById("transform").addEventListener("click", function(){\
+	 	const amount = document.getElementById("enter-amount").value;
+ 	  	moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]});
+ 	  	document.getElementById("enter-amount").value = '';
 	});
 	document.getElementById("enter-amount").addEventListener("keyup", function(e){
 		const amount = document.getElementById("enter-amount").value;
@@ -908,11 +909,13 @@ else
 	});
 	document.getElementById("proceed").addEventListener("click", function(){
 		const amount = parseInt(document.getElementById("freeze-amount").value*100000000);
+
  		if(isFreeze){
-		freeze(amount);
+			freeze(amount);
 		} else {
-		isFreeze(amount);
+			isFreeze(amount);
 		}
+		document.getElementById("freeze-amount").value = '';
 	});
 
 	function freeze(amount)  {
@@ -945,10 +948,12 @@ else
 	document.getElementById("modal_close").addEventListener("click", hideModal);
 	document.getElementById("modal-back").addEventListener("click", hideModal);
 	document.getElementById("btn_approve").addEventListener("click", approveHex);
+
 	function approveHex(){
 		const amount = document.getElementById("modal-amount").value;
  		tokenInstance.methods.approve(moneyAddress, amount.toString() + '00000000').send({from:accounts[0]}).then(hideModal());
 	}
+
 	function showModal()
 	{
 		if(window.ethereum){
@@ -958,8 +963,10 @@ else
 	}
 	function hideModal()
 	{
+		document.getElementById("modal-amount").value = '';
 		document.getElementById("modal-back").className  = '';
 		document.getElementById("modal").style.display = "none";
+
 	}
 
 	function validate(evt) {
@@ -993,7 +1000,7 @@ else
 	document.getElementById('emailForm').addEventListener('submit',ValidateEmail);
 
 	document.getElementById('email').addEventListener('change', function(){
-		document.getElementById ('email').value = document.getElementById ('email').value.replace(' ', '');
+		document.getElementById ('email').value = document.getElementById ('email').value.replace(/\s/g, '');
 	}) ;
 
 </script>
