@@ -18,9 +18,12 @@
     $apiKey = $config['apiKey'];
     $address= $config['address'];
     $topic = $config['topic'];
-
-    $stats = getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
-    $total = getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
+    if($address && $topic && $airdropContract && $acc &&$apikey)
+      $stats = getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
+    else $stats = "invalid";
+    if($address && $topic && $airdropContract && $apikey)
+      $total = getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
+    else $total = "invalid";
     echo $stats . '&&' . $total;
     exit();
   }
@@ -56,7 +59,8 @@
         else
         {
            $jsonArrayResponse = json_decode($res);
-   
+          if(!$jsonArrayResponse->result)
+            return "invalid";
           $arr = $jsonArrayResponse->result;
           if(is_array($arr))
           {
@@ -99,8 +103,9 @@ function getTotalAirdropped($address, $topic,$airdropContract,$apiKey ) {
       }
       else
       {
-         $jsonArrayResponse = json_decode($res);
- 
+        $jsonArrayResponse = json_decode($res);
+        if(!$jsonArrayResponse->result)
+            return "invalid";
         $arr = $jsonArrayResponse->result;
         if(is_array($arr))
         {
