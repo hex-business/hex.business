@@ -20,7 +20,7 @@
     $topic = $config['topic'];
     if($address && $topic && $airdropContract && $acc &&$apikey)
       $stats = getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
-    else $stats = "invalid"
+    else $stats = "invalid";
     if($address && $topic && $airdropContract && $apikey)
       $total = getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
     else $total = "invalid";
