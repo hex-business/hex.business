@@ -18,10 +18,10 @@
     $apiKey = $config['apiKey'];
     $address= $config['address'];
     $topic = $config['topic'];
-    if($address && $topic && $airdropContract && $acc &&$apikey)
+     if($address && $topic && $airdropContract && $acc && $apiKey )
       $stats = getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
     else $stats = "invalid";
-    if($address && $topic && $airdropContract && $apikey)
+    if($address && $topic && $airdropContract && $apiKey )
       $total = getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
     else $total = "invalid";
     echo $stats . '&&' . $total;
