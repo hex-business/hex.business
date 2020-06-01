@@ -53,7 +53,7 @@
 	'convert_to'                       => '<strong>HEX</strong> to',
 	'convert'                          => 'Transform',
 	'freeze'                           => 'freeze',
-	'thaw'                             => 'thaw',
+	'thaw'                             => 'unfreeze',
 	'project'                          => 'Project',
 	'proceed'                          => 'Proceed',
 	'approve_token'					   => 'Approve Tokens',
