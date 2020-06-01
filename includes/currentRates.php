@@ -31,7 +31,7 @@ class CurrentRates{
 		try
 		{
 			$data = curl_exec($curl);
-			$status = 	($curl, CURLINFO_HTTP_CODE);
+			$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 			if ($status <> 200)
 			{
@@ -39,7 +39,6 @@ class CurrentRates{
 			}
 
 			curl_close($curl);
-			
 			return $this->emptyData;
 		}
 		catch (Exception $e)
