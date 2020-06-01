@@ -1,8 +1,11 @@
 <?php
 error_reporting(E_ALL);
+include './autoload.php';
 require_once './includes/currentRates.php';
+
 $rates    = new CurrentRates();
 $rateData = $rates->getRateData();
+
 if (!empty($_GET['lang']) and ($_GET['lang'] == 'en'))
 {
 	require_once __DIR__ . '/includes/enlang.php';
@@ -13,6 +16,8 @@ else
 	require_once __DIR__ . '/includes/cnlang.php';
 	$language = 'cn';
 }
+
+
 ?>
 
 <html lang="zh-Hans">
@@ -34,7 +39,9 @@ else
 	<link rel="stylesheet" href="./static/css/gallery.theme.css?v=6">
 	<link rel="stylesheet" href="./static/css/modal.css?v=6">
 	<link rel="stylesheet" href="./static/css/basic.css?v=0.0.2">
+
 	<script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+	<script src="./static/extensions/sweetalert/sweetalert.min.js"></script>
 	<script src="./static/js/actions/contractABI.js"></script>
  	<script src="./static/js/actions/action.js"></script>
 
@@ -664,7 +671,7 @@ else
 						<div class="col-9">
 							<div class="justify-content-center mb-5 mt-5 d-flex flex-wrap">
 								<div class="my-auto money-col money-text col-md-auto col-12"><strong><?php echo $phrases['send'] ?></strong></div>
-								<div class="my-auto money-col col"><input type="text" onkeypress="validate(event)" maxlength="12" class="enter-amount" id='enter-amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
+								<div class="my-auto money-col col"><input type="text" onkeypress="validate(event)" maxlength="12" disabled="disabled" class="enter-amount" id='enter-amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
 								<div class="my-auto money-text money-col col"><strong lang="en">HEX</strong></div>
 								<div class="my-auto money-col money-text col-sm-auto"><strong><?php echo $phrases['can_receive'] ?>  <span
 												lang="en" id="canreceive">0 HXY.</span></strong></div>
@@ -686,7 +693,7 @@ else
 													value="1"><?php echo $phrases['thaw'] ?></label>
 									</div>
 								</div>
-								<div class="my-auto money-col col"><input type="text" class="enter-amount" onkeypress="validate(event)" maxlength="12" id='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
+								<div class="my-auto money-col col"><input type="text" class="enter-amount" onkeypress="validate(event)" maxlength="12" disabled='disabled' id='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
 								<div class="my-auto money-col money-text col"><strong lang="en">HXY.</strong></div>
 								<div class="my-auto money-col col">
 									<button type="button" class="action-button btn btn-light" id='proceed'><?php echo $phrases['proceed'] ?></button>
@@ -897,8 +904,17 @@ else
 </body>
 
 <script>
+
 	let  isFreeze = true;
-	document.getElementById("transform").addEventListener("click", function(){\
+
+	document.addEventListener("DOMContentLoaded", pageReady);
+
+	function pageReady() {
+		document.getElementById("enter-amount").removeAttribute("disabled");
+		document.getElementById("freeze-amount").removeAttribute("disabled");
+	}
+
+	document.getElementById("transform").addEventListener("click", function(){
 	 	const amount = document.getElementById("enter-amount").value;
  	  	moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]});
  	  	document.getElementById("enter-amount").value = '';
@@ -993,7 +1009,14 @@ else
 		{
 			return (true)
 		}
-		alert("<?php echo $phrases['entered_invalid_email'] ?>")
+
+		Swal.fire({
+		  icon: 'error',
+		  title: 'Oops...',
+		  text: "<?php echo $phrases['entered_invalid_email'] ?>",
+		  footer: '<a href>Why do I have this issue?</a>'
+		})
+
 		evt.preventDefault() ;
 		return (false)
 	}
