@@ -31,33 +31,15 @@ class CurrentRates{
 		try
 		{
 			$data = curl_exec($curl);
-			$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+			$status = 	($curl, CURLINFO_HTTP_CODE);
 
 			if ($status <> 200)
 			{
 				return $this->emptyData;
 			}
 
-			if (empty(curl_error($curl)))
-			{
-				try
-				{
-					//for some reason I'm getting a number (always 60 so far) after the json string.
-					while (substr($data, -1, 1) != '}')
-					{
-						$data = substr($data,0, -1);
-					}
-					$output = json_decode($data, true);
-					//apcu_store($this->key, $output, $this->config['cachelife']);
-					curl_close($curl);
-					return $output;
-				}
-				catch (Exception $e)
-				{
-					//would but a return here but the next line is return.
-				}
-			}
 			curl_close($curl);
+			
 			return $this->emptyData;
 		}
 		catch (Exception $e)
