@@ -80,7 +80,7 @@ class CurrentRates{
 
 			$data = $this->getFromServer();
 
-			return $this->data;
+			return $data;
 		}
 		catch (Exception $e)
 		{
