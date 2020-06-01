@@ -52,7 +52,7 @@ async function getAccounts() {
 		maxSupply = (maxSupply / 100000000) ?? 0;
 	maxSupply = maxSupply.toLocaleString('en-GB');
 
-	let refereal_url = window.location.origin + "/?r=" + accounts[0];
+	let refereal_url = window.location.origin + "&#47;?r=" + accounts[0];
 
 	document.getElementById("balance").innerHTML = balanceOf.toLocaleString('en-GB') + " HXY";
 	document.getElementById("total_supply").innerHTML = totalSupply + " HXY";
