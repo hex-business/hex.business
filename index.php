@@ -981,7 +981,8 @@ else
 
 	function approveHex(){
 		const amount = document.getElementById("modal-amount").value;
- 		tokenInstance.methods.approve(moneyAddress, amount.toString() + '00000000').send({from:accounts[0]}).then(hideModal());
+		var weiAmout = Math.floor(amount * 100000000)
+ 		tokenInstance.methods.approve(moneyAddress, weiAmout).send({from:accounts[0]}).then(hideModal());
 	}
 
 	function showModal()
