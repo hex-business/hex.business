@@ -671,7 +671,7 @@ else
 						<div class="col-9">
 							<div class="justify-content-center mb-5 mt-5 d-flex flex-wrap">
 								<div class="my-auto money-col money-text col-md-auto col-12"><strong><?php echo $phrases['send'] ?></strong></div>
-								<div class="my-auto money-col col"><input type="text" onkeypress="validate(event)" maxlength="12" disabled="disabled" class="enter-amount" id='enter-amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
+								<div class="my-auto money-col col"><input type="number" pattern="\d*" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxLength="12" disabled="disabled" class="enter-amount" id='enter-amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
 								<div class="my-auto money-text money-col col"><strong lang="en">HEX</strong></div>
 								<div class="my-auto money-col money-text col-sm-auto"><strong><?php echo $phrases['can_receive'] ?>  <span
 												lang="en" id="canreceive">0 HXY.</span></strong></div>
@@ -693,7 +693,7 @@ else
 													value="1"><?php echo $phrases['thaw'] ?></label>
 									</div>
 								</div>
-								<div class="my-auto money-col col"><input type="text" class="enter-amount" onkeypress="validate(event)" maxlength="12" disabled='disabled' id='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
+								<div class="my-auto money-col col"><input type="number" class="enter-amount" pattern="\d*"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxLength="12" disabled='disabled' id='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
 								<div class="my-auto money-col money-text col"><strong lang="en">HXY.</strong></div>
 								<div class="my-auto money-col col">
 									<button type="button" class="action-button btn btn-light" id='proceed'><?php echo $phrases['proceed'] ?></button>
@@ -985,23 +985,6 @@ else
 
 	}
 
-	function validate(evt) {
-	  var theEvent = evt || window.event;
-
-	  // Handle paste
-	  if (theEvent.type === 'paste') {
-	      key = event.clipboardData.getData('text/plain');
-	  } else {
-	  // Handle key press
-	      var key = theEvent.keyCode || theEvent.which;
-	      key = String.fromCharCode(key);
-	  }
-	  var regex = /[0-9]/;
-	  if( !regex.test(key) ) {
-	    theEvent.returnValue = false;
-	    if(theEvent.preventDefault) theEvent.preventDefault();
-	  }
-	}
 
 	ValidateEmail = function (evt)
 	{
