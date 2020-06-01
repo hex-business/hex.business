@@ -198,38 +198,38 @@ function etherscanPost() {
 	xhttp.onreadystatechange = function() {
 
 	    if (this.readyState == 4 && this.status == 200) {
-			var arr = this.responseText.split("&&");
-		    var divs = arr[0];
-		    var total = arr[1];
-		    if(arr[0] =='invalid')
-		    	divs = 0;
-		   	if(arr[1] =='invalid')
-		    	total = 0;
+	    	var response = this.responseText;
 
-		    total = total / 100000000;
-			divs = divs / 100000000;	
-		    divs = divs.toLocaleString('en-GB');
-			    total = total.toLocaleString('en-GB');
-		    if(!arr[0].includes('invalid'))
-		    {
-				document.getElementById("total_approved").innerHTML = total + " HXY";
-				document.getElementById("total_approved").style = "";
-		    }
-		    else
-		    {
-		    	document.getElementById("total_approved").innerHTML = "**********";	
-		    	document.getElementById("total_approved").style = "color:red";
-		    }
-			if(!arr[1].includes('invalid'))
-		    {
-		    	document.getElementById("your_airdropped_divs").style = "";
-				document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
-		    }
-		    else
-		    {
+	    	var arr = JSON.parse(response);
+
+	    	if (arr.status == '404') {
+	    		return false;
+	    	}
+
+		    var divs = arr.stats;
+		    var total = arr.total;
+
+		    if(divs =='invalid'){
 		    	document.getElementById("your_airdropped_divs").style = "color:red";
 		    	document.getElementById("your_airdropped_divs").innerHTML = "**********";	
 		    }
+		    else {
+				divs = divs / 100000000;	
+			    divs = divs.toLocaleString('en-GB');		    	
+		    	document.getElementById("your_airdropped_divs").style = "";
+				document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
+		    }
+		   	if(total =='invalid'){
+		    	document.getElementById("total_approved").innerHTML = "**********";	
+		    	document.getElementById("total_approved").style = "color:red";
+		   	}
+		   	else {
+		   		total = total / 100000000;	
+		   		total = total.toLocaleString('en-GB');
+				document.getElementById("total_approved").innerHTML = total + " HXY";
+				document.getElementById("total_approved").style = "";		   		
+		   	}
+
 	    }
 	};	
 

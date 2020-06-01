@@ -9,7 +9,9 @@
     return '0x000000000000000000000000' . substr($add,2);
   }
 
-  if(isset($_POST['account']) ){
+  $result = array();
+
+  if(isset($_POST['account']) && !empty($_POST['account']) ){
 
     $acc = $_POST['account'];
     $airdropContract = $config['airdropContract'];
@@ -24,13 +26,17 @@
     if($address && $topic && $airdropContract && $apiKey )
       $total = getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
     else $total = "invalid";
-    echo $stats . '&&' . $total;
-    exit();
+
+    $result['status'] = 200;
+    $result['stats'] = $stats;
+    $result['total'] = $total;
+    
   }
-  // else
-  // {
-  //   die("It's not authorized");
-  // }
+  else {
+    $result['status'] = 404;
+  }
+
+  echo json_encode($result); exit;
 
 
  function getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey) {
