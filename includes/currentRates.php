@@ -28,6 +28,8 @@ class CurrentRates{
 		curl_setopt($curl, CURLOPT_HEADER, 0);
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
 
+		$output = $this->emptyData;
+
 		try
 		{
 			$data = curl_exec($curl);
@@ -45,18 +47,19 @@ class CurrentRates{
 					{
 						$data = substr($data,0, -1);
 					}
+
 					$output = json_decode($data, true);
-					//apcu_store($this->key, $output, $this->config['cachelife']);
-					curl_close($curl);
-					return $output;
+					
 				}
 				catch (Exception $e)
 				{
 					//would but a return here but the next line is return.
 				}				
 			}
+
 			curl_close($curl);
-			return $this->emptyData;
+
+			return $output;
 		}
 		catch (Exception $e)
 		{
@@ -74,11 +77,10 @@ class CurrentRates{
 				return $data;
 			}
 		 */
-			if ($data = $this->getFromServer())
-			{
-				return $data;
-			}
-			return $this->emptyData;
+
+			$data = $this->getFromServer();
+
+			return $this->data;
 		}
 		catch (Exception $e)
 		{
