@@ -863,7 +863,7 @@ else
 				<div class="row"><p class="title"> <?php echo $phrases['for_more_information_subscribe'] ?></p></div>
 				<div class="justify-content-center emailform">
 					<form action="./handlesubscription.php?lang=<?php echo $language?>" method="post" id="emailForm">
-						<div ><input class="email-input" type="email" name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50" id="email" ></div>
+						<div ><input class="email-input" type="email" oninput="removeSpaces(this.value)"  name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50" id="email" ></div>
 						<div class="sign-up">
 							<button type="submit" class="sign-up btn btn-light"><strong><?php echo $phrases['subscription'] ?></strong></button>
 						</div>
@@ -999,7 +999,35 @@ else
 
 	}
 
+	function removeSpaces(value) {
+		if (value == '') {
+			document.getElementById("email").value = '***';
+			document.getElementById("email").value = '';
+		}
+		var newVal = value.replace(/\s/g, '');
 
+		document.getElementById("email").value = newVal;
+	}
+
+	function setCaretPosition(elemId, caretPos) {
+	    var elem = document.getElementById(elemId);
+
+	    if(elem != null) {
+	        if(elem.createTextRange) {
+	            var range = elem.createTextRange();
+	            range.move('character', caretPos);
+	            range.select();
+	        }
+	        else {
+	            if(elem.selectionStart) {
+	                elem.focus();
+	                elem.setSelectionRange(caretPos, caretPos);
+	            }
+	            else
+	                elem.focus();
+	        }
+	    }
+	}
 	ValidateEmail = function (evt)
 	{
 		 const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
