@@ -1,9 +1,6 @@
 <?php
 
-require_once  __DIR__ . '/config.php';
-
 class CurrentRates{
-	protected $config = array();
 	protected $emptyData = ['lastUpdated' => '',
 							'hexUsd' => 0, 'hexBtc' => 0, 'hexEth' => 0,
 							'btcUsd' => 0, 'ethUsd' => 0, 'hexTotalSupply' => 0,
@@ -15,14 +12,20 @@ class CurrentRates{
 							'uniswapHexEth24Change' => 0,];
 	protected $key = 'currentRateData';
 
-	public function __construct()
+	public function __construct(Config $config)
 	{
-		$this->config = Config::getConfig();
+		$this->config = $config;
 	}
 
+    /**
+     * Get Rate data
+     *
+     * @return String
+    */
+
 	protected function getFromServer()
-	{
-		$curl = curl_init($this->config['rateDataUrl']);
+	{	
+		$curl = curl_init($this->config->getRateDataUrl());
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
 		curl_setopt($curl, CURLOPT_HEADER, 0);
@@ -67,19 +70,18 @@ class CurrentRates{
 		}
 	}
 
+    /**
+     * Return data
+     *
+     * @return String
+    */
+
+
 	public function getRateData()
 	{
 		try
 		{
-		/*	if ($data = apcu_fetch($this->key))
-			{
-				echo "got from cache\n";
-				return $data;
-			}
-		 */
-
 			$data = $this->getFromServer();
-
 			return $data;
 		}
 		catch (Exception $e)

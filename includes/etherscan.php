@@ -5,65 +5,78 @@
 
   Class Etherscan {
 
-
     private $config;
 
     public function __construct(Config $config)
     {
-      $this->config = $config->getEtherConfig();
+      $this->config = $config;
     }
+
+    /**
+     * response etherscan api results
+     *
+     * @param  int  $id
+     * @return Json
+    */
 
     public function init() {
 
       $result = array();
 
-        if(!isset($_POST['account']) && empty($_POST['account']) ){
-            $result['status'] = 400;
-        }
-        else {
-            $acc = trim($_POST['account']);
-            $airdropContract = $this->config['airdropContract'];
-//            $hexTokenAddress = $this->config['hexTokenAddress'];
-//            $transferTopic = $this->config['transferTopic'];  //those two are not being used so remove them?
-            $apiKey = $this->config['apiKey'];
-            $address= $this->config['address'];
-            $topic = $this->config['topic'];
+      if(!isset($_POST['account']) && empty($_POST['account']) ){
+          $result['status'] = 404;
+      }
+      else {
+        $acc = trim($_POST['account']);
 
-            try {
-                $stats = $this->getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
-            } catch (Exception $e) {
-                $stats = "invalid";
-            }
-
-            try {
-                $total = $this->getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
-            } catch (Exception $e){
-                $total = "invalid";
-            }
-
-            $result['status'] = 200;
-            $result['stats'] = $stats;
-            $result['total'] = $total;
+        try {
+            $stats = $this->getAirdropStats($acc);
+        } catch (Exception $e) {
+            $stats = "invalid";
         }
 
-        
+        try {
+            $total = $this->getTotalAirdropped();
+        } catch (Exception $e){
+            $total = "invalid";
+        }
 
+        $result['status'] = 200;
+        $result['stats'] = $stats;
+        $result['total'] = $total;
+      }
 
-      echo json_encode($result); exit;
+      echo json_encode($result);
     }
 
-    private  function toHexAddress($add): string
+    /**
+     * response HexAddress
+     *
+     * @param  string  $add
+     * @return string
+    */
+
+    private  function toHexAddress(string $add): string
     {
-      return '0x000000000000000000000000' . substr($add,2);
+      if (!empty($add) && strlen($add) == 42) {
+        return '0x000000000000000000000000' . substr($add, 2);  
+      }
+
     }
-    
 
-    private  function getAirdropStats($address, $topic, $airdropContract, $acc, $apiKey):int
+    /**
+     * response HexAddress
+     *
+     * @param  string  $add
+     * @return string
+    */
+
+    private  function getAirdropStats(string $acc):int
     {
-        if(empty($address) || empty($topic) || empty($airdropContract) || empty($acc) || empty($apiKey)) {
-            throw new InvalidArgumentException("invalid");
-        }
-
+        $airdropContract = $this->config->getEtherConfigAirDropContract();
+        $apiKey          = $this->config->getEtherScanApiKey();
+        $address         = $this->config->getEtherConfigHexTokenAddress();
+        $topic           = $this->config->getEtherConfigTransferTopic();
 
         $cURLConnection = curl_init();
 
@@ -86,6 +99,12 @@
         return $this->processTotalAirDropped($res);
     }
 
+    /**
+     * Processing Total Airdropped
+     *
+     * @param  string  $result
+     * @return int
+    */
     private function processTotalAirDropped(string $result):int
     {
         if(empty($result)) {
@@ -111,12 +130,19 @@
     }
 
 
-    private function getTotalAirdropped($address, $topic,$airdropContract,$apiKey ):int
-    {
-        if (empty($address) || empty($topic) || empty($airdropContract) || empty($apiKey)) {
-            throw new InvalidArgumentException("invalid");
-        }
+    /**
+     * Response Total Airdropped
+     *
+     * @return int
+    */
 
+    private function getTotalAirdropped():int
+    {
+
+        $airdropContract = $this->config->getEtherConfigAirDropContract();
+        $apiKey          = $this->config->getEtherScanApiKey();
+        $address         = $this->config->getEtherConfigHexTokenAddress();
+        $topic           = $this->config->getEtherConfigTransferTopic();
 
         $cURLConnection = curl_init();
 

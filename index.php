@@ -1,9 +1,10 @@
 <?php
 
-include_once './autoload.php';
-require_once './includes/currentRates.php';
+include_once __DIR__.'/autoload.php';
+require_once  __DIR__ . '/includes/config.php';
+require_once __DIR__.'/includes/currentRates.php';
 
-$rates    = new CurrentRates();
+$rates    = new CurrentRates(new Config());
 $rateData = $rates->getRateData();
 
 if (!empty($_GET['lang']) and ($_GET['lang'] == 'en'))

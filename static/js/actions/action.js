@@ -202,7 +202,7 @@ function etherscanPost() {
 
 	    	var arr = JSON.parse(response);
 
-	    	if (arr.status == 400) {
+	    	if (arr.status == 404) {
 	    		return false;
 	    	}
 
