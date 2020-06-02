@@ -15,14 +15,6 @@ class Config
         }
         return $value;
     }
-    public function getCacheLife():int
-    {
-        return (int)$this->parseEnv('cachelife', 'Cache life configuration is missing');
-    }
-    public function getEtherScanApiKey():string
-    {
-        return $this->parseEnv("etherscanApiKey", "Ether api key missing");
-    }
     public function getRateDataUrl():string
     {
         return $this->parseEnv("rateDataUrl", "rateDataUrl missing");
