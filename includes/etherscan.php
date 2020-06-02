@@ -75,8 +75,8 @@
     {
         $airdropContract = $this->config->getEtherConfigAirDropContract();
         $apiKey          = $this->config->getEtherConfigEtherApiKey();
-        $address         = $this->config->getEtherConfigHexTokenAddress();
-        $topic           = $this->config->getEtherConfigTransferTopic();
+        $address         = $this->config->getEtherConfigAddress();
+        $topic           = $this->config->getEtherConfigTopic();
 
         $cURLConnection = curl_init();
 
