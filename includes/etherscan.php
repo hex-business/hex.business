@@ -5,11 +5,11 @@
 
   Class Etherscan {
 
-    protected $config;
+    // protected $config;
 
-    public function __construct()
+    public function __construct(Config $config)
     {
-      $this->config = Config::getEtherConfig();
+      $this->config = $config->getEtherConfig();
     }
 
     public function init() {
@@ -52,13 +52,13 @@
       echo json_encode($result); exit;
     }
 
-    private  function toHexAddress($add): ?string
+    private  function toHexAddress($add): string
     {
       return '0x000000000000000000000000' . substr($add,2);
     }
     
 
-    private  function getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey): ?string
+    private  function getAirdropStats($address, $topic, $airdropContract, $acc, $apiKey): string
     {
       $_totalAirdropped = 0;
    
@@ -75,8 +75,7 @@
           return "invalid";
       } else {
         
-          // check the HTTP status code of the request
-          $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
+            $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
           curl_close($cURLConnection);
 
           if ($resultStatus != 200) {
@@ -84,10 +83,15 @@
           }
           else
           {
-             $jsonArrayResponse = json_decode($res);
-            if(!$jsonArrayResponse->result)
+
+            $jsonArrayResponse = json_decode($res);
+
+            if(!$jsonArrayResponse->result){
               return "invalid";
+            }
+
             $arr = $jsonArrayResponse->result;
+
             if(is_array($arr))
             {
               foreach($arr as $item)
@@ -104,7 +108,7 @@
     }
 
 
-    private function getTotalAirdropped($address, $topic,$airdropContract,$apiKey ): ?string
+    private function getTotalAirdropped($address, $topic,$airdropContract,$apiKey ): string
     {
 
       $_totalAirdropped = 0;
@@ -148,6 +152,6 @@
     }
   }
 
-  $obj = new Etherscan();
+  $obj = new Etherscan(new Config);
   $obj->init();
 ?>
