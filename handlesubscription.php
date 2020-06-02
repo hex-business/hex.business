@@ -5,11 +5,11 @@ $email = isset($_POST['email']) ? $_POST['email'] : "";
 
 if (!empty($lang) and ($lang == 'en'))
 {
-	require_once __DIR__ . '/includes/enlang.php';
+	require_once __DIR__ . '/includes/language/enlang.php';
 }
 else
 {
-	require_once __DIR__ . '/includes/cnlang.php';
+	require_once __DIR__ . '/includes/language/cnlang.php';
 }
 
 if (empty($email))
