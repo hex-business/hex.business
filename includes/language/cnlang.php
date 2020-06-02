@@ -60,6 +60,8 @@
 	'on'                               => '关于',
 	'for_more_information_subscribe'   => '欲知更多信息请<strong>订阅</strong>',
 	'no_metamask'					   => 'Please connect to metamask first. Thanks.',
+	'in_processing'				       => 'You can confirm your action in metamask transaction.',
+	'no_input'				       	   => 'You need to input first. Thanks.',
 	'email'                            => '电子邮件' ,
 	'subscription' =>  '订阅',
 	'subscribe_no_email' => 'You did not include an email&#46;  Please use your browser to go back, or click <a href="./index&#46;php&#63;lang&#61;cn"> HERE </a> and enter one',

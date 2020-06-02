@@ -932,9 +932,17 @@ else
 
 		if (window.ethereum) {
 			window.ethereum.enable();
-		 	const amount = document.getElementById("enter-amount").value;
-	 	  	moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]});
-	 	  	document.getElementById("enter-amount").value = '';			
+		 	let amount = document.getElementById("enter-amount").value;
+		 	if (amount) {
+			 	moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]}).then(
+			 		showSuccess("transform", amount)
+			 	);
+		 	  	document.getElementById("enter-amount").value = '';					 		
+		 	}
+		 	else {
+		 		showNodata("transform");
+		 	}
+
 		}
 		else {
 			Swal.fire({
@@ -955,14 +963,21 @@ else
 
 		if (window.ethereum) {
 			window.ethereum.enable();
-			const amount = parseInt(document.getElementById("freeze-amount").value*100000000);
+			let amount = document.getElementById("freeze-amount").value;
 
-	 		if(isFreeze){
-				freeze(amount);
-			} else {
-				isFreeze(amount);
+			if (amount) {
+				amount = parseInt(amount*100000000);
+		 		if(isFreeze){
+					freeze(amount);
+				} else {
+					unfreeze(amount);
+				}
+				document.getElementById("freeze-amount").value = '';				
+				
 			}
-			document.getElementById("freeze-amount").value = '';			
+			else{
+				showNodata("freeze");			
+			}
 		}
 		else {
 			Swal.fire({
@@ -975,11 +990,16 @@ else
 	});
 
 	function freeze(amount)  {
-		moneyInstance.methods.FreezeTokens(amount).send({from:accounts[0]});
+
+ 		moneyInstance.methods.FreezeTokens(amount).send({from:accounts[0]}).then(
+ 			showSuccess("freeze", amount)
+		); 		
 	}
 
 	function unfreeze(amount){
-		moneyInstance.methods.UnfreezeTokens().send({from:accounts[0]});
+		moneyInstance.methods.UnfreezeTokens().send({from:accounts[0]}).then(
+			showSuccess("unfreeze", amount)
+		);
 	}
 
 	document.getElementById("approve").addEventListener("click", function(e){
@@ -1009,9 +1029,25 @@ else
 	document.getElementById("btn_approve").addEventListener("click", approveHex);
 
 	function approveHex(){
-		const amount = document.getElementById("modal-amount").value;
-		var weiAmout = Math.floor(amount * 100000000)
- 		tokenInstance.methods.approve(moneyAddress, weiAmout).send({from:accounts[0]}).then(hideModal());
+		let amount = document.getElementById("modal-amount").value;
+		if (amount) {
+			var weiAmout = Math.floor(amount * 100000000);
+	 		tokenInstance.methods.approve(moneyAddress, weiAmout).send({from:accounts[0]}).then(
+	 			showSuccess('approve', weiAmout)
+	 		); 			
+		}
+		else {
+			showNodata("approve");
+		}
+
+	}
+
+	function showNodata(type) {
+		Swal.fire({
+		  icon: 'error',
+		  title: 'Oops...',
+		  text: "<?php echo $phrases['no_input'] ?>"
+		})		
 	}
 
 	function showModal()
@@ -1028,6 +1064,21 @@ else
 			  text: "<?php echo $phrases['no_metamask'] ?>"
 			})
 		}				
+	}
+
+	function showSuccess(type, amount) {
+
+		let message = "<?php echo $phrases['in_processing']; ?>";
+
+		if (type == "approve") {
+			hideModal();
+		}
+
+		Swal.fire({
+		  icon: 'success',
+		  title: 'Thanks',
+		  text:  message
+		});
 	}
 
 	function hideModal()
