@@ -58,6 +58,7 @@
 	'proceed'                          => 'Proceed',
 	'approve_token'					   => 'Approve Tokens',
 	'on'                               => 'about',
+	'no_metamask'					   => 'Please connect to metamask first. Thanks.',
 	'for_more_information_subscribe'   => 'For more information please <strong> subscribe </strong>' ,
 	'email'	=> 'Email',
 	'subscription' => 'submit',

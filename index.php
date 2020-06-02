@@ -931,11 +931,19 @@ else
 	document.getElementById("transform").addEventListener("click", function(){
 
 		if (window.ethereum) {
+			window.ethereum.enable();
 		 	const amount = document.getElementById("enter-amount").value;
 	 	  	moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]});
 	 	  	document.getElementById("enter-amount").value = '';			
 		}
-		
+		else {
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: "<?php echo $phrases['no_metamask'] ?>"
+			})
+		}
+
 	});
 
 	document.getElementById("enter-amount").addEventListener("keyup", function(e){
@@ -946,6 +954,7 @@ else
 	document.getElementById("proceed").addEventListener("click", function(){
 
 		if (window.ethereum) {
+			window.ethereum.enable();
 			const amount = parseInt(document.getElementById("freeze-amount").value*100000000);
 
 	 		if(isFreeze){
@@ -955,6 +964,13 @@ else
 			}
 			document.getElementById("freeze-amount").value = '';			
 		}
+		else {
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: "<?php echo $phrases['no_metamask'] ?>"
+			})
+		}		
 
 	});
 
@@ -1001,9 +1017,17 @@ else
 	function showModal()
 	{
 		if(window.ethereum){
+			window.ethereum.enable();
 			document.getElementById("modal").style.display = "block";
  			document.getElementById("modal-back").className  = 'ismodal';
 		}
+		else {
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: "<?php echo $phrases['no_metamask'] ?>"
+			})
+		}				
 	}
 
 	function hideModal()
