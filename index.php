@@ -1,6 +1,6 @@
 <?php
 
-include './autoload.php';
+include_once './autoload.php';
 require_once './includes/currentRates.php';
 
 $rates    = new CurrentRates();
@@ -1041,8 +1041,7 @@ else
 		Swal.fire({
 		  icon: 'error',
 		  title: 'Oops...',
-		  text: "<?php echo $phrases['entered_invalid_email'] ?>",
-		  footer: '<a href>Why do I have this issue?</a>'
+		  text: "<?php echo $phrases['entered_invalid_email'] ?>"
 		})
 
 		evt.preventDefault() ;
