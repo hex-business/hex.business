@@ -10,7 +10,7 @@ class CurrentRates{
                      'hexCirculatingSupply24Change' => 0, 'adoptionAmplifierCurrentEth24Change' => 0, 'adoptionAmplifierCurrentHexEth24Change' => 0,
                      'uniswapHexEth24Change' => 0,];
    protected $key = 'currentRateData';
-   private Config $config;
+
    public function __construct(Config $config)
    {
       $this->config = $config;

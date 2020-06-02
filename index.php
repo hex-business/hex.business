@@ -3,7 +3,7 @@
 	include_once __DIR__.'/autoload.php';
 	require_once  __DIR__ . '/includes/config.php';
 	require_once __DIR__.'/includes/currentRates.php';
-
+	
 	$rates    = new CurrentRates(new Config());
 	$rateData = $rates->getRateData();
 
