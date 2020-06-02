@@ -7,7 +7,7 @@ require_once __DIR__.'/includes/currentRates.php';
 $rates    = new CurrentRates(new Config());
 $rateData = $rates->getRateData();
 
-if (!empty($_GET['lang']) and ($_GET['lang'] == 'en'))
+if (isset($_GET['lang']) && !empty($_GET['lang']) && ($_GET['lang'] == 'en'))
 {
 	require_once __DIR__ . '/includes/language/enlang.php';
 	$language = 'en';

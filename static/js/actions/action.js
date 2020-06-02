@@ -11,7 +11,6 @@ async function getAccounts() {
 	let tokenFrozenBalances = 0;
 	let freezingReward = 0;
 	let allowance = 0;
-	let metamaskEthBalance = 0;
 
 	let totalSupply = await getTotalSupply();
 	let maxSupply = await getMaxSupply();
@@ -26,7 +25,6 @@ async function getAccounts() {
 		tokenFrozenBalances = await getTokenFrozenBalances(accounts);
 		freezingReward = await getFreezingReward(accounts);
 		allowance = await getAllowance(accounts);
-		metamaskEthBalance = await getMetamaskEthBalance(accounts);
 		
 	}
 
@@ -35,10 +33,9 @@ async function getAccounts() {
 	heartsTransformed = (heartsTransformed / 100000000) ?? 0;
 	tokenFrozenBalances = (tokenFrozenBalances /100000000)??0;
 	balanceOf = (balanceOf /100000000)??0;
-	let interest = (tokenFrozenBalances == 0 ? 0 : (freezingReward / 100000000) ?? 0);
+	let interest = (tokenFrozenBalances === 0 ? 0 : (freezingReward / 100000000) ?? 0);
 	interest = interest.toLocaleString('en-GB');
 	let calculating_supply = ((totalSupply / 100000000) ?? 0) - ((frzoneTokenBalance / 100000000) ?? 0)  - ((lockedToken / 100000000) ?? 0);
-	metamaskEthBalance = (metamaskEthBalance/100000000)??0;
 	totalSupply = Math.floor((totalSupply / 100000000) ?? 0);
 	totalSupply = totalSupply.toLocaleString('en-GB');
 	lockedToken = (lockedToken / 100000000) ?? 0;
@@ -79,7 +76,7 @@ if (window.ethereum) {
 
 async function getTotalSupply() {
 
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 
 		moneyInstance.methods.totalSupply().call().then(result => {
 			resolve(result);
@@ -92,7 +89,7 @@ async function getTotalSupply() {
 
 
 async function getMaxSupply() {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods._maxSupply().call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -102,7 +99,7 @@ async function getMaxSupply() {
 
 
 async function getBalanceOf(accounts) {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.balanceOf(accounts[0]).call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -112,7 +109,7 @@ async function getBalanceOf(accounts) {
 
 
 async function getTokenFrozenBalances(accounts) {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.tokenFrozenBalances(accounts[0]).call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -121,7 +118,7 @@ async function getTokenFrozenBalances(accounts) {
 }
 
 async function getFreezingReward(accounts) {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.calcFreezingRewards().call({from: accounts[0]}).then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -131,17 +128,8 @@ async function getFreezingReward(accounts) {
 
 
 async function getAllowance(accounts) {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		tokenInstance.methods.allowance(accounts[0], moneyAddress).call().then(result => {
-			result = result ? result : 0;
-			resolve(result);
-		});
-	});
-}
-
-async function getMetamaskEthBalance(accounts) {
-	return new Promise (function (resolve, reject) {
-		web3.eth.getBalance(accounts[0]).then(function ( result ) {
 			result = result ? result : 0;
 			resolve(result);
 		});
@@ -150,7 +138,7 @@ async function getMetamaskEthBalance(accounts) {
 
 
 async function getLockedToken() {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.lockedTokens().call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -159,7 +147,7 @@ async function getLockedToken() {
 }
 
 async function getFrzoneTokenBalance() {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.totalFrozenTokenBalance().call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -168,7 +156,7 @@ async function getFrzoneTokenBalance() {
 }
 
 async function getHxyTransformed() {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.totalHXYTransformed().call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -177,7 +165,7 @@ async function getHxyTransformed() {
 }
 
 async function getHeartsTransformed() {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.totalHeartsTransformed().call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -197,19 +185,19 @@ function etherscanPost() {
 
 	xhttp.onreadystatechange = function() {
 
-	    if (this.readyState == 4 && this.status == 200) {
+	    if (this.readyState === 4 && this.status === 200) {
 	    	var response = this.responseText;
 
 	    	var arr = JSON.parse(response);
 
-	    	if (arr.status == 404) {
+	    	if (arr.status === 404) {
 	    		return false;
 	    	}
 
 		    var divs = arr.stats;
 		    var total = arr.total;
 
-		    if(divs == 0){
+		    if(divs === 0){
 		    	document.getElementById("your_airdropped_divs").style = "color:red";
 		    	document.getElementById("your_airdropped_divs").innerHTML = "**********";	
 		    }
@@ -219,7 +207,7 @@ function etherscanPost() {
 		    	document.getElementById("your_airdropped_divs").style = "";
 				document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
 		    }
-		   	if(total == 0){
+		   	if(total === 0){
 		    	document.getElementById("total_approved").innerHTML = "**********";	
 		    	document.getElementById("total_approved").style = "color:red";
 		   	}

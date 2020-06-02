@@ -140,9 +140,9 @@
     {
 
         $airdropContract = $this->config->getEtherConfigAirDropContract();
-        $apiKey          = $this->config->getEtherScanApiKey();
-        $address         = $this->config->getEtherConfigHexTokenAddress();
-        $topic           = $this->config->getEtherConfigTransferTopic();
+        $apiKey          = $this->config->getEtherConfigEtherApiKey();
+        $address         = $this->config->getEtherConfigAddress();
+        $topic           = $this->config->getEtherConfigTopic();
 
         $cURLConnection = curl_init();
 
@@ -152,7 +152,7 @@
         $res = curl_exec($cURLConnection);
 
         if (curl_errno($cURLConnection)) {
-            throw new InvalidArgumentException("invalid");
+          throw new InvalidArgumentException("invalid");
         }
 
         $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
@@ -161,7 +161,7 @@
         if ($resultStatus !== 200) {
             throw new InvalidArgumentException("invalid");
         }
-
+        
         return $this->processTotalAirDropped($res);
     }
 
