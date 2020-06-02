@@ -202,14 +202,14 @@ function etherscanPost() {
 
 	    	var arr = JSON.parse(response);
 
-	    	if (arr.status == '404') {
+	    	if (arr.status == 400) {
 	    		return false;
 	    	}
 
 		    var divs = arr.stats;
 		    var total = arr.total;
 
-		    if(divs =='invalid'){
+		    if(divs == 0){
 		    	document.getElementById("your_airdropped_divs").style = "color:red";
 		    	document.getElementById("your_airdropped_divs").innerHTML = "**********";	
 		    }
@@ -219,7 +219,7 @@ function etherscanPost() {
 		    	document.getElementById("your_airdropped_divs").style = "";
 				document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
 		    }
-		   	if(total =='invalid'){
+		   	if(total == 0){
 		    	document.getElementById("total_approved").innerHTML = "**********";	
 		    	document.getElementById("total_approved").style = "color:red";
 		   	}
