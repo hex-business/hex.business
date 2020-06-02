@@ -5,9 +5,6 @@
 
   $config = Config::getEtherConfig();
 
-  function toHexAddress($add){
-    return '0x000000000000000000000000' . substr($add,2);
-  }
 
   $result = array();
 
@@ -20,12 +17,20 @@
     $apiKey = $config['apiKey'];
     $address= $config['address'];
     $topic = $config['topic'];
-     if($address && $topic && $airdropContract && $acc && $apiKey )
+
+    if(!empty($address) && !empty($topic) && !empty($airdropContract) && !empty($acc) && !empty($apiKey) ){
       $stats = getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
-    else $stats = "invalid";
-    if($address && $topic && $airdropContract && $apiKey )
+    }
+    else {
+      $stats = "invalid";
+    }
+
+    if(!empty($address) && !empty($topic) && !empty($airdropContract) && !empty($apiKey) ) {
       $total = getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
-    else $total = "invalid";
+    }
+    else {
+      $total = "invalid";  
+    }    
 
     $result['status'] = 200;
     $result['stats'] = $stats;
@@ -38,8 +43,14 @@
 
   echo json_encode($result); exit;
 
+ function toHexAddress($add): ?string
+ {
+    return '0x000000000000000000000000' . substr($add,2);
+ }
 
- function getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey) {
+
+ function getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey): ?string
+ {
     $_totalAirdropped = 0;
  
     $cURLConnection = curl_init();
@@ -85,7 +96,9 @@
 }
 
 
-function getTotalAirdropped($address, $topic,$airdropContract,$apiKey ) {
+function getTotalAirdropped($address, $topic,$airdropContract,$apiKey ): ?string
+{
+
   $_totalAirdropped = 0;
 
   $cURLConnection = curl_init();
@@ -124,7 +137,6 @@ function getTotalAirdropped($address, $topic,$airdropContract,$apiKey ) {
         return "invalid";
       }
   }
- 
 }
 
  
