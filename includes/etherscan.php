@@ -10,7 +10,7 @@
 
   if(isset($_POST['account']) && !empty($_POST['account']) ){
 
-    $acc = $_POST['account'];
+    $acc = trim($_POST['account']);
     $airdropContract = $config['airdropContract'];
     $hexTokenAddress = $config['hexTokenAddress'];
     $transferTopic = $config['transferTopic'];
