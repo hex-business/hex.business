@@ -20,30 +20,32 @@
         if(!isset($_POST['account']) && empty($_POST['account']) ){
             $result['status'] = 400;
         }
+        else {
+            $acc = trim($_POST['account']);
+            $airdropContract = $this->config['airdropContract'];
+//            $hexTokenAddress = $this->config['hexTokenAddress'];
+//            $transferTopic = $this->config['transferTopic'];  //those two are not being used so remove them?
+            $apiKey = $this->config['apiKey'];
+            $address= $this->config['address'];
+            $topic = $this->config['topic'];
 
-        $acc = trim($_POST['account']);
-        $airdropContract = $this->config['airdropContract'];
-        $hexTokenAddress = $this->config['hexTokenAddress'];
-        $transferTopic = $this->config['transferTopic'];
-        $apiKey = $this->config['apiKey'];
-        $address= $this->config['address'];
-        $topic = $this->config['topic'];
+            try {
+                $stats = $this->getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
+            } catch (Exception $e) {
+                $stats = "invalid";
+            }
 
-        try {
-            $stats = $this->getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
-        } catch (Exception $e) {
-            $stats = "invalid";
+            try {
+                $total = $this->getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
+            } catch (Exception $e){
+                $total = "invalid";
+            }
+
+            $result['status'] = 200;
+            $result['stats'] = $stats;
+            $result['total'] = $total;
         }
 
-        try {
-            $total = $this->getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
-        } catch (Exception $e){
-            $total = "invalid";
-        }
-
-        $result['status'] = 200;
-        $result['stats'] = $stats;
-        $result['total'] = $total;
         
 
 
