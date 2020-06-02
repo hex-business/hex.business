@@ -929,23 +929,33 @@ else
 	}
 
 	document.getElementById("transform").addEventListener("click", function(){
-	 	const amount = document.getElementById("enter-amount").value;
- 	  	moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]});
- 	  	document.getElementById("enter-amount").value = '';
+
+		if (window.ethereum) {
+		 	const amount = document.getElementById("enter-amount").value;
+	 	  	moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]});
+	 	  	document.getElementById("enter-amount").value = '';			
+		}
+		
 	});
+
 	document.getElementById("enter-amount").addEventListener("keyup", function(e){
 		const amount = document.getElementById("enter-amount").value;
 		document.getElementById("canreceive").innerHTML = (parseInt(amount || 0) / 1000) || 0 + " HXY";
 	});
-	document.getElementById("proceed").addEventListener("click", function(){
-		const amount = parseInt(document.getElementById("freeze-amount").value*100000000);
 
- 		if(isFreeze){
-			freeze(amount);
-		} else {
-			isFreeze(amount);
+	document.getElementById("proceed").addEventListener("click", function(){
+
+		if (window.ethereum) {
+			const amount = parseInt(document.getElementById("freeze-amount").value*100000000);
+
+	 		if(isFreeze){
+				freeze(amount);
+			} else {
+				isFreeze(amount);
+			}
+			document.getElementById("freeze-amount").value = '';			
 		}
-		document.getElementById("freeze-amount").value = '';
+
 	});
 
 	function freeze(amount)  {
@@ -955,6 +965,7 @@ else
 	function unfreeze(amount){
 		moneyInstance.methods.UnfreezeTokens().send({from:accounts[0]});
 	}
+
 	document.getElementById("approve").addEventListener("click", function(e){
 		e.stopPropagation();
 		showModal();
@@ -970,11 +981,13 @@ else
 		isFreeze = true;
 		document.getElementById("unfreeze").classList.remove("active");
 	});
+
 	document.getElementById("unfreeze").addEventListener("click", function(e){
 		isFreeze = false;
 		document.getElementById("unfreeze").classList.add("active");
 		document.getElementById("freeze").classList.remove("active");
 	});
+
 	document.getElementById("modal_close").addEventListener("click", hideModal);
 	document.getElementById("modal-back").addEventListener("click", hideModal);
 	document.getElementById("btn_approve").addEventListener("click", approveHex);
@@ -992,6 +1005,7 @@ else
  			document.getElementById("modal-back").className  = 'ismodal';
 		}
 	}
+
 	function hideModal()
 	{
 		document.getElementById("modal-amount").value = '';
@@ -1029,6 +1043,7 @@ else
 	        }
 	    }
 	}
+
 	ValidateEmail = function (evt)
 	{
 		 const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -1047,11 +1062,12 @@ else
 		evt.preventDefault() ;
 		return (false)
 	}
+
 	document.getElementById('emailForm').addEventListener('submit',ValidateEmail);
 
 	document.getElementById('email').addEventListener('change', function(){
 		document.getElementById ('email').value = document.getElementById ('email').value.replace(/\s/g, '');
-	}) ;
+	});
 
 </script>
 
