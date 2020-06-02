@@ -8,12 +8,12 @@ $rateData = $rates->getRateData();
 
 if (!empty($_GET['lang']) and ($_GET['lang'] == 'en'))
 {
-	require_once __DIR__ . '/includes/enlang.php';
+	require_once __DIR__ . '/includes/language/enlang.php';
 	$language = 'en';
 }
 else
 {
-	require_once __DIR__ . '/includes/cnlang.php';
+	require_once __DIR__ . '/includes/language/cnlang.php';
 	$language = 'cn';
 }
 
