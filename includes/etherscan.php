@@ -58,7 +58,7 @@
 
     private  function toHexAddress(string $add): string
     {
-      if (!empty($add) && strlen($add) == 42) {
+      if (!empty($add) && strlen($add) >= 3) {
         return '0x000000000000000000000000' . substr($add, 2);  
       }
 
@@ -74,7 +74,7 @@
     private  function getAirdropStats(string $acc):int
     {
         $airdropContract = $this->config->getEtherConfigAirDropContract();
-        $apiKey          = $this->config->getEtherScanApiKey();
+        $apiKey          = $this->config->getEtherConfigEtherApiKey();
         $address         = $this->config->getEtherConfigHexTokenAddress();
         $topic           = $this->config->getEtherConfigTransferTopic();
 
@@ -161,7 +161,7 @@
         if ($resultStatus !== 200) {
             throw new InvalidArgumentException("invalid");
         }
-        
+
         return $this->processTotalAirDropped($res);
     }
 
