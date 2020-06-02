@@ -29,7 +29,7 @@
 			Swal.fire({
 			  icon: 'error',
 			  title: 'Oops...',
-			  text: "<?php echo $phrases['no_metamask'] ?>"
+			  text: no_metamask
 			})
 		}
 
@@ -64,7 +64,7 @@
 			Swal.fire({
 			  icon: 'error',
 			  title: 'Oops...',
-			  text: "<?php echo $phrases['no_metamask'] ?>"
+			  text: no_metamask
 			})
 		}		
 
@@ -127,7 +127,7 @@
 		Swal.fire({
 		  icon: 'error',
 		  title: 'Oops...',
-		  text: "<?php echo $phrases['no_input'] ?>"
+		  text: no_input
 		})		
 	}
 
@@ -142,14 +142,14 @@
 			Swal.fire({
 			  icon: 'error',
 			  title: 'Oops...',
-			  text: "<?php echo $phrases['no_metamask'] ?>"
+			  text: no_metamask
 			})
 		}				
 	}
 
 	function showSuccess(type, amount) {
 
-		let message = "<?php echo $phrases['in_processing']; ?>";
+		let message = in_processing;
 
 		if (type == "approve") {
 			hideModal();
@@ -212,7 +212,7 @@
 		Swal.fire({
 		  icon: 'error',
 		  title: 'Oops...',
-		  text: "<?php echo $phrases['entered_invalid_email'] ?>"
+		  text: entered_invalid_email
 		})
 
 		evt.preventDefault() ;

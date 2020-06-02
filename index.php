@@ -858,6 +858,13 @@
 	</div>
 </div>
 
+<script>
+	var no_metamask = "<?php echo $phrases['no_metamask'] ?>";
+	var no_input = "<?php echo $phrases['no_input'] ?>";
+	var in_processing = "<?php echo $phrases['in_processing'] ?>";
+	var entered_invalid_email = "<?php echo $phrases['entered_invalid_email'] ?>";
+</script>
+
 <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
 <script src="./static/extensions/sweetalert/sweetalert.min.js"></script>
 <script src="./static/js/actions/contractABI.js"></script>
