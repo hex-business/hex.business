@@ -4,6 +4,7 @@ var xhttp = new XMLHttpRequest();
 async function getAccounts() {
 
 	accounts = await web3.eth.getAccounts();
+
 	etherscanPost();
 
 	let balanceOf = 0;
@@ -174,50 +175,64 @@ async function getHeartsTransformed() {
 
 
 
+function getMeta(metaName) {
+  const metas = document.getElementsByTagName('meta');
+
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+
+  return '';
+}
 
 
 function etherscanPost() {
 
-	xhttp.open("POST", "includes/etherscan.php", true);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("account="+accounts[0]);
+	if (accounts && accounts.length > 0) {
+		xhttp.open("POST", "includes/etherscan.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("account="+accounts[0]+"&token="+getMeta("_csrf"));
 
-	xhttp.onreadystatechange = function() {
+		xhttp.onreadystatechange = function() {
 
-	    if (this.readyState === 4 && this.status === 200) {
-	    	var response = this.responseText;
+		    if (this.readyState === 4 && this.status === 200) {
+		    	var response = this.responseText;
 
-	    	var arr = JSON.parse(response);
+		    	var arr = JSON.parse(response);
 
-	    	if (arr.status === 404) {
-	    		return false;
-	    	}
+		    	if (arr.status === 404) {
+		    		return false;
+		    	}
 
-		    var divs = arr.stats;
-		    var total = arr.total;
+			    var divs = arr.stats;
+			    var total = arr.total;
 
-		    if(divs === 0){
-		    	document.getElementById("your_airdropped_divs").style = "color:red";
-		    	document.getElementById("your_airdropped_divs").innerHTML = "**********";	
+			    if(divs === 0){
+			    	document.getElementById("your_airdropped_divs").style = "color:red";
+			    	document.getElementById("your_airdropped_divs").innerHTML = "**********";	
+			    }
+			    else {
+					divs = divs / 100000000;	
+				    divs = divs.toLocaleString('en-GB');		    	
+			    	document.getElementById("your_airdropped_divs").style = "";
+					document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
+			    }
+			   	if(total === 0){
+			    	document.getElementById("total_approved").innerHTML = "**********";	
+			    	document.getElementById("total_approved").style = "color:red";
+			   	}
+			   	else {
+			   		total = total / 100000000;	
+			   		total = total.toLocaleString('en-GB');
+					document.getElementById("total_approved").innerHTML = total + " HXY";
+					document.getElementById("total_approved").style = "";		   		
+			   	}
+
 		    }
-		    else {
-				divs = divs / 100000000;	
-			    divs = divs.toLocaleString('en-GB');		    	
-		    	document.getElementById("your_airdropped_divs").style = "";
-				document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
-		    }
-		   	if(total === 0){
-		    	document.getElementById("total_approved").innerHTML = "**********";	
-		    	document.getElementById("total_approved").style = "color:red";
-		   	}
-		   	else {
-		   		total = total / 100000000;	
-		   		total = total.toLocaleString('en-GB');
-				document.getElementById("total_approved").innerHTML = total + " HXY";
-				document.getElementById("total_approved").style = "";		   		
-		   	}
+		};	
 
-	    }
-	};	
+	}
 
 }			  

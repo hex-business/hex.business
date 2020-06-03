@@ -1,14 +1,15 @@
 
   <?php
-
+  include_once __DIR__.'/base.php';
   require_once  __DIR__ . '/config.php';
-
-  Class Etherscan {
+  
+  Class Etherscan extends Base{
 
     private $config;
 
     public function __construct(Config $config)
     {
+      $this->verifyToken();
       $this->config = $config;
     }
 
@@ -164,7 +165,6 @@
 
         return $this->processTotalAirDropped($res);
     }
-
   }
 
   $obj = new Etherscan(new Config);

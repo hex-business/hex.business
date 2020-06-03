@@ -19,7 +19,6 @@
 		$language = 'cn';
 	}
 
-
 ?>
 
 <html lang="zh-Hans">
@@ -29,11 +28,13 @@
 	<meta charset="utf-8">
 	<meta name="theme-color" content="#000000">
 	<meta name="description" content="The most rewarding way to support HEX adopion!">
+	<meta name="_csrf" content="<?php echo $_SESSION['token']; ?>"/>
+
 	<meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/>
 	<title>HEX.business</title>
 
 	<link rel="icon" href="./favicon.ico">
-	<link rel="apple-touch-icon" href="./logo192.png">
+	<link rel="apple-touch-icon" href="./static/media/logo192.png">
 	<!--<link rel="stylesheet" href="./static/css/normalize.css">-->
 	<link href="./static/css/additional.css" rel="stylesheet">
 	<link href="./static/css/main.css" rel="stylesheet">
@@ -778,7 +779,7 @@
 			<div class="col">
 				<div class="row"><p class="title"> <?php echo $phrases['for_more_information_subscribe'] ?></p></div>
 				<div class="justify-content-center emailform">
-					<form action="./handlesubscription.php?lang=<?php echo $language?>" method="post" id="emailForm">
+					<form action="./includes/handlesubscription.php?lang=<?php echo $language?>" method="post" id="emailForm">
 						<div ><input class="email-input" type="email" oninput="removeSpaces(this.value)"  name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50" id="email" ></div>
 						<div class="sign-up">
 							<button type="submit" class="sign-up btn btn-light"><strong><?php echo $phrases['subscription'] ?></strong></button>
