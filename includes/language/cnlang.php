@@ -74,4 +74,6 @@
 	'copy_right' => 'Copyright &#169; 2020 Hex Business版权所有 &#45; 保留所有权利',
 	'privacypolicy'	=> '私隱政策',
 	'entered_invalid_email' 	=> '您输入了错误的电子邮件地址&#33;',
+	'token_expired' => 'Sorry&#46; Your token expired!',
+	'invalid_request' => 'It`s not the valid request! <a href="./index&#46;php&#63;lang&#61;cn"> Try again by clicking here! </a> '
 ];

@@ -1,6 +1,7 @@
 <?php
 
 	include_once __DIR__.'/autoload.php';
+	include_once __DIR__.'/includes/global.php';
 	require_once  __DIR__ . '/includes/config.php';
 	require_once __DIR__.'/includes/currentRates.php';
 
@@ -781,7 +782,9 @@
 						<div ><input class="email-input" type="email" oninput="removeSpaces(this.value)"  name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50" id="email" ></div>
 						<div class="sign-up">
 							<button type="submit" class="sign-up btn btn-light"><strong><?php echo $phrases['subscription'] ?></strong></button>
+							<input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
 						</div>
+
 					</form>
 				</div>
 				<div class="justify-content-center row">
