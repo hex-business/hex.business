@@ -18,10 +18,19 @@
 			if (accounts && accounts.length > 0) {
 			 	let amount = document.getElementById("enter-amount").value;
 			 	if (amount) {
-				 	moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]}).then(
-				 		showSuccess("transform", amount)
-				 	);
-			 	  	document.getElementById("enter-amount").value = '';					 		
+
+			 		var weiAmout = Math.floor(amount * 100000000);
+
+			 		if (weiAmout > 0) {
+					 	moneyInstance.methods.transformHEX(weiAmout, '0x0000000000000000000000000000000000000000').send({from:accounts[0]}).then(
+					 		showSuccess("transform", amount)
+					 	);
+				 	  	document.getElementById("enter-amount").value = '';					 					 			
+			 		}
+			 		else {
+			 			showNodata("transform");	
+			 		}
+
 			 	}
 			 	else {
 			 		showNodata("transform");
@@ -51,13 +60,19 @@
 				let amount = document.getElementById("freeze-amount").value;
 
 				if (amount) {
-					amount = parseInt(amount*100000000);
-			 		if(isFreeze){
-						freeze(amount);
-					} else {
-						unfreeze(amount);
+					var weiAmout = Math.floor(amount * 100000000);
+
+					if (weiAmout > 0) {
+				 		if(isFreeze){
+							freeze(weiAmout);
+						} else {
+							unfreeze(weiAmout);
+						}
+						document.getElementById("freeze-amount").value = '';										
+					} 
+					else {
+						showNodata("freeze");				
 					}
-					document.getElementById("freeze-amount").value = '';				
 					
 				}
 				else{
@@ -116,16 +131,26 @@
 
 	function approveHex(){
 		let amount = document.getElementById("modal-amount").value;
+
 		if (amount) {
+
 			var weiAmout = Math.floor(amount * 100000000);
-			if (accounts && accounts.length > 0) { 
-		 		tokenInstance.methods.approve(moneyAddress, weiAmout).send({from:accounts[0]}).then(
-		 			showSuccess('approve', weiAmout)
-		 		); 							
+
+			if (weiAmout > 0) {
+
+				if (accounts && accounts.length > 0) { 
+			 		tokenInstance.methods.approve(moneyAddress, weiAmout).send({from:accounts[0]}).then(
+			 			showSuccess('approve', weiAmout)
+			 		); 							
+				}
+				else {
+					showMetamaskLogin();
+				}
 			}
 			else {
-				showMetamaskLogin();
+				showNodata("approve");
 			}
+
 		}
 		else {
 			showNodata("approve");
