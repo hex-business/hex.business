@@ -47,6 +47,7 @@ else
 
 <html>
 	<head>
+		<meta charset="utf-8">
 		<link href="./static/css/additional.css" rel="stylesheet">
 		<link href="./static/css/main.css" rel="stylesheet">
 		<link rel="stylesheet" href="./static/css/basic.css?v=0.0.1">

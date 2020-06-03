@@ -595,7 +595,7 @@
 									<strong lang="en">HEX</strong>
 								</div>
 								<div class="my-auto money-col money-text col-sm-auto">
-									<strong><?php echo $phrases['can_receive'] ?><span lang="en" id="canreceive">0 HXY&#46;</span></strong>
+									<strong><?php echo $phrases['can_receive'] ?> <span lang="en" id="canreceive">0 HXY&#46;</span></strong>
 								</div>
 								<div class="my-auto money-col col-sm-auto">
 									<button type="button" class="action-button btn btn-light" id='transform'><?php echo $phrases['convert'] ?></button>
