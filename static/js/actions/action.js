@@ -3,7 +3,6 @@ var xhttp = new XMLHttpRequest();
 
 async function getAccounts() {
 
-	let web3 = new Web3(window.ethereum);
 	accounts = await web3.eth.getAccounts();
 	etherscanPost();
 

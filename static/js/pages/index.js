@@ -1,6 +1,7 @@
 
 	let  isFreeze = true;
 
+
 	document.addEventListener("DOMContentLoaded", pageReady);
 
 	function pageReady() {
@@ -13,24 +14,25 @@
 
 		if (window.ethereum) {
 			window.ethereum.enable();
-		 	let amount = document.getElementById("enter-amount").value;
-		 	if (amount) {
-			 	moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]}).then(
-			 		showSuccess("transform", amount)
-			 	);
-		 	  	document.getElementById("enter-amount").value = '';					 		
-		 	}
-		 	else {
-		 		showNodata("transform");
-		 	}
 
+			if (accounts && accounts.length > 0) {
+			 	let amount = document.getElementById("enter-amount").value;
+			 	if (amount) {
+				 	moneyInstance.methods.transformHEX(Math.floor(amount * 100000000), '0x0000000000000000000000000000000000000000').send({from:accounts[0]}).then(
+				 		showSuccess("transform", amount)
+				 	);
+			 	  	document.getElementById("enter-amount").value = '';					 		
+			 	}
+			 	else {
+			 		showNodata("transform");
+			 	}
+			}
+			else {
+				showMetamaskLogin();				
+			}
 		}
 		else {
-			Swal.fire({
-			  icon: 'error',
-			  title: 'Oops...',
-			  text: no_metamask
-			})
+			showMetamaskLogin();
 		}
 
 	});
@@ -44,28 +46,31 @@
 
 		if (window.ethereum) {
 			window.ethereum.enable();
-			let amount = document.getElementById("freeze-amount").value;
 
-			if (amount) {
-				amount = parseInt(amount*100000000);
-		 		if(isFreeze){
-					freeze(amount);
-				} else {
-					unfreeze(amount);
+			if (accounts && accounts.length > 0) {
+				let amount = document.getElementById("freeze-amount").value;
+
+				if (amount) {
+					amount = parseInt(amount*100000000);
+			 		if(isFreeze){
+						freeze(amount);
+					} else {
+						unfreeze(amount);
+					}
+					document.getElementById("freeze-amount").value = '';				
+					
 				}
-				document.getElementById("freeze-amount").value = '';				
-				
+				else{
+					showNodata("freeze");			
+				}				
 			}
-			else{
-				showNodata("freeze");			
+			else {
+				showMetamaskLogin();
 			}
+
 		}
 		else {
-			Swal.fire({
-			  icon: 'error',
-			  title: 'Oops...',
-			  text: no_metamask
-			})
+			showMetamaskLogin();
 		}		
 
 	});
@@ -113,9 +118,14 @@
 		let amount = document.getElementById("modal-amount").value;
 		if (amount) {
 			var weiAmout = Math.floor(amount * 100000000);
-	 		tokenInstance.methods.approve(moneyAddress, weiAmout).send({from:accounts[0]}).then(
-	 			showSuccess('approve', weiAmout)
-	 		); 			
+			if (accounts && accounts.length > 0) { 
+		 		tokenInstance.methods.approve(moneyAddress, weiAmout).send({from:accounts[0]}).then(
+		 			showSuccess('approve', weiAmout)
+		 		); 							
+			}
+			else {
+				showMetamaskLogin();
+			}
 		}
 		else {
 			showNodata("approve");
@@ -139,11 +149,7 @@
  			document.getElementById("modal-back").className  = 'ismodal';
 		}
 		else {
-			Swal.fire({
-			  icon: 'error',
-			  title: 'Oops...',
-			  text: no_metamask
-			})
+			showMetamaskLogin();
 		}				
 	}
 
@@ -198,6 +204,14 @@
 	                elem.focus();
 	        }
 	    }
+	}
+
+	function showMetamaskLogin() {
+		Swal.fire({
+		  icon: 'error',
+		  title: 'Oops...',
+		  text: no_metamask
+		})		
 	}
 
 	ValidateEmail = function (evt)
