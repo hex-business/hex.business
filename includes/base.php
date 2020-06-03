@@ -1,20 +1,17 @@
 <?php
 
-include_once __DIR__.'/global.php';
+include_once __DIR__.'/session.php';
 
 class Base
 {
     public function verifyToken() {
 
-        if (isset($_POST['token'])) {
-            if (!empty($_POST['token'])) {
-                if (!hash_equals($_SESSION['token'], $_POST['token'])) {
-                    throw new InvalidArgumentException("Token Expired");
-                } 
-            }
+        if(!isset($_POST['token']) || empty(trim($_POST['token']))) {
+            throw new InvalidArgumentException("token cannot be empty");
         }
-        else {
-            throw new InvalidArgumentException("Invalid Request");
+        $token = trim($_POST['token']);
+        if ($token!==$_SESSION['token']) {
+            throw new InvalidArgumentException("Invalid token or Token Expired");
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
+include_once __DIR__.'/session.php';
 include_once __DIR__.'/base.php';
-include_once __DIR__.'/global.php';
 
 $lang = isset($_GET['lang']) ? $_GET['lang'] : "";
 $email = isset($_POST['email']) ? $_POST['email'] : "";

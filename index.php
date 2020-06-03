@@ -1,7 +1,7 @@
 <?php
 
 	include_once __DIR__.'/autoload.php';
-	include_once __DIR__.'/includes/global.php';
+	include_once __DIR__.'/includes/session.php';
 	require_once  __DIR__ . '/includes/config.php';
 	require_once __DIR__.'/includes/currentRates.php';
 
