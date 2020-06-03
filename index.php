@@ -853,7 +853,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="button" id="btn_approve" class="action-button btn btn-light">Approve</button>
+			<button type="button" id="btn_approve" class="action-button btn btn-light"><?php echo $phrases['approve'] ?></button>
 		</div>
 	</div>
 </div>

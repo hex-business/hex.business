@@ -137,7 +137,7 @@
 		Swal.fire({
 		  icon: 'error',
 		  title: 'Oops...',
-		  text: no_input
+		  html: '<div>' + no_input + '</div>'
 		})		
 	}
 
@@ -164,7 +164,7 @@
 		Swal.fire({
 		  icon: 'success',
 		  title: 'Thanks',
-		  text:  message
+		  html:  '<div>' + message + '</div>'
 		});
 	}
 
@@ -210,7 +210,7 @@
 		Swal.fire({
 		  icon: 'error',
 		  title: 'Oops...',
-		  text: no_metamask
+		  html: '<div>' + no_metamask + '</div>'
 		})		
 	}
 
@@ -226,7 +226,7 @@
 		Swal.fire({
 		  icon: 'error',
 		  title: 'Oops...',
-		  text: entered_invalid_email
+		  html: '<div>' + entered_invalid_email + '</div>'
 		})
 
 		evt.preventDefault() ;
