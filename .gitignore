@@ -1,2 +1,5 @@
 env.php
 **/.DS_Store
+vendor
+metamask.php
+autoload.php
