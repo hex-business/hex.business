@@ -32,8 +32,8 @@ class HandleSubscription extends Base
 		{
 			$email = trim($email);
 			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
-			
-			if (filter_var($email, FILTER_VALIDATE_EMAIL))
+			$emailReg ="/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/";
+			if (preg_match($emailReg, $email))
 			{
 				$to      = "announcements-subscribe-" . str_replace('@', '=', $email) . '@hexbusiness.net';
 				$from    = $email;
