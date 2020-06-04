@@ -1,5 +1,4 @@
-
-  <?php
+<?php
   include_once __DIR__.'/base.php';
   require_once  __DIR__ . '/config.php';
   
@@ -169,4 +168,3 @@
 
   $obj = new Etherscan(new Config);
   $obj->init();
-?>

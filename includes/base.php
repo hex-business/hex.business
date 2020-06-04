@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__.'/session.php';
+require_once 'session.php';
 
 class Base
 {
@@ -16,4 +16,3 @@ class Base
     }
 }
 
-?>
