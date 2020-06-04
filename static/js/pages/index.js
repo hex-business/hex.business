@@ -170,7 +170,7 @@
 	{
 		if(window.ethereum){
 			window.ethereum.enable();
-			document.getElementById("modal").style.display = "block";
+			document.getElementById("approve_token_modal").style.display = "block";
  			document.getElementById("modal-back").className  = 'ismodal';
 		}
 		else {
@@ -197,7 +197,7 @@
 	{
 		document.getElementById("modal-amount").value = '';
 		document.getElementById("modal-back").className  = '';
-		document.getElementById("modal").style.display = "none";
+		document.getElementById("approve_token_modal").style.display = "none";
 
 	}
 

@@ -39,6 +39,9 @@ body {
 	width: 100%;
 	z-index: 100;
 }
+#approve_token_modal {
+	display: none;
+}
 /*
 .gallery .controls {
 	width:1000px;
@@ -212,6 +215,13 @@ body {
 
 .expand {
 	display: none;
+}
+#close_approve_modal:target {
+	display: none;
+}
+
+#approve_token_modal:target {
+	display: block;
 }
 .menu:target {
 	display: block;

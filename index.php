@@ -178,8 +178,11 @@
 
 					<ul class="navbar-nav ml-auto">
 						<li class="my-auto hand" id='approve'>
-							<img src="./static/media/metamask.2c92daf3.png" class="metamask-button"
-							     alt="Connect MetaMask">
+							<a href="#approve_token_modal">
+								<img src="./static/media/metamask.2c92daf3.png" class="metamask-button"
+							     alt="Connect MetaMask" />
+							</a>
+							
 						</li>
 						<li class="my-auto hand margin-5 d-flex">
 							<a href="./index.php?lang=en"><img src="./static/media/entranslation.png" alt="Use English" class=" "> </a>
@@ -832,14 +835,14 @@
 </div>
 <div style="display: none;width:100vw;height:100vh;position:fixed;top:0;left:0;background-color: black" class="" id='modal-back'>
 	</div>
-<div class='modal-dialog' id="modal" style='display: none'>
- 
+
+<div class='modal-dialog' id="approve_token_modal">
 	<div class="modal-content">
 		<div class="modal-header">
 			<div class="modal-title h4">
 				<strong><?php echo $phrases['approve_token'] ?></strong>
 			</div>
-			<button type="button" class="close"><span aria-hidden="true" id='modal_close'>×</span><span class="sr-only">Close</span></button>
+			<a href="#close" type="button" class="close"><span aria-hidden="true" id='modal_close'>×</span><span class="sr-only">Close</span></a>
 		</div>
 		<div class="modal-body">
 			<div class="justify-content-center row mobile-approvemodal">
