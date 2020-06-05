@@ -21,7 +21,8 @@
     */
 
     public function init() {
-
+      if(!isset($_POST['account'])||empty($_POST['account']))
+        return;
       $result = array();
 
       if(!isset($_POST['account']) && empty($_POST['account']) ){
@@ -52,11 +53,13 @@
     public function initwithoutJS($acc) {
 
       $result = array();
-
       
-
+      
         try {
-            $stats = $this->getAirdropStats($acc);
+              if(isset($acc) && !empty($acc))
+                $stats = $this->getAirdropStats($acc);
+              else
+              $stats = "invalid";
         } catch (Exception $e) {
             $stats = "invalid";
         }
@@ -82,7 +85,7 @@
      * @return string
     */
 
-    private  function toHexAddress(string $add): string
+    private function toHexAddress(string $add): string
     {
       if (!empty($add) && strlen($add) >= 3) {
         return '0x000000000000000000000000' . substr($add, 2);  

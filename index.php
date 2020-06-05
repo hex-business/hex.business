@@ -21,8 +21,14 @@
 		require_once __DIR__ . '/includes/language/cnlang.php';
 		$language = 'cn';
 	}
-	$ether_result = $etherscan->initwithoutJS('0x51C2609885753A1CB8B6901A933C15a0224CB57B');
-	$dropstats = $ether_result['stats']/100000000??0;
+	$ether_result = $etherscan->initwithoutJS('');
+	if($ether_result['stats'] =='invalid')
+		$dropstats="*********";
+	else
+	{
+	  $dropstats = ($ether_result['stats']/100000000??0)." HEX";
+	  
+	}
 	$airdropped = $ether_result['total']/100000000??0;
 	$tokenFrozenBalance = $ethernum->frozenBalances/ 100000000 ?? 0;
 	$freezingReward = $ethernum->freezeReward/ 100000000 ?? 0;
@@ -702,7 +708,7 @@
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['Your_airdropped_dividends'] ?></div>
-								<div class="col-6"><strong lang="en" id="your_airdropped_divs"><?php echo $dropstats?> HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="your_airdropped_divs"><?php echo $dropstats?> </strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hex_conversion'] ?></div>
