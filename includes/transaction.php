@@ -105,12 +105,12 @@ class Transaction// extends Base
     }
     private function transform($amount)
     {
-      
-      $this->moneyInstance->send('transformHEX',$amount,'0x0000000000000000000000000000000000000000',['from'=>$this->getUserAccount()], function($err,$result){
+      echo $this->getUserAccount(). "A".$amount;
+      $this->moneyInstance->send('transform',$amount,'0x0000000000000000000000000000000000000000',['from'=>$this->getUserAccount()], function($err,$result){
         if(!empty($err)) {
             throw new InvalidArgumentException($err);
         }
-       echo 'success';
+       echo "success";
        });
     }
     private function freeze($amount)

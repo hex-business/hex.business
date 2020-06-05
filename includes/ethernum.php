@@ -57,16 +57,22 @@ class Ethernum// extends Base
     {
       if(isset($_POST['account'])&&!empty($_POST['account']))
         $this->setUserAccount($_POST['account']);
-       
-      $this->getTokenFrozenBalances();
-      $this->getFreezingReward();
-      $this->getAllowance();
+      
+      if($this->isLogged())
+      {
+        $this->getTokenFrozenBalances();
+        $this->getFreezingReward();
+        $this->getAllowance();
+        $this->getAccountBalance();
+      }
+     
+
       $this->getLockedToken();
       $this->getFrzoneTokenBalance();
       $this->getHxyTransformed();
       $this->getTotalSupply();
       $this->getMaxSupply();
-      $this->getAccountBalance();
+      
       $this->getHeartsTransformed();
       $result = array();
     }
