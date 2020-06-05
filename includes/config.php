@@ -46,4 +46,14 @@ class Config
     public function getMoneyAddress():string{
         return $this->parseEnv("moneyAddress", "moneyAddress missing");
     }
+    public function getMoneyABI():string{
+        return $this->parseEnv("moneyABI", "moneyABI missing");
+    }
+    public function getTokenABI():string{
+        return $this->parseEnv("tokenABI", "tokenABI missing");
+    }
+    public function getProvider():string{
+        return $this->parseEnv("provider", "provider missing");
+    }
+    
 }
