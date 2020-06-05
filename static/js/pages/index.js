@@ -28,13 +28,14 @@ document.getElementById("transform").addEventListener("click", function (e) {
             "application/x-www-form-urlencoded"
           );
           xhttptransform.send(
-            "account=" + accounts[0] + "&transform=" + amount
+            "account=" + accounts[0] + "&type=transform&amount=" + weiAmout
           );
 
           xhttptransform.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
-              console.log(this.responseText);
-              showSuccess("transform", amount);
+              console.log("Response", this.responseText);
+              if (this.responseText == "success")
+                showSuccess("transform", amount);
               document.getElementById("enter-amount").value = "";
             }
           };
@@ -76,16 +77,18 @@ document.getElementById("proceed").addEventListener("click", function (e) {
             "application/x-www-form-urlencoded"
           );
           if (isFreeze) {
-            xhttpproceed.send("account=" + accounts[0] + "&freeze=" + weiAmout);
-          } else {
             xhttpproceed.send(
-              "account=" + accounts[0] + "&unfreeze=" + weiAmout
+              "account=" + accounts[0] + "&type=freeze&amount=" + weiAmout
             );
+          } else {
+            xhttpproceed.send("account=" + accounts[0] + "&type=unfreeze");
           }
 
           xhttpproceed.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
-              showSuccess("freeze", weiAmout);
+              console.log(this.responseText);
+              if (this.responseText == "success")
+                showSuccess("freeze", weiAmout);
               document.getElementById("freeze-amount").value = "";
             }
           };
@@ -162,7 +165,9 @@ function approveHex(e) {
           "Content-type",
           "application/x-www-form-urlencoded"
         );
-        xhttpapprove.send("account=" + accounts[0] + "&approve=" + weiAmout);
+        xhttpapprove.send(
+          "account=" + accounts[0] + "&type=approve&amount=" + weiAmout
+        );
 
         xhttpapprove.onreadystatechange = function () {
           if (this.readyState === 4 && this.status === 200) {

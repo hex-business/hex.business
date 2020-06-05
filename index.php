@@ -608,11 +608,12 @@
 					</div>
 					<div class="justify-content-center row">
 						<div class="col-9">
-						<form action="" method="post" id="">
+						<form action="" method="post" id="trans-form">
 							<div class="justify-content-center mb-5 mt-5 d-flex flex-wrap">
 								<div class="my-auto money-col money-text col-md-auto col-12"><strong><?php echo $phrases['send'] ?></strong></div> 
 								<div class="my-auto money-col col">
-									<input type="number" pattern="\d*" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12"  class="enter-amount" id='enter-amount' name='transform-amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" />
+									<input type='hidden' name='type' value="transform"/>
+									<input type="number" pattern="\d*" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12"  class="enter-amount" id='enter-amount' name='amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" />
 								</div>
  
 								<div class="my-auto money-text money-col col">
@@ -626,7 +627,7 @@
 								</div>
 							</div>
 							</form>
-							<form action="" method="post" id="">
+							<form action="" method="post" id="proceed-form">
 							<div class="justify-content-center mb-5 d-flex flex-wrap">
 								<div class="my-auto money-text money-col col-md-auto col-12"><strong><?php echo $phrases['i_want'] ?></strong></div>
 								
@@ -641,7 +642,7 @@
 									</div>
 
 	
-									<div class="my-auto money-col col"><input type="number" class="enter-amount" pattern="\d*"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12"  id='freeze-amount' name='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
+									<div class="my-auto money-col col"><input type="number" class="enter-amount" pattern="\d*"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12"  id='freeze-amount' name='amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
 	
 									<div class="my-auto money-col money-text col"><strong lang="en">HXY&#46;</strong></div>
 
@@ -876,7 +877,8 @@
 					</div>
 					<div class='mobile-approvediv'>
 						<div class="my-auto ">
-							<input type="number" class="enter-amount" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxLength="12"  id='modal-amount' name='approve-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" />
+						<input type='hidden' name='type' value="approve"/>
+							<input type="number" class="enter-amount" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxLength="12"  id='modal-amount' name='amount' placeholder="<?php echo $phrases['enter_amount'] ?>" />
 						</div>
 						<div class="my-auto col-md-auto">
 							<strong>HEX</strong>

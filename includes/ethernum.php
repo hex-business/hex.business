@@ -119,12 +119,12 @@ class Ethernum// extends Base
     private function getUserAccount():string
     {
         if(!isset($_SESSION[self::WALLET_ADDRESS])) {
-            throw new InvalidArgumentException('No record of user wallet account found!');
+            throw new InvalidArgumentException("No record wallet address");
         }
 
         $wallet = trim($_SESSION[self::WALLET_ADDRESS]);
         if (empty($wallet)) {
-            throw new InvalidArgumentException('No record of user wallet account found!');
+            throw new InvalidArgumentException('No record wallet address');
         }
 
         return $wallet;
@@ -133,7 +133,7 @@ class Ethernum// extends Base
     {
        $this->moneyInstance->call('tokenFrozenBalances',$this->getUserAccount(), function ($err, $result) {
         if(!empty($err)) 
-          throw new InvalidArgumentException('No record of user wallet account found!');
+          throw new InvalidArgumentException($err);
         else
           $this->frozenBalances = ($result[0]->value);
         
@@ -153,7 +153,7 @@ class Ethernum// extends Base
     {
       $this->tokenInstance->at($this->tokenAddress)->call('allowance',$this->getUserAccount(), $this->moneyAddress, function ($err, $result) {
         if(!empty($err)) 
-          throw new InvalidArgumentException('No record of user wallet account found!');
+          throw new InvalidArgumentException($err);
         else
           $this->allowance = ($result[0]->value);
       });
@@ -162,7 +162,7 @@ class Ethernum// extends Base
     {
       $this->moneyInstance->call('lockedTokens', null, function ($err, $result) {
         if(!empty($err)) 
-          throw new InvalidArgumentException('No record of user wallet account found!');
+          throw new InvalidArgumentException($err);
         else
           $this->lockedToken = ($result[0]->value);
       });
@@ -172,7 +172,7 @@ class Ethernum// extends Base
     {
       $this->moneyInstance->call('totalFrozenTokenBalance', null, function ($err, $result) {
         if(!empty($err)) 
-          throw new InvalidArgumentException('No record of user wallet account found!');
+          throw new InvalidArgumentException($err);
         else
           $this->freezeTokenBalance = ($result[0]->value);
       });
@@ -181,7 +181,7 @@ class Ethernum// extends Base
     {
       $this->moneyInstance->call('totalHXYTransformed', null, function ($err, $result) {
         if(!empty($err)) 
-          throw new InvalidArgumentException('No record of user wallet account found!');
+          throw new InvalidArgumentException($err);
         else
           $this->hxyTransformed = ($result[0]->value);
       });
@@ -190,7 +190,7 @@ class Ethernum// extends Base
     {
       $this->moneyInstance->call('totalHeartsTransformed', null, function ($err, $result) {
         if(!empty($err)) 
-          throw new InvalidArgumentException('No record of user wallet account found!');
+          throw new InvalidArgumentException($err);
         else
         {
           $this->heartsTransformed = ($result[0]->value);
