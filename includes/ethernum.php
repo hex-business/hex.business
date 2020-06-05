@@ -1,32 +1,12 @@
 <?php
-  require_once  __DIR__ . '/config.php';
-
+ include_once __DIR__.'/base.php';
+ require_once  __DIR__ . '/config.php';
   use Web3\Web3;
   use Web3\Contract;
   use Web3\Providers\HttpProvider;
   use Web3\RequestManagers\HttpRequestManager;
-
-  // $web3 = new Web3('https://mainnet.infura.io/v3/c0f4f68a12e84857bedb6b76ebf5c14e/');
-//   $web3 = new Web3(new HttpProvider(new HttpRequestManager('https://mainnet.infura.io/v3/c0f4f68a12e84857bedb6b76ebf5c14e', 3)));
-
-//   $config = new Config();
-//   $moneyAddress = $config->getMoneyAddress();
-//   $tokenaddress = $config->getEtherConfigAddress();
-
-//   $tokenABI = $config->getTokenABI();
-//   $moneyContractABI = $config->getMoneyABI();
-
-
-
-// $contract = new Contract($web3->provider, $moneyContractABI);
-
-
-// $contract->at($moneyAddress)->call('_maxSupply', null, function ($err, $result) {
-//    return "A";
-// });
-
-
-class Ethernum
+ 
+class Ethernum// extends Base
 {
     
     private const WALLET_ADDRESS = 'walletAddress';
@@ -35,6 +15,7 @@ class Ethernum
     private $moneyAdderss;
     private $tokenAddress;
     private $account = '0x51C2609885753A1CB8B6901A933C15a0224CB57B';
+    
     public $frozenBalances = 0;
     public $freezeReward = 0;
     public $allowance = 0;
@@ -45,14 +26,24 @@ class Ethernum
     public $totalSupply = 0;
     public $maxSupply = 0;
     public $accountBalance = 0;
+    
     public function __construct(Config $config)
     {
       
-       
+     // $this->verifyToken();  
+     
       $provider = $config->getProvider();
+      
       if (empty($provider)) {
         throw new InvalidArgumentException("ethernum node uri cannot be empty");
       }
+     if(isset($_POST['account']) && !empty($_POST['account'])) {
+        $this->setUserAccount($_POST['account']);
+      }
+      else if(isset($_SESSION[self::WALLET_ADDRESS]) && !empty($_SESSION[self::WALLET_ADDRESS])) {
+        $this->setUserAccount($_SESSION[self::WALLET_ADDRESS]);
+      }
+      
       $web3 = new Web3(new HttpProvider(new HttpRequestManager($provider, 3)));
       $contract = new Contract($web3->provider, $config->getMoneyABI());
       $this->moneyAddress = $config->getMoneyAddress();
@@ -65,7 +56,7 @@ class Ethernum
     public function init()
     {
       $this->getTokenFrozenBalances();
-       $this->getFreezingReward();
+      $this->getFreezingReward();
       $this->getAllowance();
       $this->getLockedToken();
       $this->getFrzoneTokenBalance();
@@ -79,7 +70,20 @@ class Ethernum
     private function sendResult($heartsTransformed)
     { 
       $this->heartsTransformed = $heartsTransformed;
-      print_r ($this->heartsTransformed );
+      $result = array();
+      
+      $result['frozenBalances'] = $this->frozenBalances;
+      $result['freezeReward'] = $this->freezeReward;
+      $result['allowance'] = $this->allowance;
+      $result['lockedToken'] = $this->lockedToken;
+      $result['freezeTokenBalance'] = $this->freezeTokenBalance;
+      $result['hxyTransformed'] = $this->hxyTransformed;
+      $result['heartsTransformed'] = $this->heartsTransformed;
+      $result['totalSupply'] = $this->totalSupply;
+      $result['maxSupply'] = $this->maxSupply;
+      $result['accountBalance'] = $this->accountBalance;
+      echo json_encode($result);
+       //print_r ($this->heartsTransformed );
     }
     /**
      * This function checks if the user is already logged
@@ -127,7 +131,7 @@ class Ethernum
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
-          $this->freezeTokenBalance = dechex($result[0]->value);
+          $this->frozenBalances = hexdec($result[0]->value);
         
       });
     }
@@ -137,7 +141,7 @@ class Ethernum
         if(!empty($err)) 
           throw new InvalidArgumentException($err);
         else
-          $this->freezingReward =dechex($result[0]->value);
+          $this->freezingReward =hexdec($result[0]->value);
       });
     }
 
@@ -147,7 +151,7 @@ class Ethernum
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
-          $this->allowance = dechex($result[0]->value);
+          $this->allowance = hexdec($result[0]->value);
       });
     }
     function getLockedToken(): void
@@ -156,7 +160,7 @@ class Ethernum
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
-          $this->lockedToken = dechex($result[0]->value);
+          $this->lockedToken = hexdec($result[0]->value);
       });
     }
 
@@ -166,7 +170,7 @@ class Ethernum
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
-          $this->frozenTokenBalance = dechex($result[0]->value);
+          $this->freezeTokenBalance = hexdec($result[0]->value);
       });
     }
     function getHxyTransformed(): void
@@ -175,7 +179,7 @@ class Ethernum
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
-          $this->hxyTransformed = dechex($result[0]->value);
+          $this->hxyTransformed = hexdec($result[0]->value);
       });
     }
     function getHeartsTransformed(): void
@@ -185,46 +189,46 @@ class Ethernum
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
         {
-          $this->getheartsTransformed = dechex($result[0]->value);
-          $this->sendResult($result);
+          $this->heartsTransformed = hexdec($result[0]->value);
+          $this->sendResult( hexdec($result[0]->value));
         }
       });
     }
    
     public function getTotalSupply()
     {
-        $this->contractCall()->call('totalSupply', null, function($err,$result){
+        $this->moneyInstance->call('totalSupply', null, function($err,$result){
             if(!empty($err)) {
                 throw new InvalidArgumentException($err);
             }
 
-            $this->totalySupply = dechex($result[0]->value);
+            $this->totalSupply = hexdec($result[0]->value);
         });
     }
 
     public function getMaxSupply()
     {
-        $this->contractCall()->call('_maxSupply', null, function($err,$result){
+        $this->moneyInstance->call('_maxSupply', null, function($err,$result){
             if(!empty($err)) {
                 throw new InvalidArgumentException($err);
             }
 
-            $this->maxSupply = dechex($result[0]->value);
+            $this->maxSupply = hexdec($result[0]->value);
         });
     }
 
     public function getAccountBalance()
     {
-        //$this->contractCall()->call()->__maxSupply($this->getUserAccount());
-        $this->contractCall()->call('balanceOf',$this->getUserAccount(), function($err,$result){
+        //$this->moneyInstance->call()->__maxSupply($this->getUserAccount());
+        $this->moneyInstance->call('balanceOf',$this->getUserAccount(), function($err,$result){
             if(!empty($err)) {
                 throw new InvalidArgumentException($err);
             }
-           $this->accountBalance = dechex($result[0]->value);
+           $this->accountBalance = hexdec($result[0]->value);
         });
     }
  
 }
-$obj = new Ethernum(new Config);
-$obj->init();
+$ehternum = new Ethernum(new Config);
+$ehternum->init();
  

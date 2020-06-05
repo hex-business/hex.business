@@ -2,13 +2,14 @@
   include_once __DIR__.'/base.php';
   require_once  __DIR__ . '/config.php';
   
-  Class Etherscan extends Base{
+  Class Etherscan// extends Base
+  {
 
     private $config;
 
     public function __construct(Config $config)
     {
-      $this->verifyToken();
+     // $this->verifyToken();
       $this->config = $config;
     }
 
@@ -47,6 +48,31 @@
       }
 
       echo json_encode($result);
+    }
+    public function initwithoutJS($acc) {
+
+      $result = array();
+
+      
+
+        try {
+            $stats = $this->getAirdropStats($acc);
+        } catch (Exception $e) {
+            $stats = "invalid";
+        }
+
+        try {
+            $total = $this->getTotalAirdropped();
+        } catch (Exception $e){
+            $total = "invalid";
+        }
+
+        $result['status'] = 200;
+        $result['stats'] = $stats;
+        $result['total'] = $total;
+     
+
+      return $result;
     }
 
     /**
@@ -166,5 +192,5 @@
     }
   }
 
-  $obj = new Etherscan(new Config);
-  $obj->init();
+  $etherscan = new Etherscan(new Config);
+  $etherscan->init();

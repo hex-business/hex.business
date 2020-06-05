@@ -4,6 +4,9 @@
 	require_once __DIR__.'/includes/session.php';
 	require_once  __DIR__ . '/includes/config.php';
 	require_once __DIR__.'/includes/currentRates.php';
+	//require_once __DIR__.'/includes/ethernum.php';
+	//require_once __DIR__.'/includes/etherscan.php';
+
 
 	$rates    = new CurrentRates(new Config());
 	$rateData = $rates->getRateData();
@@ -18,6 +21,36 @@
 		require_once __DIR__ . '/includes/language/cnlang.php';
 		$language = 'cn';
 	}
+	// $ether_result = $etherscan->initwithoutJS('0x51C2609885753A1CB8B6901A933C15a0224CB57B');
+	// $dropstats = $ether_result['stats'];
+	// $airdropped = $ether_result['total'];
+	// $tokenFrozenBalance = $ethernum->getTokenFrozenBalances()/ 100000000 ?? 0;
+	// $freezingReward = $ethernum->getFreezingReward()/ 100000000 ?? 0;
+	// $allowance = $ethernum->getAllowance()/ 100000000 ?? 0;
+	// $lockedToken = $ethernum->getLockedToken()/ 100000000 ?? 0;
+	// $frezoneTokenBalance =$ethernum->getFrzoneTokenBalance()/ 100000000 ?? 0;
+	// $hxyTransformed =$ethernum->getHxyTransformed()/ 100000000 ?? 0;
+	// $totalSupply = $ethernum->getTotalSupply()/ 100000000 ?? 0;
+	// $maxSupply = $ethernum->getMaxSupply()/ 100000000 ?? 0;
+	// $accountBalance = $ethernum->getAccountBalance()/ 100000000 ?? 0;
+	// $heartsTransformed = $ethernum->getHeartsTransformed()/ 100000000 ?? 0;
+	// $interest = $tokenFrozenBalance === 0 ? 0 : $freezingReward ;
+	// $calculating_supply =$totalSupply -$frezoneTokenBalance - $lockedToken;
+	$ether_result = 0;
+	$dropstats = 0;
+	$airdropped = 0;
+	$tokenFrozenBalance =0;
+	$freezingReward = 0;
+	$allowance =   0;
+	$lockedToken =  0;
+	$frezoneTokenBalance =  0;
+	$hxyTransformed =  0;
+	$totalSupply =  0;
+	$maxSupply =   0;
+	$accountBalance =  0;
+	$heartsTransformed =   0;
+	$interests =0 ;
+	$calculating_supply =0;
 
 ?>
 
@@ -590,10 +623,11 @@
 					</div>
 					<div class="justify-content-center row">
 						<div class="col-9">
+						<form action="" method="post" id="">
 							<div class="justify-content-center mb-5 mt-5 d-flex flex-wrap">
 								<div class="my-auto money-col money-text col-md-auto col-12"><strong><?php echo $phrases['send'] ?></strong></div> 
 								<div class="my-auto money-col col">
-									<input type="number" pattern="\d*" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12" disabled="disabled" class="enter-amount" id='enter-amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" />
+									<input type="number" pattern="\d*" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12" disabled="disabled" class="enter-amount" id='enter-amount' name='transform-amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" />
 								</div>
  
 								<div class="my-auto money-text money-col col">
@@ -603,29 +637,32 @@
 									<strong><?php echo $phrases['can_receive'] ?> <span lang="en" id="canreceive">0 HXY&#46;</span></strong>
 								</div>
 								<div class="my-auto money-col col-sm-auto">
-									<button type="button" class="action-button btn btn-light" id='transform'><?php echo $phrases['convert'] ?></button>
+									<button type="submit" class="action-button btn btn-light" id='transform'><?php echo $phrases['convert'] ?></button>
 								</div>
 							</div>
+							</form>
 							<div class="justify-content-center mb-5 d-flex flex-wrap">
 								<div class="my-auto money-text money-col col-md-auto col-12"><strong><?php echo $phrases['i_want'] ?></strong></div>
-								<div class="my-auto money-col col">
-									<div role="group" class="w-100 btn-group btn-group-toggle">
-										<label class="my-auto select-button btn active btn-light" id='freeze'>
-											<input name="freeze-unfreeze" type="radio" autocomplete="off" value="0" checked=""><?php echo $phrases['freeze'] ?></label>
-											<label class="my-auto select-button btn btn-light" id='unfreeze'>
-												<input name="freeze-unfreeze" type="radio" autocomplete="off" value="1"><?php echo $phrases['thaw'] ?>
-											</label>
+								<form action="" method="post" id="">
+									<div class="my-auto money-col col">
+										<div role="group" class="w-100 btn-group btn-group-toggle">
+											<label class="my-auto select-button btn active btn-light" id='freeze'>
+												<input name="freeze-unfreeze" type="radio" autocomplete="off" value="0" checked=""><?php echo $phrases['freeze'] ?></label>
+												<label class="my-auto select-button btn btn-light" id='unfreeze'>
+													<input name="freeze-unfreeze" type="radio" autocomplete="off" value="1"><?php echo $phrases['thaw'] ?>
+												</label>
+										</div>
 									</div>
-								</div>
 
- 
-								<div class="my-auto money-col col"><input type="number" class="enter-amount" pattern="\d*"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12" disabled='disabled' id='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
- 
-								<div class="my-auto money-col money-text col"><strong lang="en">HXY&#46;</strong></div>
+	
+									<div class="my-auto money-col col"><input type="number" class="enter-amount" pattern="\d*"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12" disabled='disabled' id='freeze-amount' name='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
+	
+									<div class="my-auto money-col money-text col"><strong lang="en">HXY&#46;</strong></div>
 
-								<div class="my-auto money-col col">
-									<button type="button" class="action-button btn btn-light" id='proceed'><?php echo $phrases['proceed'] ?></button>
-								</div>
+									<div class="my-auto money-col col">
+										<button type="submit" class="action-button btn btn-light" id='proceed'><?php echo $phrases['proceed'] ?></button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -635,53 +672,53 @@
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="total_supply">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="total_supply"><?php echo $totalSupply?> HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_amount_frozen'] ?></div>
-								<div class="col-6"><strong lang="en" id="frzoneTokenBalance">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="frzoneTokenBalance"><?php echo $frezoneTokenBalance?> HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['current_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="calculating_supply">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="calculating_supply"><?php echo $calculating_supply?> HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['approved_amount'] ?></div>
-								<div class="col-6"><strong lang="en" id="approved_amount">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="approved_amount"><?php echo $allowance?> HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_airdrop_amount'] ?></div>
-								<div class="col-6"><strong lang="en" id="total_approved">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="total_approved"><?php echo $airdropped?> HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hxy_conversion'] ?></div>
-								<div class="col-6"><strong id="total_hxy_conversion">0 HXY</strong></div>
+								<div class="col-6"><strong id="total_hxy_conversion"><?php echo $hxyTransformed?> HXY</strong></div>
 							</div>
 						</div>
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_locked'] ?></div>
-								<div class="col-6"><strong lang="en" id="locked_tokens">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="locked_tokens"><?php echo $lockedToken?> HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_hxy_interest'] ?></div>
-								<div class="col-6"><strong lang="en" id="interest">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="interest"><?php echo $interests?> HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_frozen_hxy'] ?></div>
-								<div class="col-6"><strong id="tokenFrozenBalances">0 HXY</strong></div>
+								<div class="col-6"><strong id="tokenFrozenBalances"><?php echo $tokenFrozenBalance?> HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['maximum_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="maxSupply">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="maxSupply"><?php echo $maxSupply?> HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['Your_airdropped_dividends'] ?></div>
-								<div class="col-6"><strong lang="en" id="your_airdropped_divs">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="your_airdropped_divs"><?php echo $dropstats?> HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hex_conversion'] ?></div>
-								<div class="col-6"><strong id="total_hex_conversion">0 HEX</strong></div>
+								<div class="col-6"><strong id="total_hex_conversion"><?php echo $heartsTransformed?> HEX</strong></div>
 							</div>
 						</div>
 					</div>
@@ -844,24 +881,26 @@
 			</div>
 			<a href="#close" type="button" class="close"><span aria-hidden="true" id='modal_close'>×</span><span class="sr-only">Close</span></a>
 		</div>
-		<div class="modal-body">
-			<div class="justify-content-center row mobile-approvemodal">
-				<div class="col-md-4">
-					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAGECAMAAAC77O3EAAAC+lBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////86i/ucAAAA/XRSTlMAAAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gIiMkJSYnKCkqKywtLi8wMTIzNDU2Nzg5Ojs8PT4/QEFCQ0RFRkdISUpLTE1OT1BRUlNU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" class="img-fluid">
-				</div>
-				<div class='mobile-approvediv'>
-					<div class="my-auto ">
-						<input type="number" class="enter-amount" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxLength="12" disabled='disabled' id='modal-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" />
+		<form action="" method="post" id="">
+			<div class="modal-body">
+				<div class="justify-content-center row mobile-approvemodal">
+					<div class="col-md-4">
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAGECAMAAAC77O3EAAAC+lBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////86i/ucAAAA/XRSTlMAAAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gIiMkJSYnKCkqKywtLi8wMTIzNDU2Nzg5Ojs8PT4/QEFCQ0RFRkdISUpLTE1OT1BRUlNU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" class="img-fluid">
 					</div>
-					<div class="my-auto col-md-auto">
-						<strong>HEX</strong>
+					<div class='mobile-approvediv'>
+						<div class="my-auto ">
+							<input type="number" class="enter-amount" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxLength="12" disabled='disabled' id='modal-amount' name='approve-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" />
+						</div>
+						<div class="my-auto col-md-auto">
+							<strong>HEX</strong>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" id="btn_approve" class="action-button btn btn-light"><?php echo $phrases['approve'] ?></button>
-		</div>
+			<div class="modal-footer">
+				<button type="submit" id="btn_approve" class="action-button btn btn-light"><?php echo $phrases['approve'] ?></button>
+			</div>
+		 </form>
 	</div>
 </div>
 
