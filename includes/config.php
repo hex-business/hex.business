@@ -43,4 +43,7 @@ class Config
     {
         return $this->parseEnv("topic", "topic missing");
     }
+    public function getMoneyAddress():string{
+        return $this->parseEnv("moneyAddress", "moneyAddress missing");
+    }
 }
