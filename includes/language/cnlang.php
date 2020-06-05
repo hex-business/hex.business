@@ -65,15 +65,15 @@
 	'no_input'				       	   => '您需要先輸入&#46; 謝謝&#46;',
 	'email'                            => '电子邮件' ,
 	'subscription' =>  '订阅',
-	'subscribe_no_email' => '您尚未输入电子邮件地址&#46;  请使用浏览器返回&#44; <a href="./index&#46;php&#63;lang&#61;cn"> 或点击这里 </a> 并且输入1&#46;',
+	'subscribe_no_email' => '您尚未输入电子邮件地址&#46;  请使用浏览器返回&#44; <a href="../index&#46;php&#63;lang&#61;cn"> 或点击这里 </a> 并且输入1&#46;',
 	'subscribe_invalid_email' => '这不是正确的邮件地址&#46;  请使用浏览器返回&#44; <a href=&#34&#46;&#47;index&#46;php&#63;lang&#61;cn"> 或点击这里 </a> 并且输入1&#46;',
 	'subscribe_good' => '感谢您订阅我们的通知服务&#46; 您将收到电子邮件以确认您的兴趣&#46; 请回复邮件完成订阅流程&#46;
-	您可以使用浏览器的返回键返回&#46; <a href="./index&#46;php&#63;lang&#61;cn"> 或点击这里回到网站&#46; </a> ',
+	您可以使用浏览器的返回键返回&#46; <a href="../index&#46;php&#63;lang&#61;cn"> 或点击这里回到网站&#46; </a> ',
 	'subscribe_error' => '<h3>这儿存在一个问题&#46; 该发送失败。 很抱歉，请您几个小时后再回来<br/>
-	您可以使用浏览器的返回键返回&#46; <a href="./index&#46;php&#63;lang&#61;cn"> 或点击这里回到网站 </a>&#46;',
+	您可以使用浏览器的返回键返回&#46; <a href="../index&#46;php&#63;lang&#61;cn"> 或点击这里回到网站 </a>&#46;',
 	'copy_right' => 'Copyright &#169; 2020 Hex Business版权所有 &#45; 保留所有权利',
 	'privacypolicy'	=> '私隱政策',
 	'entered_invalid_email' 	=> '您输入了错误的电子邮件地址&#33;',
 	'token_expired' => 'Sorry&#46; Your token expired!',
-	'invalid_request' => 'It`s not the valid request! <a href="./index&#46;php&#63;lang&#61;cn"> Try again by clicking here! </a> '
+	'invalid_request' => 'It`s not the valid request! <a href="../index&#46;php&#63;lang&#61;cn"> Try again by clicking here! </a> '
 ];
