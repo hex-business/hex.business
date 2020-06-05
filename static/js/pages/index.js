@@ -172,7 +172,7 @@ function approveHex(e) {
         xhttpapprove.onreadystatechange = function () {
           if (this.readyState === 4 && this.status === 200) {
             showSuccess("approve", weiAmout);
-            document.getElementById("approve-amount").value = "";
+            document.getElementById("modal-amount").value = "";
           }
         };
       } else {
