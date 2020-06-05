@@ -4,11 +4,11 @@
 	require_once __DIR__.'/includes/session.php';
 	require_once  __DIR__ . '/includes/config.php';
 	require_once __DIR__.'/includes/currentRates.php';
-	// include_once __DIR__.'/includes/ethernum.php';
 	include_once __DIR__.'/includes/etherscan.php';
-
+	include_once __DIR__.'/includes/ethernum.php';	
 
 	$rates    = new CurrentRates(new Config());
+	$ethernum    = new Ethernum(new Config());
 	$rateData = $rates->getRateData();
 	$config = new Config();
 	if (isset($_GET['lang']) && !empty($_GET['lang']) && ($_GET['lang'] == 'en'))
@@ -21,27 +21,19 @@
 		require_once __DIR__ . '/includes/language/cnlang.php';
 		$language = 'cn';
 	}
+
 	$ether_result = $etherscan->initwithoutJS('');
-	if($ether_result['stats'] =='invalid')
+
+	if($ether_result['stats'] =='invalid'){
 		$dropstats="*********";
+	}
 	else
 	{
 	  $dropstats = ($ether_result['stats']/100000000??0)." HEX";
-	  
 	}
+
 	$airdropped = $ether_result['total']/100000000??0;
-	$tokenFrozenBalance = $ethernum->frozenBalances/ 100000000 ?? 0;
-	$freezingReward = $ethernum->freezeReward/ 100000000 ?? 0;
-	$allowance = $ethernum->allowance/ 100000000 ?? 0;
-	$lockedToken = $ethernum->lockedToken/ 100000000 ?? 0;
-	$frezoneTokenBalance =$ethernum->freezeTokenBalance/ 100000000 ?? 0;
-	$hxyTransformed =$ethernum->hxyTransformed/ 100000000 ?? 0;
-	$totalSupply = $ethernum->totalSupply/ 100000000 ?? 0;
-	$maxSupply = $ethernum->maxSupply/ 100000000 ?? 0;
-	$accountBalance = $ethernum->accountBalance/ 100000000 ?? 0;
-	$heartsTransformed = $ethernum->heartsTransformed/ 100000000 ?? 0;
-	$interests = $tokenFrozenBalance === 0 ? 0 : $freezingReward ;
-	$calculating_supply =$totalSupply -$frezoneTokenBalance - $lockedToken;
+
  
 ?>
 
@@ -632,7 +624,7 @@
 									<strong><?php echo $phrases['can_receive'] ?> <span lang="en" id="canreceive">0 HXY&#46;</span></strong>
 								</div>
 								<div class="my-auto money-col col-sm-auto">
-									<button type="submit" class="action-button btn btn-light" id='transform'><?php echo $phrases['convert'] ?></button>
+									<button type="submit" class="action-button btn btn-light" id='transform' disabled="disabled"><?php echo $phrases['convert'] ?></button>
 								</div>
 							</div>
 							</form>
@@ -656,7 +648,7 @@
 									<div class="my-auto money-col money-text col"><strong lang="en">HXY&#46;</strong></div>
 
 									<div class="my-auto money-col col">
-										<button type="submit" class="action-button btn btn-light" id='proceed'><?php echo $phrases['proceed'] ?></button>
+										<button type="submit" class="action-button btn btn-light" id='proceed' disabled="disableds"><?php echo $phrases['proceed'] ?></button>
 									</div>
 								
 							</div>
@@ -711,7 +703,7 @@
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['Your_airdropped_dividends'] ?></div>
-								<div class="col-6"><strong lang="en" id="your_airdropped_divs"><?php echo $dropstats?> </strong></div>
+								<div class="col-6"><strong lang="en" id="your_airdropped_divs" class="<?php echo $ether_result['stats']; ?>"><?php echo $dropstats?> </strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hex_conversion'] ?></div>
@@ -896,7 +888,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" id="btn_approve" class="action-button btn btn-light"><?php echo $phrases['approve'] ?></button>
+				<button type="submit" id="btn_approve" class="action-button btn btn-light" disabled="disabled"><?php echo $phrases['approve'] ?></button>
 			</div>
 		 </form>
 	</div>

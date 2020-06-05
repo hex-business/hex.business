@@ -22,6 +22,10 @@ body {
     font-family: "Palanquin";
     -webkit-font-smoothing: antialiased;
 }
+
+.invalid {
+	color: red;
+}
 .stickyback{
 	background-image: linear-gradient(90deg, #45b8ff, #8941fc);
 	padding-top:45px;

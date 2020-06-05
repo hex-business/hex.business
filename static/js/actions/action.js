@@ -4,9 +4,8 @@ var xhttpEthernum = new XMLHttpRequest();
 
 async function getAccounts() {
   accounts = await web3.eth.getAccounts();
-
-  // etherscanPost();
-  //metamaskPost();
+  etherscanPost();
+  metamaskPost();  
 }
 
 if (window.ethereum) {
@@ -14,125 +13,6 @@ if (window.ethereum) {
   getAccounts();
   setInterval(() => getAccounts(), 20000);
 }
-
-// async function getTotalSupply() {
-//   return new Promise(function (resolve) {
-//     moneyInstance.methods
-//       .totalSupply()
-//       .call()
-//       .then(result => {
-//         resolve(result);
-//       });
-//   });
-// }
-
-// async function getMaxSupply() {
-//   return new Promise(function (resolve) {
-//     moneyInstance.methods
-//       ._maxSupply()
-//       .call()
-//       .then(result => {
-//         result = result ? result : 0;
-//         resolve(result);
-//       });
-//   });
-// }
-
-// async function getBalanceOf(accounts) {
-//   return new Promise(function (resolve) {
-//     moneyInstance.methods
-//       .balanceOf(accounts[0])
-//       .call()
-//       .then(result => {
-//         result = result ? result : 0;
-//         resolve(result);
-//       });
-//   });
-// }
-
-// async function getTokenFrozenBalances(accounts) {
-//   return new Promise(function (resolve) {
-//     moneyInstance.methods
-//       .tokenFrozenBalances(accounts[0])
-//       .call()
-//       .then(result => {
-//         result = result ? result : 0;
-//         resolve(result);
-//       });
-//   });
-// }
-
-// async function getFreezingReward(accounts) {
-//   return new Promise(function (resolve) {
-//     moneyInstance.methods
-//       .calcFreezingRewards()
-//       .call({ from: accounts[0] })
-//       .then(result => {
-//         result = result ? result : 0;
-//         resolve(result);
-//       });
-//   });
-// }
-
-// async function getAllowance(accounts) {
-//   return new Promise(function (resolve) {
-//     tokenInstance.methods
-//       .allowance(accounts[0], moneyAddress)
-//       .call()
-//       .then(result => {
-//         result = result ? result : 0;
-//         resolve(result);
-//       });
-//   });
-// }
-
-// async function getLockedToken() {
-//   return new Promise(function (resolve) {
-//     moneyInstance.methods
-//       .lockedTokens()
-//       .call()
-//       .then(result => {
-//         result = result ? result : 0;
-//         resolve(result);
-//       });
-//   });
-// }
-
-// async function getFrzoneTokenBalance() {
-//   return new Promise(function (resolve) {
-//     moneyInstance.methods
-//       .totalFrozenTokenBalance()
-//       .call()
-//       .then(result => {
-//         result = result ? result : 0;
-//         resolve(result);
-//       });
-//   });
-// }
-
-// async function getHxyTransformed() {
-//   return new Promise(function (resolve) {
-//     moneyInstance.methods
-//       .totalHXYTransformed()
-//       .call()
-//       .then(result => {
-//         result = result ? result : 0;
-//         resolve(result);
-//       });
-//   });
-// }
-
-// async function getHeartsTransformed() {
-//   return new Promise(function (resolve) {
-//     moneyInstance.methods
-//       .totalHeartsTransformed()
-//       .call()
-//       .then(result => {
-//         result = result ? result : 0;
-//         resolve(result);
-//       });
-//   });
-// }
 
 function getMeta(metaName) {
   const metas = document.getElementsByTagName("meta");
@@ -147,6 +27,7 @@ function getMeta(metaName) {
 }
 
 function etherscanPost() {
+
   if (accounts && accounts.length > 0) {
     xhttpEtherscan.open("POST", "includes/etherscan.php", true);
     xhttpEtherscan.setRequestHeader(
@@ -170,13 +51,13 @@ function etherscanPost() {
         var total = arr.total;
 
         if (divs === 0) {
-          document.getElementById("your_airdropped_divs").style = "color:red";
+          document.getElementById("your_airdropped_divs").classList.add("invalid");
           document.getElementById("your_airdropped_divs").innerHTML =
             "**********";
         } else {
           divs = divs / 100000000;
           divs = divs.toLocaleString("en-GB");
-          document.getElementById("your_airdropped_divs").style = "";
+          document.getElementById("your_airdropped_divs").classList.remove("invalid");
           document.getElementById("your_airdropped_divs").innerHTML =
             divs + " HXY";
         }
@@ -193,7 +74,10 @@ function etherscanPost() {
     };
   }
 }
+
+
 function metamaskPost() {
+
   if (accounts && accounts.length > 0) {
     xhttpEthernum.open("POST", "includes/ethernum.php", true);
     xhttpEthernum.setRequestHeader(

@@ -237,8 +237,8 @@ class Ethernum// extends Base
            $this->accountBalance = ($result[0]->value);
         });
     }
-    
 }
+
 $ethernum = new Ethernum(new Config);
 $ethernum->init();
  

@@ -50,11 +50,10 @@
 
       echo json_encode($result);
     }
+    
     public function initwithoutJS($acc) {
 
-      $result = array();
-      
-      
+      $result = array();      
         try {
               if(isset($acc) && !empty($acc))
                 $stats = $this->getAirdropStats($acc);

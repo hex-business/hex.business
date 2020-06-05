@@ -9,6 +9,10 @@ function pageReady() {
   document.getElementById("enter-amount").removeAttribute("disabled");
   document.getElementById("freeze-amount").removeAttribute("disabled");
   document.getElementById("modal-amount").removeAttribute("disabled");
+
+  document.getElementById("btn_approve").removeAttribute("disabled");
+  document.getElementById("transform").removeAttribute("disabled");
+  document.getElementById("proceed").removeAttribute("disabled");  
 }
 
 document.getElementById("transform").addEventListener("click", function (e) {
