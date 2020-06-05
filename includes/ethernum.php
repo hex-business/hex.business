@@ -55,6 +55,9 @@ class Ethernum// extends Base
 
     public function init()
     {
+      if(isset($_POST['account'])&&!empty($_POST['account']))
+        $this->setUserAccount($_POST['account']);
+       
       $this->getTokenFrozenBalances();
       $this->getFreezingReward();
       $this->getAllowance();
@@ -82,6 +85,7 @@ class Ethernum// extends Base
       $result['totalSupply'] = $this->totalSupply;
       $result['maxSupply'] = $this->maxSupply;
       $result['accountBalance'] = $this->accountBalance;
+      if(isset($_POST['account'])&&!empty($_POST['account']))
       echo json_encode($result);
        //print_r ($this->heartsTransformed );
     }
@@ -89,7 +93,7 @@ class Ethernum// extends Base
      * This function checks if the user is already logged
      * @return bool
      */
-    public function isLogged():bool
+    private function isLogged():bool
     { 
         try {
             $this->getUserAccount();
@@ -99,7 +103,7 @@ class Ethernum// extends Base
         }
     }
 
-    public function setUserAccount(string $address)
+    private function setUserAccount(string $address)
     {
         if (empty($address)) {
             throw new InvalidArgumentException("Wallet Address cannot be empty");
@@ -112,7 +116,7 @@ class Ethernum// extends Base
      * This function returns the user wallet address
      * @return string
      */
-    public function getUserAccount():string
+    private function getUserAccount():string
     {
         if(!isset($_SESSION[self::WALLET_ADDRESS])) {
             throw new InvalidArgumentException('No record of user wallet account found!');
@@ -125,110 +129,110 @@ class Ethernum// extends Base
 
         return $wallet;
     }
-    function getTokenFrozenBalances(): void
+    private function getTokenFrozenBalances(): void
     {
        $this->moneyInstance->call('tokenFrozenBalances',$this->getUserAccount(), function ($err, $result) {
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
-          $this->frozenBalances = hexdec($result[0]->value);
+          $this->frozenBalances = ($result[0]->value);
         
       });
     }
-    function getFreezingReward(): void
+    private function getFreezingReward(): void
     {
       $this->moneyInstance->call('calcFreezingRewards', ['from'=>$this->account], function ($err, $result) {
         if(!empty($err)) 
           throw new InvalidArgumentException($err);
         else
-          $this->freezingReward =hexdec($result[0]->value);
+          $this->freezingReward =($result[0]->value);
       });
     }
 
-    function getAllowance(): void
+    private function getAllowance(): void
     {
-      $this->tokenInstance->at($this->moneyAddress)->call('allowance',$this->getUserAccount(), $this->moneyAddress, function ($err, $result) {
+      $this->tokenInstance->at($this->tokenAddress)->call('allowance',$this->getUserAccount(), $this->moneyAddress, function ($err, $result) {
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
-          $this->allowance = hexdec($result[0]->value);
+          $this->allowance = ($result[0]->value);
       });
     }
-    function getLockedToken(): void
+    private function getLockedToken(): void
     {
       $this->moneyInstance->call('lockedTokens', null, function ($err, $result) {
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
-          $this->lockedToken = hexdec($result[0]->value);
+          $this->lockedToken = ($result[0]->value);
       });
     }
 
-    function getFrzoneTokenBalance(): void
+    private function getFrzoneTokenBalance(): void
     {
       $this->moneyInstance->call('totalFrozenTokenBalance', null, function ($err, $result) {
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
-          $this->freezeTokenBalance = hexdec($result[0]->value);
+          $this->freezeTokenBalance = ($result[0]->value);
       });
     }
-    function getHxyTransformed(): void
+    private function getHxyTransformed(): void
     {
       $this->moneyInstance->call('totalHXYTransformed', null, function ($err, $result) {
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
-          $this->hxyTransformed = hexdec($result[0]->value);
+          $this->hxyTransformed = ($result[0]->value);
       });
     }
-    function getHeartsTransformed(): void
+    private function getHeartsTransformed(): void
     {
       $this->moneyInstance->call('totalHeartsTransformed', null, function ($err, $result) {
         if(!empty($err)) 
           throw new InvalidArgumentException('No record of user wallet account found!');
         else
         {
-          $this->heartsTransformed = hexdec($result[0]->value);
-          $this->sendResult( hexdec($result[0]->value));
+          $this->heartsTransformed = ($result[0]->value);
+          $this->sendResult( ($result[0]->value));
         }
       });
     }
    
-    public function getTotalSupply()
+    private function getTotalSupply()
     {
         $this->moneyInstance->call('totalSupply', null, function($err,$result){
             if(!empty($err)) {
                 throw new InvalidArgumentException($err);
             }
 
-            $this->totalSupply = hexdec($result[0]->value);
+            $this->totalSupply = ($result[0]->value);
         });
     }
 
-    public function getMaxSupply()
+    private function getMaxSupply()
     {
         $this->moneyInstance->call('_maxSupply', null, function($err,$result){
             if(!empty($err)) {
                 throw new InvalidArgumentException($err);
             }
 
-            $this->maxSupply = hexdec($result[0]->value);
+            $this->maxSupply = ($result[0]->value);
         });
     }
 
-    public function getAccountBalance()
+    private function getAccountBalance()
     {
         //$this->moneyInstance->call()->__maxSupply($this->getUserAccount());
         $this->moneyInstance->call('balanceOf',$this->getUserAccount(), function($err,$result){
             if(!empty($err)) {
                 throw new InvalidArgumentException($err);
             }
-           $this->accountBalance = hexdec($result[0]->value);
+           $this->accountBalance = ($result[0]->value);
         });
     }
- 
+    
 }
-$ehternum = new Ethernum(new Config);
-$ehternum->init();
+$ethernum = new Ethernum(new Config);
+$ethernum->init();
  

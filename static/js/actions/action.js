@@ -5,8 +5,8 @@ var xhttpEthernum = new XMLHttpRequest();
 async function getAccounts() {
   accounts = await web3.eth.getAccounts();
 
-  etherscanPost();
-  metamaskPost();
+  // etherscanPost();
+  //metamaskPost();
 }
 
 if (window.ethereum) {

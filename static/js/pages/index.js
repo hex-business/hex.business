@@ -1,4 +1,7 @@
 let isFreeze = true;
+var xhttpapprove = new XMLHttpRequest();
+var xhttptransform = new XMLHttpRequest();
+var xhttpproceed = new XMLHttpRequest();
 
 document.addEventListener("DOMContentLoaded", pageReady);
 
@@ -19,14 +22,22 @@ document.getElementById("transform").addEventListener("click", function (e) {
         var weiAmout = Math.floor(amount * 100000000);
 
         if (weiAmout > 0) {
-          moneyInstance.methods
-            .transformHEX(
-              weiAmout,
-              "0x0000000000000000000000000000000000000000"
-            )
-            .send({ from: accounts[0] })
-            .then(showSuccess("transform", amount));
-          document.getElementById("enter-amount").value = "";
+          xhttptransform.open("POST", "includes/transaction.php", true);
+          xhttptransform.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+          );
+          xhttptransform.send(
+            "account=" + accounts[0] + "&transform=" + amount
+          );
+
+          xhttptransform.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+              console.log(this.responseText);
+              showSuccess("transform", amount);
+              document.getElementById("enter-amount").value = "";
+            }
+          };
         } else {
           showNodata("transform");
         }
@@ -59,11 +70,26 @@ document.getElementById("proceed").addEventListener("click", function (e) {
         var weiAmout = Math.floor(amount * 100000000);
 
         if (weiAmout > 0) {
+          xhttpproceed.open("POST", "includes/transaction.php", true);
+          xhttpproceed.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+          );
           if (isFreeze) {
-            freeze(weiAmout);
+            xhttpproceed.send("account=" + accounts[0] + "&freeze=" + weiAmout);
           } else {
-            unfreeze(weiAmout);
+            xhttpproceed.send(
+              "account=" + accounts[0] + "&unfreeze=" + weiAmout
+            );
           }
+
+          xhttpproceed.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+              showSuccess("freeze", weiAmout);
+              document.getElementById("freeze-amount").value = "";
+            }
+          };
+
           document.getElementById("freeze-amount").value = "";
         } else {
           showNodata("freeze");
@@ -79,19 +105,19 @@ document.getElementById("proceed").addEventListener("click", function (e) {
   }
 });
 
-function freeze(amount) {
-  moneyInstance.methods
-    .FreezeTokens(amount)
-    .send({ from: accounts[0] })
-    .then(showSuccess("freeze", amount));
-}
+// function freeze(amount) {
+//   moneyInstance.methods
+//     .FreezeTokens(amount)
+//     .send({ from: accounts[0] })
+//     .then(showSuccess("freeze", amount));
+// }
 
-function unfreeze(amount) {
-  moneyInstance.methods
-    .UnfreezeTokens()
-    .send({ from: accounts[0] })
-    .then(showSuccess("unfreeze", amount));
-}
+// function unfreeze(amount) {
+//   moneyInstance.methods
+//     .UnfreezeTokens()
+//     .send({ from: accounts[0] })
+//     .then(showSuccess("unfreeze", amount));
+// }
 
 document.getElementById("approve").addEventListener("click", function (e) {
   e.stopPropagation();
@@ -131,10 +157,19 @@ function approveHex(e) {
 
     if (weiAmout > 0) {
       if (accounts && accounts.length > 0) {
-        tokenInstance.methods
-          .approve(moneyAddress, weiAmout)
-          .send({ from: accounts[0] })
-          .then(showSuccess("approve", weiAmout));
+        xhttpapprove.open("POST", "includes/transaction.php", true);
+        xhttpapprove.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        );
+        xhttpapprove.send("account=" + accounts[0] + "&approve=" + weiAmout);
+
+        xhttpapprove.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            showSuccess("approve", weiAmout);
+            document.getElementById("approve-amount").value = "";
+          }
+        };
       } else {
         showMetamaskLogin();
       }

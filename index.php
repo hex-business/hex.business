@@ -4,8 +4,8 @@
 	require_once __DIR__.'/includes/session.php';
 	require_once  __DIR__ . '/includes/config.php';
 	require_once __DIR__.'/includes/currentRates.php';
-	//require_once __DIR__.'/includes/ethernum.php';
-	//require_once __DIR__.'/includes/etherscan.php';
+	include_once __DIR__.'/includes/ethernum.php';
+	include_once __DIR__.'/includes/etherscan.php';
 
 
 	$rates    = new CurrentRates(new Config());
@@ -21,37 +21,22 @@
 		require_once __DIR__ . '/includes/language/cnlang.php';
 		$language = 'cn';
 	}
-	// $ether_result = $etherscan->initwithoutJS('0x51C2609885753A1CB8B6901A933C15a0224CB57B');
-	// $dropstats = $ether_result['stats'];
-	// $airdropped = $ether_result['total'];
-	// $tokenFrozenBalance = $ethernum->getTokenFrozenBalances()/ 100000000 ?? 0;
-	// $freezingReward = $ethernum->getFreezingReward()/ 100000000 ?? 0;
-	// $allowance = $ethernum->getAllowance()/ 100000000 ?? 0;
-	// $lockedToken = $ethernum->getLockedToken()/ 100000000 ?? 0;
-	// $frezoneTokenBalance =$ethernum->getFrzoneTokenBalance()/ 100000000 ?? 0;
-	// $hxyTransformed =$ethernum->getHxyTransformed()/ 100000000 ?? 0;
-	// $totalSupply = $ethernum->getTotalSupply()/ 100000000 ?? 0;
-	// $maxSupply = $ethernum->getMaxSupply()/ 100000000 ?? 0;
-	// $accountBalance = $ethernum->getAccountBalance()/ 100000000 ?? 0;
-	// $heartsTransformed = $ethernum->getHeartsTransformed()/ 100000000 ?? 0;
-	// $interest = $tokenFrozenBalance === 0 ? 0 : $freezingReward ;
-	// $calculating_supply =$totalSupply -$frezoneTokenBalance - $lockedToken;
-	$ether_result = 0;
-	$dropstats = 0;
-	$airdropped = 0;
-	$tokenFrozenBalance =0;
-	$freezingReward = 0;
-	$allowance =   0;
-	$lockedToken =  0;
-	$frezoneTokenBalance =  0;
-	$hxyTransformed =  0;
-	$totalSupply =  0;
-	$maxSupply =   0;
-	$accountBalance =  0;
-	$heartsTransformed =   0;
-	$interests =0 ;
-	$calculating_supply =0;
-
+	$ether_result = $etherscan->initwithoutJS('0x51C2609885753A1CB8B6901A933C15a0224CB57B');
+	$dropstats = $ether_result['stats']/100000000??0;
+	$airdropped = $ether_result['total']/100000000??0;
+	$tokenFrozenBalance = $ethernum->frozenBalances/ 100000000 ?? 0;
+	$freezingReward = $ethernum->freezeReward/ 100000000 ?? 0;
+	$allowance = $ethernum->allowance/ 100000000 ?? 0;
+	$lockedToken = $ethernum->lockedToken/ 100000000 ?? 0;
+	$frezoneTokenBalance =$ethernum->freezeTokenBalance/ 100000000 ?? 0;
+	$hxyTransformed =$ethernum->hxyTransformed/ 100000000 ?? 0;
+	$totalSupply = $ethernum->totalSupply/ 100000000 ?? 0;
+	$maxSupply = $ethernum->maxSupply/ 100000000 ?? 0;
+	$accountBalance = $ethernum->accountBalance/ 100000000 ?? 0;
+	$heartsTransformed = $ethernum->heartsTransformed/ 100000000 ?? 0;
+	$interests = $tokenFrozenBalance === 0 ? 0 : $freezingReward ;
+	$calculating_supply =$totalSupply -$frezoneTokenBalance - $lockedToken;
+ 
 ?>
 
 <html lang="zh-Hans">
@@ -627,7 +612,7 @@
 							<div class="justify-content-center mb-5 mt-5 d-flex flex-wrap">
 								<div class="my-auto money-col money-text col-md-auto col-12"><strong><?php echo $phrases['send'] ?></strong></div> 
 								<div class="my-auto money-col col">
-									<input type="number" pattern="\d*" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12" disabled="disabled" class="enter-amount" id='enter-amount' name='transform-amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" />
+									<input type="number" pattern="\d*" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12"  class="enter-amount" id='enter-amount' name='transform-amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" />
 								</div>
  
 								<div class="my-auto money-text money-col col">
@@ -641,9 +626,10 @@
 								</div>
 							</div>
 							</form>
+							<form action="" method="post" id="">
 							<div class="justify-content-center mb-5 d-flex flex-wrap">
 								<div class="my-auto money-text money-col col-md-auto col-12"><strong><?php echo $phrases['i_want'] ?></strong></div>
-								<form action="" method="post" id="">
+								
 									<div class="my-auto money-col col">
 										<div role="group" class="w-100 btn-group btn-group-toggle">
 											<label class="my-auto select-button btn active btn-light" id='freeze'>
@@ -655,15 +641,16 @@
 									</div>
 
 	
-									<div class="my-auto money-col col"><input type="number" class="enter-amount" pattern="\d*"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12" disabled='disabled' id='freeze-amount' name='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
+									<div class="my-auto money-col col"><input type="number" class="enter-amount" pattern="\d*"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12"  id='freeze-amount' name='freeze-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
 	
 									<div class="my-auto money-col money-text col"><strong lang="en">HXY&#46;</strong></div>
 
 									<div class="my-auto money-col col">
 										<button type="submit" class="action-button btn btn-light" id='proceed'><?php echo $phrases['proceed'] ?></button>
 									</div>
-								</form>
+								
 							</div>
+							</form>
 						</div>
 					</div>
 					<div class="row"><p class="mb-5 title"><strong><?php echo $phrases['your_wallet_balance'] ?>&nbsp;&#58;&nbsp; <span lang="en" id='balance'>0 HXY</span> </strong></p>
@@ -889,7 +876,7 @@
 					</div>
 					<div class='mobile-approvediv'>
 						<div class="my-auto ">
-							<input type="number" class="enter-amount" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxLength="12" disabled='disabled' id='modal-amount' name='approve-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" />
+							<input type="number" class="enter-amount" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxLength="12"  id='modal-amount' name='approve-amount' placeholder="<?php echo $phrases['enter_amount'] ?>" />
 						</div>
 						<div class="my-auto col-md-auto">
 							<strong>HEX</strong>
