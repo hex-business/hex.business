@@ -10,7 +10,7 @@
 
 	$rates    = new CurrentRates(new Config());
 	$rateData = $rates->getRateData();
-
+	$config = new Config();
 	if (isset($_GET['lang']) && !empty($_GET['lang']) && ($_GET['lang'] == 'en'))
 	{
 		require_once __DIR__ . '/includes/language/enlang.php';
@@ -907,6 +907,10 @@
 	var no_input = "<?php echo $phrases['no_input'] ?>";
 	var in_processing = "<?php echo $phrases['in_processing'] ?>";
 	var entered_invalid_email = "<?php echo $phrases['entered_invalid_email'] ?>";
+	var tokenAddress = "<?php echo $config->getEtherConfigAddress(); ?>";
+	var moneyAddress = "<?php echo $config->getMoneyAddress(); ?>";
+	var tokenABI = '<?php echo $config->getTokenABI(); ?>';
+	var moneyContractABI = '<?php echo $config->getMoneyABI(); ?>';
 </script>
 
 <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>

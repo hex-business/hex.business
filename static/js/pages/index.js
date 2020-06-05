@@ -59,68 +59,58 @@ document.getElementById("enter-amount").addEventListener("keyup", function (e) {
     parseInt(amount || 0) / 1000 || 0 + " HXY";
 });
 
-document.getElementById("proceed").addEventListener("click", function (e) {
-  e.preventDefault();
-  if (window.ethereum) {
-    window.ethereum.enable();
+  document.getElementById("proceed").addEventListener("click", function(){
 
-    if (accounts && accounts.length > 0) {
-      let amount = document.getElementById("freeze-amount").value;
+    if (window.ethereum) {
+      window.ethereum.enable();
 
-      if (amount) {
-        var weiAmout = Math.floor(amount * 100000000);
+      if (accounts && accounts.length > 0) {
+        let amount = document.getElementById("freeze-amount").value;
 
-        if (weiAmout > 0) {
-          xhttpproceed.open("POST", "includes/transaction.php", true);
-          xhttpproceed.setRequestHeader(
-            "Content-type",
-            "application/x-www-form-urlencoded"
-          );
-          if (isFreeze) {
-            xhttpproceed.send(
-              "account=" + accounts[0] + "&type=freeze&amount=" + weiAmout
-            );
-          } else {
-            xhttpproceed.send("account=" + accounts[0] + "&type=unfreeze");
-          }
+        if (amount) {
+          var weiAmout = Math.floor(amount * 100000000);
 
-          xhttpproceed.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-              console.log(this.responseText);
-              if (this.responseText == "success")
-                showSuccess("freeze", weiAmout);
-              document.getElementById("freeze-amount").value = "";
+          if (weiAmout > 0) {
+             if(isFreeze){
+              freeze(weiAmout);
+            } else {
+              unfreeze(weiAmout);
             }
-          };
-
-          document.getElementById("freeze-amount").value = "";
-        } else {
-          showNodata("freeze");
+            document.getElementById("freeze-amount").value = '';                    
+          } 
+          else {
+            showNodata("freeze");        
+          }
+          
         }
-      } else {
-        showNodata("freeze");
+        else{
+          showNodata("freeze");      
+        }        
       }
-    } else {
-      showMetamaskLogin();
+      else {
+        showMetamaskLogin();
+      }
+
     }
-  } else {
-    showMetamaskLogin();
-  }
-});
+    else {
+      showMetamaskLogin();
+    }    
 
-// function freeze(amount) {
-//   moneyInstance.methods
-//     .FreezeTokens(amount)
-//     .send({ from: accounts[0] })
-//     .then(showSuccess("freeze", amount));
-// }
+  });
 
-// function unfreeze(amount) {
-//   moneyInstance.methods
-//     .UnfreezeTokens()
-//     .send({ from: accounts[0] })
-//     .then(showSuccess("unfreeze", amount));
-// }
+function freeze(amount) {
+  moneyInstance.methods
+    .FreezeTokens(amount)
+    .send({ from: accounts[0] })
+    .then(showSuccess("freeze", amount));
+}
+
+function unfreeze(amount) {
+  moneyInstance.methods
+    .UnfreezeTokens()
+    .send({ from: accounts[0] })
+    .then(showSuccess("unfreeze", amount));
+}
 
 document.getElementById("approve").addEventListener("click", function (e) {
   e.stopPropagation();
@@ -151,39 +141,33 @@ document.getElementById("modal_close").addEventListener("click", hideModal);
 document.getElementById("modal-back").addEventListener("click", hideModal);
 document.getElementById("btn_approve").addEventListener("click", approveHex);
 
-function approveHex(e) {
-  e.preventDefault();
+function approveHex(){
   let amount = document.getElementById("modal-amount").value;
 
   if (amount) {
+
     var weiAmout = Math.floor(amount * 100000000);
 
     if (weiAmout > 0) {
-      if (accounts && accounts.length > 0) {
-        xhttpapprove.open("POST", "includes/transaction.php", true);
-        xhttpapprove.setRequestHeader(
-          "Content-type",
-          "application/x-www-form-urlencoded"
-        );
-        xhttpapprove.send(
-          "account=" + accounts[0] + "&type=approve&amount=" + weiAmout
-        );
 
-        xhttpapprove.onreadystatechange = function () {
-          if (this.readyState === 4 && this.status === 200) {
-            showSuccess("approve", weiAmout);
-            document.getElementById("modal-amount").value = "";
-          }
-        };
-      } else {
+      if (accounts && accounts.length > 0) { 
+         tokenInstance.methods.approve(moneyAddress, weiAmout).send({from:accounts[0]}).then(
+           showSuccess('approve', weiAmout)
+         );               
+      }
+      else {
         showMetamaskLogin();
       }
-    } else {
+    }
+    else {
       showNodata("approve");
     }
-  } else {
+
+  }
+  else {
     showNodata("approve");
   }
+
 }
 
 function showNodata(type) {
