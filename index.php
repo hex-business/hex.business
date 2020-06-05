@@ -4,7 +4,7 @@
 	require_once __DIR__.'/includes/session.php';
 	require_once  __DIR__ . '/includes/config.php';
 	require_once __DIR__.'/includes/currentRates.php';
-	include_once __DIR__.'/includes/ethernum.php';
+	// include_once __DIR__.'/includes/ethernum.php';
 	include_once __DIR__.'/includes/etherscan.php';
 
 
@@ -229,8 +229,11 @@
 
 						<ul class="navbar-nav ml-auto">
 							<li class="my-auto hand" id='approvemobile'>
-								<img src="./static/media/metamask.2c92daf3.png" class="metamask-button"
+								<a href="#approve_token_modal">
+									<img src="./static/media/metamask.2c92daf3.png" class="metamask-button"
 									alt="Connect MetaMask">
+								</a>								
+								
 							</li>
 							<li class="my-auto">
 								<div>

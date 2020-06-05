@@ -41,6 +41,7 @@ body {
 }
 #approve_token_modal {
 	display: none;
+
 }
 /*
 .gallery .controls {
@@ -222,6 +223,7 @@ body {
 
 #approve_token_modal:target {
 	display: block;
+	z-index: 100;
 }
 .menu:target {
 	display: block;
@@ -487,6 +489,19 @@ body {
 	}
 	.lets-talk p {
 		margin: 0 auto;
+	}
+	#approve_token_modal {
+		width: 90%;
+	}
+	.mobile-approvemodal div{
+		text-align: center;
+	}
+	.mobile-approvemodal .img-fluid {
+		max-width: 150px;
+	}
+	.modal-footer button {
+		margin: 0 auto;
+		margin-bottom: -15px;
 	}
 }
 
