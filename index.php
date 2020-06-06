@@ -5,10 +5,8 @@
 	require_once  __DIR__ . '/includes/config.php';
 	require_once __DIR__.'/includes/currentRates.php';
 	include_once __DIR__.'/includes/etherscan.php';
-	include_once __DIR__.'/includes/ethernum.php';	
 
 	$rates    = new CurrentRates(new Config());
-	$ethernum    = new Ethernum(new Config());
 	$rateData = $rates->getRateData();
 	$config = new Config();
 	if (isset($_GET['lang']) && !empty($_GET['lang']) && ($_GET['lang'] == 'en'))
@@ -661,53 +659,53 @@
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="total_supply"><?php echo $totalSupply?> HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="total_supply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_amount_frozen'] ?></div>
-								<div class="col-6"><strong lang="en" id="frzoneTokenBalance"><?php echo $frezoneTokenBalance?> HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="frzoneTokenBalance">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['current_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="calculating_supply"><?php echo $calculating_supply?> HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="calculating_supply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['approved_amount'] ?></div>
-								<div class="col-6"><strong lang="en" id="approved_amount"><?php echo $allowance?> HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="approved_amount">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_airdrop_amount'] ?></div>
-								<div class="col-6"><strong lang="en" id="total_approved"><?php echo $airdropped?> HEX</strong></div>
+								<div class="col-6"><strong lang="en" id="total_approved">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hxy_conversion'] ?></div>
-								<div class="col-6"><strong id="total_hxy_conversion"><?php echo $hxyTransformed?> HXY</strong></div>
+								<div class="col-6"><strong id="total_hxy_conversion">0 HXY</strong></div>
 							</div>
 						</div>
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_locked'] ?></div>
-								<div class="col-6"><strong lang="en" id="locked_tokens"><?php echo $lockedToken?> HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="locked_tokens">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_hxy_interest'] ?></div>
-								<div class="col-6"><strong lang="en" id="interest"><?php echo $interests?> HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="interest">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_frozen_hxy'] ?></div>
-								<div class="col-6"><strong id="tokenFrozenBalances"><?php echo $tokenFrozenBalance?> HXY</strong></div>
+								<div class="col-6"><strong id="tokenFrozenBalances">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['maximum_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="maxSupply"><?php echo $maxSupply?> HXY</strong></div>
+								<div class="col-6"><strong lang="en" id="maxSupply">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['Your_airdropped_dividends'] ?></div>
-								<div class="col-6"><strong lang="en" id="your_airdropped_divs" class="<?php echo $ether_result['stats']; ?>"><?php echo $dropstats?> </strong></div>
+								<div class="col-6"><strong lang="en" id="your_airdropped_divs">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hex_conversion'] ?></div>
-								<div class="col-6"><strong id="total_hex_conversion"><?php echo $heartsTransformed?> HEX</strong></div>
+								<div class="col-6"><strong id="total_hex_conversion">0 HEX</strong></div>
 							</div>
 						</div>
 					</div>

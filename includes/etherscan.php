@@ -2,14 +2,14 @@
   include_once __DIR__.'/base.php';
   require_once  __DIR__ . '/config.php';
   
-  Class Etherscan// extends Base
+  Class Etherscan extends Base
   {
 
     private $config;
 
     public function __construct(Config $config)
     {
-     // $this->verifyToken();
+      // $this->verifyToken();
       $this->config = $config;
     }
 
@@ -20,7 +20,9 @@
      * @return Json
     */
 
-    public function init() {
+    public function init(): void {
+
+      // 
       if(!isset($_POST['account'])||empty($_POST['account']))
         return;
       $result = array();
@@ -29,6 +31,7 @@
           $result['status'] = 404;
       }
       else {
+        $this->verifyToken();
         $acc = trim($_POST['account']);
 
         try {
@@ -50,31 +53,32 @@
 
       echo json_encode($result);
     }
-    
-    public function initwithoutJS($acc) {
 
-      $result = array();      
-        try {
-              if(isset($acc) && !empty($acc))
-                $stats = $this->getAirdropStats($acc);
-              else
-              $stats = "invalid";
-        } catch (Exception $e) {
+    public function initwithoutJS($acc): array {
+
+      $result = array();
+
+      try {
+            if(isset($acc) && !empty($acc))
+              $stats = $this->getAirdropStats($acc);
+            else
             $stats = "invalid";
-        }
+      } catch (Exception $e) {
+          $stats = "invalid";
+      }
 
-        try {
-            $total = $this->getTotalAirdropped();
-        } catch (Exception $e){
-            $total = "invalid";
-        }
+      try {
+          $total = $this->getTotalAirdropped();
+      } catch (Exception $e){
+          $total = "invalid";
+      }
 
-        $result['status'] = 200;
-        $result['stats'] = $stats;
-        $result['total'] = $total;
-     
+      $result['status'] = 200;
+      $result['stats'] = $stats;
+      $result['total'] = $total;
 
       return $result;
+
     }
 
     /**
@@ -166,31 +170,30 @@
 
     private function getTotalAirdropped():int
     {
+      $airdropContract = $this->config->getEtherConfigAirDropContract();
+      $apiKey          = $this->config->getEtherConfigEtherApiKey();
+      $address         = $this->config->getEtherConfigAddress();
+      $topic           = $this->config->getEtherConfigTopic();
 
-        $airdropContract = $this->config->getEtherConfigAirDropContract();
-        $apiKey          = $this->config->getEtherConfigEtherApiKey();
-        $address         = $this->config->getEtherConfigAddress();
-        $topic           = $this->config->getEtherConfigTopic();
+      $cURLConnection = curl_init();
 
-        $cURLConnection = curl_init();
+      curl_setopt($cURLConnection, CURLOPT_URL, "https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=10011880&toBlock=latest&address=" . $address . "&topic0=" . $topic . "&topic0_1_opr=and&topic1=" . $this->toHexAddress($airdropContract) . "&apikey=" . $apiKey);
+      curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+      $res = curl_exec($cURLConnection);
 
-        curl_setopt($cURLConnection, CURLOPT_URL, "https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=10011880&toBlock=latest&address=" . $address . "&topic0=" . $topic . "&topic0_1_opr=and&topic1=" . $this->toHexAddress($airdropContract) . "&apikey=" . $apiKey);
-        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-        $res = curl_exec($cURLConnection);
+      if (curl_errno($cURLConnection)) {
+        throw new InvalidArgumentException("invalid");
+      }
 
-        if (curl_errno($cURLConnection)) {
+      $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
+      curl_close($cURLConnection);
+
+      if ($resultStatus !== 200) {
           throw new InvalidArgumentException("invalid");
-        }
+      }
 
-        $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
-        curl_close($cURLConnection);
-
-        if ($resultStatus !== 200) {
-            throw new InvalidArgumentException("invalid");
-        }
-
-        return $this->processTotalAirDropped($res);
+      return $this->processTotalAirDropped($res);
     }
   }
 

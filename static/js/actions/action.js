@@ -90,14 +90,10 @@ function metamaskPost() {
       if (this.readyState === 4 && this.status === 200) {
         var response = this.responseText;
         var arr = JSON.parse(response);
-        console.log(response);
         let balanceOf = arr.accountBalance;
-
         let tokenFrozenBalances = arr.frozenBalances;
-
         let freezingReward = arr.freezeReward;
         let allowance = arr.allowance;
-
         let totalSupply = arr.totalSupply;
         let maxSupply = arr.maxSupply;
         let lockedToken = arr.lockedToken;

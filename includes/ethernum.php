@@ -1,21 +1,21 @@
 <?php
- include_once __DIR__.'/base.php';
- require_once  __DIR__ . '/config.php';
-  use Web3\Web3;
-  use Web3\Contract;
-  use Web3\Providers\HttpProvider;
-  use Web3\RequestManagers\HttpRequestManager;
+include_once __DIR__.'/session.php';
+include_once __DIR__.'/base.php';
+require_once  __DIR__ . '/config.php';
+
+use Web3\Web3;
+use Web3\Contract;
+use Web3\Providers\HttpProvider;
+use Web3\RequestManagers\HttpRequestManager;
  
-class Ethernum// extends Base
+class Ethernum extends Base
 {
-    
     private const WALLET_ADDRESS = 'walletAddress';
     private $moneyInstance;
     private $tokenInstance;
     private $moneyAdderss;
     private $tokenAddress;
-    private $account = '0x51C2609885753A1CB8B6901A933C15a0224CB57B';
-    
+    private $account;
     public $frozenBalances = 0;
     public $freezeReward = 0;
     public $allowance = 0;
@@ -30,7 +30,7 @@ class Ethernum// extends Base
     public function __construct(Config $config)
     {
       
-     // $this->verifyToken();  
+      $this->verifyToken();  
      
       $provider = $config->getProvider();
       
@@ -53,7 +53,7 @@ class Ethernum// extends Base
 
     }
 
-    public function init()
+    public function init(): void
     {
       if(isset($_POST['account'])&&!empty($_POST['account']))
         $this->setUserAccount($_POST['account']);
@@ -76,7 +76,8 @@ class Ethernum// extends Base
       $this->getHeartsTransformed();
       $result = array();
     }
-    private function sendResult($heartsTransformed)
+
+    private function sendResult($heartsTransformed): void
     { 
       $this->heartsTransformed = $heartsTransformed;
       $result = array();
@@ -93,8 +94,8 @@ class Ethernum// extends Base
       $result['accountBalance'] = $this->accountBalance;
       if(isset($_POST['account'])&&!empty($_POST['account']))
       echo json_encode($result);
-       //print_r ($this->heartsTransformed );
     }
+
     /**
      * This function checks if the user is already logged
      * @return bool
@@ -109,12 +110,11 @@ class Ethernum// extends Base
         }
     }
 
-    private function setUserAccount(string $address)
+    private function setUserAccount(string $address): void
     {
         if (empty($address)) {
             throw new InvalidArgumentException("Wallet Address cannot be empty");
         }
-
         $_SESSION[self::WALLET_ADDRESS] = $address;
     }
      
@@ -122,7 +122,7 @@ class Ethernum// extends Base
      * This function returns the user wallet address
      * @return string
      */
-    private function getUserAccount():string
+    private function getUserAccount(): string
     {
         if(!isset($_SESSION[self::WALLET_ADDRESS])) {
             throw new InvalidArgumentException("No record wallet address");
@@ -137,104 +137,146 @@ class Ethernum// extends Base
     }
     private function getTokenFrozenBalances(): void
     {
-       $this->moneyInstance->call('tokenFrozenBalances',$this->getUserAccount(), function ($err, $result) {
-        if(!empty($err)) 
+      $this->moneyInstance->call('tokenFrozenBalances',$this->getUserAccount(), function ($err, $result) {
+
+        if(!empty($err))  {
           throw new InvalidArgumentException($err);
-        else
-          $this->frozenBalances = ($result[0]->value);
+        }
+        else {
+          if (count($result) > 0 && property_exists($result[0], 'value')){
+            $this->frozenBalances = ($result[0]->value);  
+          }
+        }
         
       });
     }
     private function getFreezingReward(): void
     {
       $this->moneyInstance->call('calcFreezingRewards', ['from'=>$this->account], function ($err, $result) {
-        if(!empty($err)) 
+        if(!empty($err)) {
           throw new InvalidArgumentException($err);
-        else
-          $this->freezingReward =($result[0]->value);
+        }
+        else{
+          if (count($result) > 0 && property_exists($result[0], 'value')){
+            $this->freezingReward = ($result[0]->value);
+          }          
+        }
       });
     }
 
     private function getAllowance(): void
     {
       $this->tokenInstance->at($this->tokenAddress)->call('allowance',$this->getUserAccount(), $this->moneyAddress, function ($err, $result) {
-        if(!empty($err)) 
+        if(!empty($err)) {
           throw new InvalidArgumentException($err);
-        else
-          $this->allowance = ($result[0]->value);
+        }
+        else {
+          if (count($result) > 0 && property_exists($result[0], 'value')){
+            $this->allowance = ($result[0]->value);
+          }
+        }
       });
     }
     private function getLockedToken(): void
     {
       $this->moneyInstance->call('lockedTokens', null, function ($err, $result) {
-        if(!empty($err)) 
+        if(!empty($err)) {
           throw new InvalidArgumentException($err);
-        else
-          $this->lockedToken = ($result[0]->value);
+        }
+        else {
+          if (count($result) > 0 && property_exists($result[0], 'value')){
+            $this->lockedToken = ($result[0]->value);
+          }          
+        }
       });
     }
 
     private function getFrzoneTokenBalance(): void
     {
       $this->moneyInstance->call('totalFrozenTokenBalance', null, function ($err, $result) {
-        if(!empty($err)) 
+        if(!empty($err)) {
           throw new InvalidArgumentException($err);
-        else
-          $this->freezeTokenBalance = ($result[0]->value);
+        }
+        else {
+          if (count($result) > 0 && property_exists($result[0], 'value')){
+            $this->freezeTokenBalance = ($result[0]->value);
+          }          
+        }
       });
     }
+
     private function getHxyTransformed(): void
     {
       $this->moneyInstance->call('totalHXYTransformed', null, function ($err, $result) {
-        if(!empty($err)) 
+        if(!empty($err)) {
           throw new InvalidArgumentException($err);
-        else
-          $this->hxyTransformed = ($result[0]->value);
+        }
+        else {
+          if (count($result) > 0 && property_exists($result[0], 'value')){
+            $this->hxyTransformed = ($result[0]->value);
+          }          
+        }
       });
     }
+
     private function getHeartsTransformed(): void
     {
       $this->moneyInstance->call('totalHeartsTransformed', null, function ($err, $result) {
-        if(!empty($err)) 
+
+        if(!empty($err)) {
           throw new InvalidArgumentException($err);
+        }
         else
         {
-          $this->heartsTransformed = ($result[0]->value);
-          $this->sendResult( ($result[0]->value));
+          if (count($result) > 0 && property_exists($result[0], 'value')){
+            $this->heartsTransformed = ($result[0]->value);
+            $this->sendResult( ($result[0]->value));
+          }          
+
         }
       });
     }
    
-    private function getTotalSupply()
+    private function getTotalSupply(): void
     {
         $this->moneyInstance->call('totalSupply', null, function($err,$result){
             if(!empty($err)) {
                 throw new InvalidArgumentException($err);
             }
-
-            $this->totalSupply = ($result[0]->value);
+            else {
+              if (count($result) > 0 && property_exists($result[0], 'value')){
+                $this->totalSupply = ($result[0]->value);
+              }                     
+            }
+            
         });
     }
 
-    private function getMaxSupply()
+    private function getMaxSupply(): void
     {
         $this->moneyInstance->call('_maxSupply', null, function($err,$result){
             if(!empty($err)) {
                 throw new InvalidArgumentException($err);
             }
-
-            $this->maxSupply = ($result[0]->value);
+            else {
+              if (count($result) > 0 && property_exists($result[0], 'value')){
+                $this->maxSupply = ($result[0]->value);
+              }                
+            }
         });
     }
 
-    private function getAccountBalance()
+    private function getAccountBalance(): void
     {
-        //$this->moneyInstance->call()->__maxSupply($this->getUserAccount());
         $this->moneyInstance->call('balanceOf',$this->getUserAccount(), function($err,$result){
-            if(!empty($err)) {
-                throw new InvalidArgumentException($err);
-            }
-           $this->accountBalance = ($result[0]->value);
+          if(!empty($err)) {
+              throw new InvalidArgumentException($err);
+          }
+          else {
+            if (count($result) > 0 && property_exists($result[0], 'value')){
+              $this->accountBalance = ($result[0]->value);
+            }                              
+          }
         });
     }
 }
