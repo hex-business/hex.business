@@ -169,7 +169,7 @@ class Ethernum extends Base
     }
     private function getFreezingReward(): void
     {
-      $this->moneyInstance->call('calcFreezingRewards', ['from'=>$this->account], function ($err, $result) {
+      $this->moneyInstance->call('calcFreezingRewards', ['from'=>$this->getUserAccount()], function ($err, $result) {
         if(!empty($err)) {
           throw new InvalidArgumentException($err);
         }
