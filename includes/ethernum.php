@@ -11,22 +11,17 @@ use Web3\RequestManagers\HttpRequestManager;
 class Ethernum extends Base
 {
     private const WALLET_ADDRESS = 'walletAddress';
-    private $moneyInstance;
-    private $tokenInstance;
-    private $moneyAdderss;
-    private $tokenAddress;
-    private $account;
-    public $frozenBalances = 0;
-    public $freezeReward = 0;
-    public $allowance = 0;
-    public $lockedToken = 0;
-    public $freezeTokenBalance = 0;
-    public $hxyTransformed = 0;
-    public $heartsTransformed = 0;
-    public $totalSupply = 0;
-    public $maxSupply = 0;
-    public $accountBalance = 0;
-    
+    private const MAX_SUPPLY = 'maxSupply';
+    private const TOTAL_SUPPLY = 'totalSupply';
+    private const FROZEN_BALANCES = 'frozenBalances';
+    private const HEARTS_TRANSFORMED = 'heartsTransformed';
+    private const HXY_TRANSFORMED = 'hxyTransformed';
+    private const FREEZE_TOKENBALANCE = 'freezeTokenBalance';
+    private const LOCKED_TOKEN = 'lockedToken';
+    private const ACCOUNT_BALANCE = 'accountBalance';
+    private const ALLOWANCE = 'allowance';
+    private const FREEZING_REWARD = 'freezingReward';
+
     public function __construct(Config $config)
     {
       
@@ -55,44 +50,59 @@ class Ethernum extends Base
 
     public function init(): void
     {
-      if(isset($_POST['account'])&&!empty($_POST['account']))
-        $this->setUserAccount($_POST['account']);
-      
-      if($this->isLogged())
-      {
-        $this->getTokenFrozenBalances();
-        $this->getFreezingReward();
-        $this->getAllowance();
-        $this->getAccountBalance();
-      }
-     
 
-      $this->getLockedToken();
-      $this->getFrzoneTokenBalance();
-      $this->getHxyTransformed();
-      $this->getTotalSupply();
-      $this->getMaxSupply();
-      
-      $this->getHeartsTransformed();
-      $result = array();
+      if(isset($_POST['account'])&&!empty($_POST['account'])) {
+        $this->setUserAccount($_POST['account']);
+        
+        if($this->isLogged())
+        {
+          $this->getTokenFrozenBalances();
+          $this->getFreezingReward();
+          $this->getAllowance();
+          $this->getAccountBalance();
+        }
+       
+        $this->getLockedToken();
+        $this->getFrzoneTokenBalance();
+        $this->getHxyTransformed();
+        $this->getTotalSupply();
+        $this->getHeartsTransformed();
+        $this->getMaxSupply();
+      }
+
+      $this->sendResult();      
     }
 
-    private function sendResult($heartsTransformed): void
+    private function sendResult(): void
     { 
-      $this->heartsTransformed = $heartsTransformed;
+
       $result = array();
-      
-      $result['frozenBalances'] = $this->frozenBalances;
-      $result['freezeReward'] = $this->freezeReward;
-      $result['allowance'] = $this->allowance;
-      $result['lockedToken'] = $this->lockedToken;
-      $result['freezeTokenBalance'] = $this->freezeTokenBalance;
-      $result['hxyTransformed'] = $this->hxyTransformed;
-      $result['heartsTransformed'] = $this->heartsTransformed;
-      $result['totalSupply'] = $this->totalSupply;
-      $result['maxSupply'] = $this->maxSupply;
-      $result['accountBalance'] = $this->accountBalance;
-      if(isset($_POST['account'])&&!empty($_POST['account']))
+      $result[self::FROZEN_BALANCES] = 0;
+      $result[self::FREEZING_REWARD] = 0;
+      $result[self::ALLOWANCE] = 0;
+      $result[self::LOCKED_TOKEN] = 0;
+      $result[self::FREEZE_TOKENBALANCE] = 0;
+      $result[self::HXY_TRANSFORMED] = 0;
+      $result[self::HEARTS_TRANSFORMED] = 0;
+      $result[self::TOTAL_SUPPLY] = 0;
+      $result[self::MAX_SUPPLY] = 0;
+      $result[self::ACCOUNT_BALANCE] = 0;
+
+      if( isset($_POST['account']) && !empty($_POST['account']) ) {
+
+        $result[self::FROZEN_BALANCES] = $_SESSION[self::FROZEN_BALANCES];
+        $result[self::FREEZING_REWARD] = $_SESSION[self::FREEZING_REWARD];
+        $result[self::ALLOWANCE] = $_SESSION[self::ALLOWANCE];
+        $result[self::LOCKED_TOKEN] = $_SESSION[self::LOCKED_TOKEN];
+        $result[self::FREEZE_TOKENBALANCE] = $_SESSION[self::FREEZE_TOKENBALANCE];
+        $result[self::HXY_TRANSFORMED] = $_SESSION[self::HXY_TRANSFORMED];
+        $result[self::HEARTS_TRANSFORMED] = $_SESSION[self::HEARTS_TRANSFORMED];
+        $result[self::TOTAL_SUPPLY] = $_SESSION[self::TOTAL_SUPPLY];
+        $result[self::MAX_SUPPLY] = $_SESSION[self::MAX_SUPPLY];
+        $result[self::ACCOUNT_BALANCE] = $_SESSION[self::ACCOUNT_BALANCE];
+        
+      }
+
       echo json_encode($result);
     }
 
@@ -135,6 +145,7 @@ class Ethernum extends Base
 
         return $wallet;
     }
+
     private function getTokenFrozenBalances(): void
     {
       $this->moneyInstance->call('tokenFrozenBalances',$this->getUserAccount(), function ($err, $result) {
@@ -143,8 +154,14 @@ class Ethernum extends Base
           throw new InvalidArgumentException($err);
         }
         else {
+
           if (count($result) > 0 && property_exists($result[0], 'value')){
-            $this->frozenBalances = ($result[0]->value);  
+            if (gettype($result[0]->value) == 'string') {
+              $_SESSION[self::FROZEN_BALANCES] = $result[0]->value;
+            }
+            else {
+              $_SESSION[self::FROZEN_BALANCES] = gmp_intval($result[0]->value); 
+            }
           }
         }
         
@@ -157,9 +174,16 @@ class Ethernum extends Base
           throw new InvalidArgumentException($err);
         }
         else{
+          
           if (count($result) > 0 && property_exists($result[0], 'value')){
-            $this->freezingReward = ($result[0]->value);
-          }          
+            if (gettype($result[0]->value) == 'string') {
+              $_SESSION[self::FREEZING_REWARD] = $result[0]->value;
+            }
+            else {
+              $_SESSION[self::FREEZING_REWARD] = gmp_intval($result[0]->value); 
+            }
+          }
+
         }
       });
     }
@@ -171,9 +195,16 @@ class Ethernum extends Base
           throw new InvalidArgumentException($err);
         }
         else {
+
           if (count($result) > 0 && property_exists($result[0], 'value')){
-            $this->allowance = ($result[0]->value);
+            if (gettype($result[0]->value) == 'string') {
+              $_SESSION[self::ALLOWANCE] = $result[0]->value;
+            }
+            else {
+              $_SESSION[self::ALLOWANCE] = gmp_intval($result[0]->value); 
+            }
           }
+
         }
       });
     }
@@ -184,9 +215,15 @@ class Ethernum extends Base
           throw new InvalidArgumentException($err);
         }
         else {
+
           if (count($result) > 0 && property_exists($result[0], 'value')){
-            $this->lockedToken = ($result[0]->value);
-          }          
+            if (gettype($result[0]->value) == 'string') {
+              $_SESSION[self::LOCKED_TOKEN] = $result[0]->value;
+            }
+            else {
+              $_SESSION[self::LOCKED_TOKEN] = gmp_intval($result[0]->value); 
+            }
+          }
         }
       });
     }
@@ -198,9 +235,15 @@ class Ethernum extends Base
           throw new InvalidArgumentException($err);
         }
         else {
+
           if (count($result) > 0 && property_exists($result[0], 'value')){
-            $this->freezeTokenBalance = ($result[0]->value);
-          }          
+            if (gettype($result[0]->value) == 'string') {
+              $_SESSION[self::FREEZE_TOKENBALANCE] = $result[0]->value;
+            }
+            else {
+              $_SESSION[self::FREEZE_TOKENBALANCE] = gmp_intval($result[0]->value); 
+            }
+          }    
         }
       });
     }
@@ -213,8 +256,13 @@ class Ethernum extends Base
         }
         else {
           if (count($result) > 0 && property_exists($result[0], 'value')){
-            $this->hxyTransformed = ($result[0]->value);
-          }          
+            if (gettype($result[0]->value) == 'string') {
+              $_SESSION[self::HXY_TRANSFORMED] = $result[0]->value;
+            }
+            else {
+              $_SESSION[self::HXY_TRANSFORMED] = gmp_intval($result[0]->value); 
+            }
+          }     
         }
       });
     }
@@ -229,10 +277,13 @@ class Ethernum extends Base
         else
         {
           if (count($result) > 0 && property_exists($result[0], 'value')){
-            $this->heartsTransformed = ($result[0]->value);
-            $this->sendResult( ($result[0]->value));
+            if (gettype($result[0]->value) == 'string') {
+              $_SESSION[self::HEARTS_TRANSFORMED] = $result[0]->value;
+            }
+            else {
+              $_SESSION[self::HEARTS_TRANSFORMED] = gmp_intval($result[0]->value); 
+            }
           }          
-
         }
       });
     }
@@ -245,8 +296,13 @@ class Ethernum extends Base
             }
             else {
               if (count($result) > 0 && property_exists($result[0], 'value')){
-                $this->totalSupply = ($result[0]->value);
-              }                     
+                if (gettype($result[0]->value) == 'string') {
+                  $_SESSION[self::TOTAL_SUPPLY] = $result[0]->value;
+                }
+                else {
+                  $_SESSION[self::TOTAL_SUPPLY] = gmp_intval($result[0]->value); 
+                }
+              }     
             }
             
         });
@@ -260,7 +316,12 @@ class Ethernum extends Base
             }
             else {
               if (count($result) > 0 && property_exists($result[0], 'value')){
-                $this->maxSupply = ($result[0]->value);
+                if (gettype($result[0]->value) == 'string') {
+                  $_SESSION[self::MAX_SUPPLY] = $result[0]->value;
+                }
+                else {
+                  $_SESSION[self::MAX_SUPPLY] = gmp_intval($result[0]->value); 
+                }
               }                
             }
         });
@@ -274,7 +335,12 @@ class Ethernum extends Base
           }
           else {
             if (count($result) > 0 && property_exists($result[0], 'value')){
-              $this->accountBalance = ($result[0]->value);
+             if (gettype($result[0]->value) == 'string') {
+                $_SESSION[self::ACCOUNT_BALANCE] = $result[0]->value;
+              }
+              else {
+                $_SESSION[self::ACCOUNT_BALANCE] = gmp_intval($result[0]->value); 
+              }            
             }                              
           }
         });

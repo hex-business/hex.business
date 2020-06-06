@@ -11,7 +11,7 @@ async function getAccounts() {
 if (window.ethereum) {
   window.ethereum.enable();
   getAccounts();
-  setInterval(() => getAccounts(), 20000);
+  setInterval(() => getAccounts(), 60000);
 }
 
 function getMeta(metaName) {
