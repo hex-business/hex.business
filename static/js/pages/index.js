@@ -15,46 +15,40 @@ function pageReady() {
   document.getElementById("proceed").removeAttribute("disabled");  
 }
 
-document.getElementById("transform").addEventListener("click", function (e) {
-  e.preventDefault();
+document.getElementById("transform").addEventListener("click", function(){
+
   if (window.ethereum) {
     window.ethereum.enable();
 
     if (accounts && accounts.length > 0) {
-      let amount = document.getElementById("enter-amount").value;
-      if (amount) {
-        var weiAmout = Math.floor(amount * 100000000);
+       let amount = document.getElementById("enter-amount").value;
+       if (amount) {
 
-        if (weiAmout > 0) {
-          xhttptransform.open("POST", "includes/transaction.php", true);
-          xhttptransform.setRequestHeader(
-            "Content-type",
-            "application/x-www-form-urlencoded"
-          );
-          xhttptransform.send(
-            "account=" + accounts[0] + "&type=transform&amount=" + weiAmout
-          );
+         var weiAmout = Math.floor(amount * 100000000);
 
-          xhttptransform.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-              console.log("Response", this.responseText);
-              if (this.responseText == "success")
-                showSuccess("transform", amount);
-              document.getElementById("enter-amount").value = "";
-            }
-          };
-        } else {
-          showNodata("transform");
-        }
-      } else {
-        showNodata("transform");
-      }
-    } else {
-      showMetamaskLogin();
+         if (weiAmout > 0) {
+           moneyInstance.methods.transformHEX(weiAmout, '0x0000000000000000000000000000000000000000').send({from:accounts[0]}).then(
+             showSuccess("transform", amount)
+           );
+             document.getElementById("enter-amount").value = '';                            
+         }
+         else {
+           showNodata("transform");  
+         }
+
+       }
+       else {
+         showNodata("transform");
+       }
     }
-  } else {
+    else {
+      showMetamaskLogin();        
+    }
+  }
+  else {
     showMetamaskLogin();
   }
+
 });
 
 document.getElementById("enter-amount").addEventListener("keyup", function (e) {
