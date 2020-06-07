@@ -141,65 +141,76 @@ class Ethernum extends Base
 
     private function getTokenFrozenBalances(): void
     {
-      $this->moneyInstance->call('tokenFrozenBalances',$this->getUserAccount(), function ($err, $result) {
 
-        if(!empty($err))  {
-          throw new InvalidArgumentException($err);
-        }
-        else {
+      if ($this->isLogged()) {
+        $this->moneyInstance->call('tokenFrozenBalances',$this->getUserAccount(), function ($err, $result) {
 
-          if (count($result) > 0 && property_exists($result[0], 'value')){
-            if (gettype($result[0]->value) == 'string') {
-              $_SESSION[self::FROZEN_BALANCES] = $result[0]->value;
-            }
-            else {
-              $_SESSION[self::FROZEN_BALANCES] = gmp_intval($result[0]->value); 
+          if(!empty($err))  {
+            throw new InvalidArgumentException($err);
+          }
+          else {
+
+            if (count($result) > 0 && property_exists($result[0], 'value')){
+              if (gettype($result[0]->value) == 'string') {
+                $_SESSION[self::FROZEN_BALANCES] = $result[0]->value;
+              }
+              else {
+                $_SESSION[self::FROZEN_BALANCES] = gmp_intval($result[0]->value); 
+              }
             }
           }
-        }
-        
-      });
+          
+        });        
+      }
+
     }
     private function getFreezingReward(): void
     {
-      $this->moneyInstance->call('calcFreezingRewards', ['from'=>$this->getUserAccount()], function ($err, $result) {
-        if(!empty($err)) {
-          throw new InvalidArgumentException($err);
-        }
-        else{
-          
-          if (count($result) > 0 && property_exists($result[0], 'value')){
-            if (gettype($result[0]->value) == 'string') {
-              $_SESSION[self::FREEZING_REWARD] = $result[0]->value;
-            }
-            else {
-              $_SESSION[self::FREEZING_REWARD] = gmp_intval($result[0]->value); 
-            }
-          }
 
-        }
-      });
+      if ($this->isLogged()) { 
+        $this->moneyInstance->call('calcFreezingRewards', ['from'=>$this->getUserAccount()], function ($err, $result) {
+          if(!empty($err)) {
+            throw new InvalidArgumentException($err);
+          }
+          else{
+            
+            if (count($result) > 0 && property_exists($result[0], 'value')){
+              if (gettype($result[0]->value) == 'string') {
+                $_SESSION[self::FREEZING_REWARD] = $result[0]->value;
+              }
+              else {
+                $_SESSION[self::FREEZING_REWARD] = gmp_intval($result[0]->value); 
+              }
+            }
+
+          }
+        });        
+      }
     }
 
     private function getAllowance(): void
     {
-      $this->tokenInstance->at($this->tokenAddress)->call('allowance',$this->getUserAccount(), $this->moneyAddress, function ($err, $result) {
-        if(!empty($err)) {
-          throw new InvalidArgumentException($err);
-        }
-        else {
 
-          if (count($result) > 0 && property_exists($result[0], 'value')){
-            if (gettype($result[0]->value) == 'string') {
-              $_SESSION[self::ALLOWANCE] = $result[0]->value;
-            }
-            else {
-              $_SESSION[self::ALLOWANCE] = gmp_intval($result[0]->value); 
-            }
+      if ($this->isLogged()) { 
+        $this->tokenInstance->at($this->tokenAddress)->call('allowance',$this->getUserAccount(), $this->moneyAddress, function ($err, $result) {
+          if(!empty($err)) {
+            throw new InvalidArgumentException($err);
           }
+          else {
 
-        }
-      });
+            if (count($result) > 0 && property_exists($result[0], 'value')){
+              if (gettype($result[0]->value) == 'string') {
+                $_SESSION[self::ALLOWANCE] = $result[0]->value;
+              }
+              else {
+                $_SESSION[self::ALLOWANCE] = gmp_intval($result[0]->value); 
+              }
+            }
+
+          }
+        });
+
+      }
     }
     private function getLockedToken(): void
     {
@@ -322,6 +333,7 @@ class Ethernum extends Base
 
     private function getAccountBalance(): void
     {
+      if ($this->isLogged()) { 
         $this->moneyInstance->call('balanceOf',$this->getUserAccount(), function($err,$result){
           if(!empty($err)) {
               throw new InvalidArgumentException($err);
@@ -336,7 +348,9 @@ class Ethernum extends Base
               }            
             }                              
           }
-        });
+        });        
+      }
+
     }
 }
 
