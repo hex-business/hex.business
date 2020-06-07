@@ -47,8 +47,8 @@ function etherscanPost() {
           return false;
         }
 
-        var divs = arr.stats;
-        var total = arr.total;
+        var divs = arr.stats ? arr.stats : 0;
+        var total = arr.total ? arr.total : 0;
 
         if (divs === 0) {
           document.getElementById("your_airdropped_divs").classList.add("invalid");
@@ -92,7 +92,7 @@ function metamaskPost() {
         var arr = JSON.parse(response);
         let balanceOf = arr.accountBalance;
         let tokenFrozenBalances = arr.frozenBalances;
-        let freezingReward = arr.freezeReward;
+        let freezingReward = arr.freezingReward;
         let allowance = arr.allowance;
         let totalSupply = arr.totalSupply;
         let maxSupply = arr.maxSupply;
@@ -106,9 +106,11 @@ function metamaskPost() {
         heartsTransformed = heartsTransformed / 100000000 ?? 0;
         tokenFrozenBalances = tokenFrozenBalances / 100000000 ?? 0;
         balanceOf = balanceOf / 100000000 ?? 0;
-        let interest =
-          tokenFrozenBalances === 0 ? 0 : freezingReward / 100000000 ?? 0;
-        interest = interest.toLocaleString("en-GB");
+
+        
+        let interest = tokenFrozenBalances === 0 ? 0 : freezingReward / 100000000 ?? 0;
+        interest = interest ? interest.toLocaleString("en-GB") : 0;
+
         let calculating_supply =
           (totalSupply / 100000000 ?? 0) -
           (frzoneTokenBalance / 100000000 ?? 0) -
