@@ -56,6 +56,9 @@
 	<link rel="stylesheet" href="./static/css/gallery.theme.css?v=6">
 	<link rel="stylesheet" href="./static/css/modal.css?v=6">
 	<link rel="stylesheet" href="./static/css/basic.css?v=0.0.2">
+	<script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+	<script src="./static/extensions/sweetalert/sweetalert.min.js"></script>
+	
 
 </head>
 
@@ -903,8 +906,6 @@
 	var moneyContractABI = '<?php echo $config->getMoneyABI(); ?>';
 </script>
 
-<script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
-<script src="./static/extensions/sweetalert/sweetalert.min.js"></script>
 <script src="./static/js/actions/contractABI.js"></script>
 <script src="./static/js/actions/action.js"></script>
 <script src="./static/js/pages/index.js"></script> 

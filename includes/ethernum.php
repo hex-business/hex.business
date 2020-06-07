@@ -61,9 +61,7 @@ class Ethernum extends Base
         $this->getTotalSupply();
         $this->getHeartsTransformed();
         $this->getMaxSupply();
-      }
-
-      $this->sendResult();      
+        $this->sendResult();
     }
 
     private function sendResult(): void

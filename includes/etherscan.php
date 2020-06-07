@@ -9,7 +9,6 @@
 
     public function __construct(Config $config)
     {
-      // $this->verifyToken();
       $this->config = $config;
     }
 
@@ -21,11 +20,6 @@
     */
 
     public function init(): void {
-
-      // 
-      if(!isset($_POST['account'])||empty($_POST['account']))
-        return;
-      $result = array();
 
       if(!isset($_POST['account']) && empty($_POST['account']) ){
           $result['status'] = 404;
@@ -105,6 +99,11 @@
 
     private  function getAirdropStats(string $acc):int
     {
+
+      if (empty($acc)) {
+        throw new InvalidArgumentException("no account in airdrop stats");
+      }
+      else {
         $airdropContract = $this->config->getEtherConfigAirDropContract();
         $apiKey          = $this->config->getEtherConfigEtherApiKey();
         $address         = $this->config->getEtherConfigAddress();
@@ -128,7 +127,9 @@
           throw new InvalidArgumentException("invalid");
         }
 
-        return $this->processTotalAirDropped($res);
+        return $this->processTotalAirDropped($res);        
+      }
+
     }
 
     /**
