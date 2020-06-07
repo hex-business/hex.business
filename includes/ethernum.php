@@ -35,9 +35,6 @@ class Ethernum extends Base
      if(isset($_POST['account']) && !empty($_POST['account'])) {
         $this->setUserAccount($_POST['account']);
       }
-      else if(isset($_SESSION[self::WALLET_ADDRESS]) && !empty($_SESSION[self::WALLET_ADDRESS])) {
-        $this->setUserAccount($_SESSION[self::WALLET_ADDRESS]);
-      }
       
       $web3 = new Web3(new HttpProvider(new HttpRequestManager($provider, 3)));
       $contract = new Contract($web3->provider, $config->getMoneyABI());
@@ -49,11 +46,7 @@ class Ethernum extends Base
     }
 
     public function init(): void
-    {
-
-      if(isset($_POST['account'])&&!empty($_POST['account'])) {
-        $this->setUserAccount($_POST['account']);
-        
+    {        
         if($this->isLogged())
         {
           $this->getTokenFrozenBalances();
