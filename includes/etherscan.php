@@ -21,13 +21,11 @@
 
     public function init(): void {
 
-      if(!isset($_POST['account']) && empty($_POST['account']) ){
-          $result['status'] = 404;
-      }
-      else {
+      if(isset($_POST['account']) && !empty($_POST['account']) ){
+
         $this->verifyToken();
         $acc = trim($_POST['account']);
-
+        
         try {
             $stats = $this->getAirdropStats($acc);
         } catch (Exception $e) {
@@ -43,9 +41,11 @@
         $result['status'] = 200;
         $result['stats'] = $stats;
         $result['total'] = $total;
+        echo json_encode($result);
+
       }
 
-      echo json_encode($result);
+      
     }
 
     public function initwithoutJS($acc): array {
