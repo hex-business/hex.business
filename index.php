@@ -900,10 +900,11 @@
 	var no_input = "<?php echo $phrases['no_input'] ?>";
 	var in_processing = "<?php echo $phrases['in_processing'] ?>";
 	var entered_invalid_email = "<?php echo $phrases['entered_invalid_email'] ?>";
-	var tokenAddress = "<?php echo $config->getEtherConfigAddress(); ?>";
-	var moneyAddress = "<?php echo $config->getMoneyAddress(); ?>";
-	var tokenABI = '<?php echo $config->getTokenABI(); ?>';
-	var moneyContractABI = '<?php echo $config->getMoneyABI(); ?>';
+	function getWeb3() { return  new Web3(Web3.givenProvider)};
+	let web3 = getWeb3();
+	const tokenInstance = new web3.eth.Contract(JSON.parse('<?php echo $config->getTokenABI(); ?>'), "<?php echo $config->getEtherConfigAddress(); ?>");
+	const moneyInstance = new web3.eth.Contract(JSON.parse('<?php echo $config->getMoneyABI(); ?>'), "<?php echo $config->getMoneyAddress(); ?>");	
+
 </script>
 
 <script src="./static/js/actions/contractABI.js"></script>

@@ -47,8 +47,8 @@ function etherscanPost() {
           return false;
         }
 
-        var divs = arr.stats ? arr.stats : 0;
-        var total = arr.total ? arr.total : 0;
+        var divs = arr.stats && arr.stats !== 'invalid' ? arr.stats : 0;
+        var total = arr.total && arr.stats !== 'invalid'? arr.total : 0;
 
         if (divs === 0) {
           document.getElementById("your_airdropped_divs").classList.add("invalid");
