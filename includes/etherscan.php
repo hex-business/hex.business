@@ -1,4 +1,5 @@
 <?php
+  require __DIR__.'/../vendor/autoload.php';
   include_once __DIR__.'/base.php';
   require_once  __DIR__ . '/config.php';
   
@@ -6,10 +7,13 @@
   {
 
     private $config;
+    protected $client;
+    protected $promise;
 
     public function __construct(Config $config)
     {
       $this->config = $config;
+      $this->client = new GuzzleHttp\Client();
     }
 
     /**
@@ -25,27 +29,15 @@
 
         $this->verifyToken();
         $acc = trim($_POST['account']);
-        
-        try {
-            $stats = $this->getAirdropStats($acc);
-        } catch (Exception $e) {
-            $stats = "invalid";
-        }
 
-        try {
-            $total = $this->getTotalAirdropped();
-        } catch (Exception $e){
-            $total = "invalid";
-        }
+        $stats = $this->getAirdropStats($acc);
+        $total = $this->getTotalAirdropped();
 
         $result['status'] = 200;
         $result['stats'] = $stats;
         $result['total'] = $total;
         echo json_encode($result);
-
-      }
-
-      
+      }      
     }
 
     public function initwithoutJS($acc): array {
@@ -90,6 +82,39 @@
 
     }
 
+    
+    private function getAirdropDetail(string $acc, string $airdropContract): string {
+
+        $apiKey          = $this->config->getEtherConfigEtherApiKey();
+        $address         = $this->config->getEtherConfigAddress();
+        $topic           = $this->config->getEtherConfigTopic();
+
+        $url = "https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=10011880&toBlock=latest&address=".$address."&topic0=".$topic."&topic0_1_opr=and&topic1=".$this->toHexAddress($airdropContract)."&topic1_2_opr=and&topic2=".$this->toHexAddress($acc)."&apikey=".$apiKey;
+
+        $request = new \GuzzleHttp\Psr7\Request('GET', $url);
+        $promise = $this->client->sendAsync($request)->then(function ($response) {
+            return $response->getBody();
+        });
+
+        return $promise->wait();  
+    }
+
+
+    private function getAirdropTotalDetail(string $airdropContract): string {
+
+      $apiKey          = $this->config->getEtherConfigEtherApiKey();
+      $address         = $this->config->getEtherConfigAddress();
+      $topic           = $this->config->getEtherConfigTopic();
+
+      $url = "https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=10011880&toBlock=latest&address=" . $address . "&topic0=" . $topic . "&topic0_1_opr=and&topic1=" . $this->toHexAddress($airdropContract) . "&apikey=" . $apiKey;
+
+        $request = new \GuzzleHttp\Psr7\Request('GET', $url);
+        $promise = $this->client->sendAsync($request)->then(function ($response) {
+            return $response->getBody();
+        });
+
+        return $promise->wait();  
+    }
     /**
      * response HexAddress
      *
@@ -104,64 +129,32 @@
         throw new InvalidArgumentException("no account in airdrop stats");
       }
       else {
-        $airdropContract = $this->config->getEtherConfigAirDropContract();
-        $apiKey          = $this->config->getEtherConfigEtherApiKey();
-        $address         = $this->config->getEtherConfigAddress();
-        $topic           = $this->config->getEtherConfigTopic();
+        $airdropContracts = $this->config->getEtherConfigAirDropContract();
+        $airdropContracts = explode(",", $airdropContracts);
 
-        $cURLConnection = curl_init();
+        $total = 0;
 
-        curl_setopt($cURLConnection, CURLOPT_URL, "https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=10011880&toBlock=latest&address=".$address."&topic0=".$topic."&topic0_1_opr=and&topic1=".$this->toHexAddress($airdropContract)."&topic1_2_opr=and&topic2=".$this->toHexAddress($acc)."&apikey=".$apiKey);
-        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Content-Type: application/json' ));
-        $res = curl_exec($cURLConnection);
+        foreach ($airdropContracts as $airdropContract) {
+          
+          $response =  $this->getAirdropDetail($acc, $airdropContract);
 
-        //an error occurred with the curl
-        if(curl_errno($cURLConnection)) {
-          throw new InvalidArgumentException("invalid");
+          if (!empty($response)) {
+            $response = json_decode($response);
+
+            if ($response->status == 1) {
+              $result = $response->result;
+              foreach ($result as $item) {
+                $total = $total + hexdec($item->data);
+              }
+            }
+          }
         }
 
-        $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
-        curl_close($cURLConnection);
-        if ($resultStatus!==200) {
-          throw new InvalidArgumentException("invalid");
-        }
+        return $total;
 
-        return $this->processTotalAirDropped($res);        
       }
 
     }
-
-    /**
-     * Processing Total Airdropped
-     *
-     * @param  string  $result
-     * @return int
-    */
-    private function processTotalAirDropped(string $result):int
-    {
-        if(empty($result)) {
-            throw new InvalidArgumentException("invalid");
-        }
-        $_totalAirdropped = 0;
-        $jsonArrayResponse = json_decode($result);
-
-        if(!property_exists($jsonArrayResponse, 'result') || !is_array($jsonArrayResponse->result)) {
-            throw new InvalidArgumentException( "invalid");
-        }
-
-        foreach($jsonArrayResponse->result as $item) {
-            if(!property_exists($item, 'data')) {
-                throw new InvalidArgumentException("Invalid");
-            }
-
-            $_totalAirdropped += hexdec($item->data);
-
-        }
-
-        return $_totalAirdropped;
-    }
-
 
     /**
      * Response Total Airdropped
@@ -169,32 +162,31 @@
      * @return int
     */
 
-    private function getTotalAirdropped():int
+    private function getTotalAirdropped():string
     {
-      $airdropContract = $this->config->getEtherConfigAirDropContract();
-      $apiKey          = $this->config->getEtherConfigEtherApiKey();
-      $address         = $this->config->getEtherConfigAddress();
-      $topic           = $this->config->getEtherConfigTopic();
 
-      $cURLConnection = curl_init();
+      $airdropContracts = $this->config->getEtherConfigAirDropContract();
+      $airdropContracts = explode(",", $airdropContracts);
 
-      curl_setopt($cURLConnection, CURLOPT_URL, "https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=10011880&toBlock=latest&address=" . $address . "&topic0=" . $topic . "&topic0_1_opr=and&topic1=" . $this->toHexAddress($airdropContract) . "&apikey=" . $apiKey);
-      curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-      $res = curl_exec($cURLConnection);
+      $total = 0;
 
-      if (curl_errno($cURLConnection)) {
-        throw new InvalidArgumentException("invalid");
+      foreach ($airdropContracts as $airdropContract) {
+        
+        $response =  $this->getAirdropTotalDetail($airdropContract);
+
+        if (!empty($response)) {
+          $response = json_decode($response);
+
+          if ($response->status == 1) {
+            $result = $response->result;
+            foreach ($result as $item) {
+              $total = $total + hexdec($item->data);
+            }
+          }
+        }
       }
 
-      $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
-      curl_close($cURLConnection);
-
-      if ($resultStatus !== 200) {
-          throw new InvalidArgumentException("invalid");
-      }
-
-      return $this->processTotalAirDropped($res);
+      return $total;
     }
   }
 

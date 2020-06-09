@@ -48,9 +48,8 @@ function etherscanPost() {
           return false;
         }
 
-        console.log(arr);
-        var divs = arr.stats && arr.stats !== 'invalid' ? arr.stats : 0;
-        var total = arr.total && arr.stats !== 'invalid'? arr.total : 0;
+        var divs = arr.stats  ? arr.stats : 0;
+        var total = arr.total ? arr.total : 0;
 
         if (divs === 0) {
           document.getElementById("your_airdropped_divs").classList.add("invalid");
@@ -99,7 +98,7 @@ function countdownTimerFreeze(ebdDate, id) {
 function metamaskPost() {
 
   if (accounts && accounts.length > 0) {
-    xhttpEthernum.open("POST", "includes/ethernum.php", true);
+    xhttpEthernum.open("POST", "includes/ethereum.php", true);
     xhttpEthernum.setRequestHeader(
       "Content-type",
       "application/x-www-form-urlencoded"
@@ -126,9 +125,6 @@ function metamaskPost() {
           freezeEndDate = parseInt(parseInt(freezeEndDate) * 1000 + 604800000);
           countdownTimerFreeze(freezeEndDate, "freeze_end");
         }
-        // else {
-        //   countdownTimerFreeze(new Date().setUTCHours(24,0,0,0), "freeze_end");  
-        // }
         
         countdownTimerFreeze(new Date().setUTCHours(24,0,0,0), "aa_end");
         

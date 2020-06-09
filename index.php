@@ -4,7 +4,6 @@
 	require_once __DIR__.'/includes/session.php';
 	require_once  __DIR__ . '/includes/config.php';
 	require_once __DIR__.'/includes/currentRates.php';
-	include_once __DIR__.'/includes/etherscan.php';
 
 	$rates    = new CurrentRates(new Config());
 	$rateData = $rates->getRateData();
@@ -18,38 +17,20 @@
 	{
 		require_once __DIR__ . '/includes/language/cnlang.php';
 		$language = 'cn';
-	}
-
-	$ether_result = $etherscan->initwithoutJS('');
-
-	if($ether_result['stats'] =='invalid'){
-		$dropstats="*********";
-	}
-	else
-	{
-	  $dropstats = ($ether_result['stats']/100000000??0)." HEX";
-	}
-
-	$airdropped = $ether_result['total']/100000000??0;
-
- 
+	} 
 ?>
 
 <html lang="zh-Hans">
 
 <head>
-
 	<meta charset="utf-8">
 	<meta name="theme-color" content="#000000">
 	<meta name="description" content="The most rewarding way to support HEX adopion!">
 	<meta name="_csrf" content="<?php echo $_SESSION['token']; ?>"/>
-
 	<meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/>
 	<title>HEX.business</title>
-
 	<link rel="icon" href="./favicon.ico">
 	<link rel="apple-touch-icon" href="./static/media/logo192.png">
-	<!--<link rel="stylesheet" href="./static/css/normalize.css">-->
 	<link href="./static/css/additional.css" rel="stylesheet">
 	<link href="./static/css/main.css" rel="stylesheet">
 	<link rel="stylesheet" href="./static/css/gallery.prefixed.css">
@@ -58,13 +39,8 @@
 	<link rel="stylesheet" href="./static/css/basic.css?v=0.0.2">
 	<script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
 	<script src="./static/extensions/sweetalert/sweetalert.min.js"></script>
-	
-
 </head>
-
-
 <body>
-
 <div id="root">
 	<a name="outsideMenu"></a>
 	<div class="App">
@@ -913,11 +889,8 @@
 	let web3 = getWeb3();
 	const tokenInstance = new web3.eth.Contract(JSON.parse('<?php echo $config->getTokenABI(); ?>'), "<?php echo $config->getEtherConfigAddress(); ?>");
 	const moneyInstance = new web3.eth.Contract(JSON.parse('<?php echo $config->getMoneyABI(); ?>'), "<?php echo $config->getMoneyAddress(); ?>");	
-
 </script>
 <script src="./static/js/actions/action.js"></script>
 <script src="./static/js/pages/index.js"></script> 
 </body>
-
-
 </html>
