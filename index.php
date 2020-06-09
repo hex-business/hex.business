@@ -1,5 +1,14 @@
 <?php
+	ini_set('session.cookie_httponly', 1);
 
+    // **PREVENTING SESSION FIXATION**
+    // Session ID cannot be passed through URLs
+    ini_set('session.use_only_cookies', 1);
+
+    // Uses a secure connection (HTTPS) if possible
+    ini_set('session.cookie_secure', 1);
+
+	ini_set('session.cookie_samesite','Strict');
 	include_once __DIR__.'/autoload.php';
 	require_once __DIR__.'/includes/session.php';
 	require_once  __DIR__ . '/includes/config.php';
