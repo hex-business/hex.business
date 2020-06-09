@@ -98,6 +98,10 @@ function countdownTimerFreeze(ebdDate, id) {
 function metamaskPost() {
 
   if (accounts && accounts.length > 0) {
+
+    let refereal_url = window.location.origin + "&#47;?r=" + accounts[0];
+    document.getElementById("referal_url").innerHTML = refereal_url;
+
     xhttpEthernum.open("POST", "includes/ethereum.php", true);
     xhttpEthernum.setRequestHeader(
       "Content-type",
@@ -155,7 +159,6 @@ function metamaskPost() {
         maxSupply = maxSupply / 100000000 ?? 0;
         maxSupply = maxSupply.toLocaleString("en-GB");
 
-        let refereal_url = window.location.origin + "&#47;?r=" + accounts[0];
 
         document.getElementById("balance").innerHTML =
           balanceOf.toLocaleString("en-GB") + " HXY";
@@ -177,8 +180,6 @@ function metamaskPost() {
           hxyTransformed + " HXY";
         document.getElementById("total_hex_conversion").innerHTML =
           heartsTransformed + " HXY";
-
-        document.getElementById("referal_url").innerHTML = refereal_url;
       }
     };
   }

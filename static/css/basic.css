@@ -42,6 +42,27 @@ body {
     top: 0px;
 	width: 100%;
 	z-index: 100;
+	height: 45px;
+}
+#video-area {
+	height: auto;
+}
+#modal-back {
+	display: none;
+	width:100vw;
+	height:100vh;
+	position:fixed;
+	top:0;
+	left:0;
+	background-color: black;
+}
+#child-headroom-wraper {
+	position: relative; 
+	top: 0px; 
+	left: 0px; 
+	right: 0px; 
+	z-index: 1; 
+	transform: translate3d(0px, 0px, 0px);
 }
 #approve_token_modal {
 	display: none;

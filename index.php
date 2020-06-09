@@ -37,7 +37,7 @@
 	<link rel="stylesheet" href="./static/css/gallery.theme.css?v=6">
 	<link rel="stylesheet" href="./static/css/modal.css?v=6">
 	<link rel="stylesheet" href="./static/css/basic.css?v=0.0.2">
-	<script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+	<script src="./static/extensions/web3/web3.min.js"></script>
 	<script src="./static/extensions/sweetalert/sweetalert.min.js"></script>
 </head>
 <body>
@@ -157,10 +157,9 @@
 		</div>
 
 
-		<div class="headroom-wrapper " style="height: 45px;">
+		<div class="headroom-wrapper">
 
-			<div style="position: relative; top: 0px; left: 0px; right: 0px; z-index: 1; transform: translate3d(0px, 0px, 0px);"
-			     class="headroom headroom--unfixed">
+			<div id="child-headroom-wraper" class="headroom headroom--unfixed">
 
 				<nav class="App-header bottom-shadow navbar navbar-expand navbar-light desktop-nav">
 
@@ -775,7 +774,7 @@
 				</div>
 				<div class="row"><p class="title"> <?php echo $phrases['on'] ?>  <strong lang="en">HEX</strong></p></div>
 
-				<div class="justify-content-center row" style="height:auto">
+				<div class="justify-content-center row" id="video-area">
 					<iframe allowfullscreen="1"
 					        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					        title="YouTube video player"
@@ -845,7 +844,7 @@
 		</footer>
 	</div>
 </div>
-<div style="display: none;width:100vw;height:100vh;position:fixed;top:0;left:0;background-color: black" class="" id='modal-back'>
+<div class="" id='modal-back'>
 	</div>
 
 <div class='modal-dialog' id="approve_token_modal">
@@ -887,6 +886,7 @@
 	var entered_invalid_email = "<?php echo $phrases['entered_invalid_email'] ?>";
 	function getWeb3() { return  new Web3(Web3.givenProvider)};
 	let web3 = getWeb3();
+	var moneyAddress =  "<?php echo $config->getMoneyAddress(); ?>";
 	const tokenInstance = new web3.eth.Contract(JSON.parse('<?php echo $config->getTokenABI(); ?>'), "<?php echo $config->getEtherConfigAddress(); ?>");
 	const moneyInstance = new web3.eth.Contract(JSON.parse('<?php echo $config->getMoneyABI(); ?>'), "<?php echo $config->getMoneyAddress(); ?>");	
 </script>

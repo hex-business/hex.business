@@ -39,7 +39,7 @@ class Ethernum extends Base
         $this->setUserAccount($_POST['account']);
       }
       
-      $web3 = new Web3(new HttpProvider(new HttpRequestManager($provider, 3)));
+      $web3 = new Web3(new HttpProvider(new HttpRequestManager($provider, 5)));
       $contract = new Contract($web3->provider, $config->getMoneyABI());
       $this->moneyAddress = $config->getMoneyAddress();
       $this->tokenAddress = $config->getEtherConfigAddress();
