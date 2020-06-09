@@ -57,7 +57,7 @@ document.getElementById("enter-amount").addEventListener("keyup", function (e) {
     parseInt(amount || 0) / 1000 || 0 + " HXY";
 });
 
-  document.getElementById("proceed").addEventListener("click", function(){
+document.getElementById("proceed").addEventListener("click", function(){
 
     if (window.ethereum) {
       window.ethereum.enable();
@@ -94,7 +94,55 @@ document.getElementById("enter-amount").addEventListener("keyup", function (e) {
       showMetamaskLogin();
     }    
 
-  });
+ });
+
+document.getElementById("enter-amount").addEventListener("input", function (event) {
+  var myVal = event.target.value;
+  if (myVal.length > 12) {
+    document.getElementById("enter-amount").value = this.value.slice(0, 12);
+  }
+});
+
+document.getElementById("enter-amount").addEventListener("keydown", function (event) {
+  if (event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187) {
+    event.preventDefault();
+  }
+});
+
+
+document.getElementById("freeze-amount").addEventListener("input", function (event) {
+  var myVal = event.target.value;
+  if (myVal.length > 12) {
+    document.getElementById("freeze-amount").value = this.value.slice(0, 12);
+  }
+});
+
+document.getElementById("freeze-amount").addEventListener("keydown", function (event) {
+  if (event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187) {
+    event.preventDefault();
+  }
+});
+
+
+document.getElementById("modal-amount").addEventListener("input", function (event) {
+  var myVal = event.target.value;
+  if (myVal.length > 12) {
+    document.getElementById("modal-amount").value = this.value.slice(0, 12);
+  }
+});
+
+document.getElementById("modal-amount").addEventListener("keydown", function (event) {
+  if (event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187) {
+    event.preventDefault();
+  }
+});
+
+
+document.getElementById("email").addEventListener("input", function (event) {
+  var value = event.target.value;
+  removeSpaces(value);
+});
+
 
 function freeze(amount) {
   moneyInstance.methods

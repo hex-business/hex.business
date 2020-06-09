@@ -127,6 +127,19 @@ body {
 	align-items: center;
 }
 
+#subscription_area {
+	height:100%; 
+	padding: 100px;  
+	display: flex; 
+	align-items: center; 
+	justify-content: center;	
+}
+
+#subscription_area p {
+	text-align: center; 
+	margin-top: -100px;	
+}
+
 .currLabel{
 	width:140px;
 	float:left;

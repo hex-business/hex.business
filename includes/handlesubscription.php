@@ -71,8 +71,8 @@ $response = $obj->subscribe($lang, $email, $phrases);
 		<link rel="stylesheet" href="../static/css/basic.css?v=0.0.1">
 	</head>
 	<body>
-	<div class="App" style="height:100%; padding: 100px;  display: flex; align-items: center; justify-content: center;">
-		<?php echo "<p class='align-content-center; margin-top: -100px; '>" . $response . "</p>"  ?>
+	<div class="App" id="subscription_area" >
+		<?php echo "<p>" . $response . "</p>"  ?>
 	</div>
 	</body>
 

@@ -588,7 +588,7 @@
 								<div class="my-auto money-col money-text col-md-auto col-12"><strong><?php echo $phrases['send'] ?></strong></div> 
 								<div class="my-auto money-col col">
 									<input type='hidden' name='type' value="transform"/>
-									<input type="number" pattern="\d*" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12"  class="enter-amount" disabled="disabled" id='enter-amount' name='amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" />
+									<input type="number" pattern="\d*"  maxLength="12"  class="enter-amount" disabled="disabled" id='enter-amount' name='amount' min="0" placeholder="<?php echo $phrases['enter_amount'] ?>" />
 								</div>
  
 								<div class="my-auto money-text money-col col">
@@ -598,7 +598,7 @@
 									<strong><?php echo $phrases['can_receive'] ?> <span lang="en" id="canreceive">0 HXY&#46;</span></strong>
 								</div>
 								<div class="my-auto money-col col-sm-auto">
-									<button type="submit" class="action-button btn btn-light" id='transform' disabled="disabled"><?php echo $phrases['convert'] ?></button>
+									<button type="button" class="action-button btn btn-light" id='transform' disabled="disabled"><?php echo $phrases['convert'] ?></button>
 								</div>
 							</div>
 							</form>
@@ -617,12 +617,12 @@
 									</div>
 
 	
-									<div class="my-auto money-col col"><input type="number" disabled="disabled" class="enter-amount" pattern="\d*"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  maxLength="12"  id='freeze-amount' name='amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
+									<div class="my-auto money-col col"><input type="number" disabled="disabled" class="enter-amount" pattern="\d*" maxLength="12"  id='freeze-amount' name='amount' placeholder="<?php echo $phrases['enter_amount'] ?>" /></div>
 	
 									<div class="my-auto money-col money-text col"><strong lang="en">HXY&#46;</strong></div>
 
 									<div class="my-auto money-col col">
-										<button type="submit" class="action-button btn btn-light" id='proceed' disabled="disableds"><?php echo $phrases['proceed'] ?></button>
+										<button type="button" class="action-button btn btn-light" id='proceed' disabled="disableds"><?php echo $phrases['proceed'] ?></button>
 									</div>
 								
 							</div>
@@ -792,7 +792,7 @@
 				<div class="row"><p class="title"> <?php echo $phrases['for_more_information_subscribe'] ?></p></div>
 				<div class="justify-content-center emailform">
 					<form action="./includes/handlesubscription.php?lang=<?php echo $language?>" method="post" id="emailForm">
-						<div ><input class="email-input" type="email" oninput="removeSpaces(this.value)"  name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50" id="email" ></div>
+						<div ><input class="email-input" type="email" name="email" placeholder="<?php echo $phrases['email'] ?>" maxlength="50" id="email" ></div>
 						<div class="sign-up">
 							<button type="submit" class="sign-up btn btn-light"><strong><?php echo $phrases['subscription'] ?></strong></button>
 							<input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
@@ -862,7 +862,7 @@
 					<div class='mobile-approvediv'>
 						<div class="my-auto ">
 						<input type='hidden' name='type' value="approve"/>
-							<input type="number" disabled="disabled" class="enter-amount" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 187 ? false : true"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxLength="12"  id='modal-amount' name='amount' placeholder="<?php echo $phrases['enter_amount'] ?>" />
+							<input type="number" disabled="disabled" class="enter-amount" maxLength="12"  id='modal-amount' name='amount' placeholder="<?php echo $phrases['enter_amount'] ?>" />
 						</div>
 						<div class="my-auto col-md-auto">
 							<strong>HEX</strong>
@@ -871,7 +871,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" id="btn_approve" class="action-button btn btn-light" disabled="disabled"><?php echo $phrases['approve'] ?></button>
+				<button type="button" id="btn_approve" class="action-button btn btn-light" disabled="disabled"><?php echo $phrases['approve'] ?></button>
 			</div>
 		 </form>
 	</div>
