@@ -40,32 +40,6 @@
       }      
     }
 
-    public function initwithoutJS($acc): array {
-
-      $result = array();
-
-      try {
-            if(isset($acc) && !empty($acc))
-              $stats = $this->getAirdropStats($acc);
-            else
-            $stats = "invalid";
-      } catch (Exception $e) {
-          $stats = "invalid";
-      }
-
-      try {
-          $total = $this->getTotalAirdropped();
-      } catch (Exception $e){
-          $total = "invalid";
-      }
-
-      $result['status'] = 200;
-      $result['stats'] = $stats;
-      $result['total'] = $total;
-
-      return $result;
-
-    }
 
     /**
      * response HexAddress
