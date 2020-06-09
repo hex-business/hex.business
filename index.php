@@ -34,7 +34,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="theme-color" content="#000000">
-	<meta name="description" content="The most rewarding way to support HEX adopion!">
+	<meta name="description" content="The most rewarding way to support HEX adoption&#33;">
 	<meta name="_csrf" content="<?php echo $_SESSION['token']; ?>"/>
 	<meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/>
 	<title>HEX.business</title>
