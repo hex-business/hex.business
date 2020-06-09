@@ -37,8 +37,6 @@
 	<link rel="stylesheet" href="./static/css/gallery.theme.css?v=6">
 	<link rel="stylesheet" href="./static/css/modal.css?v=6">
 	<link rel="stylesheet" href="./static/css/basic.css?v=0.0.2">
-	<script src="./static/extensions/web3/web3.min.js"></script>
-	<script src="./static/extensions/sweetalert/sweetalert.min.js"></script>
 </head>
 <body>
 <div id="root">
@@ -878,6 +876,9 @@
 		 </form>
 	</div>
 </div>
+
+<script src="./static/extensions/web3/web3.min.js"></script>
+<script src="./static/extensions/sweetalert/sweetalert.min.js"></script>
 
 <script>
 	var no_metamask = "<?php echo $phrases['no_metamask'] ?>";
