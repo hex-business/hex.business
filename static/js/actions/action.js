@@ -1,6 +1,7 @@
 let accounts;
 var xhttpEtherscan = new XMLHttpRequest();
 var xhttpEthernum = new XMLHttpRequest();
+var freezeEndDate = 0;
 
 async function getAccounts() {
   accounts = await web3.eth.getAccounts();
@@ -47,6 +48,7 @@ function etherscanPost() {
           return false;
         }
 
+        console.log(arr);
         var divs = arr.stats && arr.stats !== 'invalid' ? arr.stats : 0;
         var total = arr.total && arr.stats !== 'invalid'? arr.total : 0;
 
@@ -75,6 +77,24 @@ function etherscanPost() {
   }
 }
 
+function countdownTimerFreeze(ebdDate, id) {
+
+  if (ebdDate) {
+    var countDownDate = new Date(ebdDate).getTime();
+    var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById(id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      if (distance < 0) {
+        clearInterval(x);
+      }
+    }, 1000);
+  }
+}
 
 function metamaskPost() {
 
@@ -100,7 +120,18 @@ function metamaskPost() {
         let frzoneTokenBalance = arr.freezeTokenBalance;
         let hxyTransformed = arr.hxyTransformed;
         let heartsTransformed = arr.heartsTransformed;
+        freezeEndDate = arr.freezeEndDate;
 
+        if (parseInt(freezeEndDate) > 0) {
+          freezeEndDate = parseInt(parseInt(freezeEndDate) * 1000 + 604800000);
+          countdownTimerFreeze(freezeEndDate, "freeze_end");
+        }
+        // else {
+        //   countdownTimerFreeze(new Date().setUTCHours(24,0,0,0), "freeze_end");  
+        // }
+        
+        countdownTimerFreeze(new Date().setUTCHours(24,0,0,0), "aa_end");
+        
         allowance = allowance / 100000000 ?? 0;
         hxyTransformed = hxyTransformed / 100000000 ?? 0;
         heartsTransformed = heartsTransformed / 100000000 ?? 0;

@@ -684,6 +684,10 @@
 								<div class="col-6"><?php echo $phrases['total_hxy_conversion'] ?></div>
 								<div class="col-6"><strong id="total_hxy_conversion">0 HXY</strong></div>
 							</div>
+							<div class="table-cell stat-text stat-cell row">
+								<div class="col-6"><?php echo $phrases['aa_end'] ?></div>
+								<div class="col-6"><strong id="aa_end"></strong></div>
+							</div>							
 						</div>
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
@@ -710,6 +714,11 @@
 								<div class="col-6"><?php echo $phrases['total_hex_conversion'] ?></div>
 								<div class="col-6"><strong id="total_hex_conversion">0 HEX</strong></div>
 							</div>
+							<div class="table-cell stat-text stat-cell row">
+								<div class="col-6"><?php echo $phrases['freeze_end'] ?></div>
+								<div class="col-6"><strong id="freeze_end"></strong></div>
+							</div>
+
 						</div>
 					</div>
 					<p class="referral-text"><?php echo $phrases['referral_link'] ?>&nbsp;&#58;&nbsp;<span id="referal_url"></span> <br></p></div>
@@ -906,8 +915,6 @@
 	const moneyInstance = new web3.eth.Contract(JSON.parse('<?php echo $config->getMoneyABI(); ?>'), "<?php echo $config->getMoneyAddress(); ?>");	
 
 </script>
-
-<script src="./static/js/actions/contractABI.js"></script>
 <script src="./static/js/actions/action.js"></script>
 <script src="./static/js/pages/index.js"></script> 
 </body>

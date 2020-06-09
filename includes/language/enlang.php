@@ -24,6 +24,8 @@
 	'circulation_quantity'             => 'CIRCULATING',
 	'universal_amplifier'              => 'ADOPTION AMPLIFIER ',
 	'aa_pool_val'                      => 'AA POOL val',
+	'freeze_end'                       => 'FREEZE END',
+	'aa_end'                           => 'AA END',
 	'aa_pool_price'                    => 'AA POOL cost',
 	'uniswap_price'                    => 'UNISWAP cost',
 	'click_link_below_to_download_app' => 'click one of the <strong>links</strong> to download our app',

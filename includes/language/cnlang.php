@@ -23,6 +23,8 @@
 	'circulation_quantity'             => '流通数量',
 	'universal_amplifier'              => '普及放大器 AA ',
 	'aa_pool_val'                      => 'AA POOL 总价值',
+	'freeze_end'                       => 'FREEZE END',
+	'aa_end'                           => 'AA END',
 	'aa_pool_price'                    => 'AA POOL 价格',
 	'uniswap_price'                    => 'UNISWAP 价格',
 	'transform_hex_to_hex_money'	   => '把六坊币<strong>HEX</strong>转换成六坊钱<strong>HXY</strong>',

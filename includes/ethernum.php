@@ -1,4 +1,5 @@
 <?php
+
 include_once __DIR__.'/session.php';
 include_once __DIR__.'/base.php';
 require_once  __DIR__ . '/config.php';
@@ -11,6 +12,7 @@ use Web3\RequestManagers\HttpRequestManager;
 class Ethernum extends Base
 {
     private const WALLET_ADDRESS = 'walletAddress';
+    private const FREEZE_END = 'freezeEndDate';
     private const MAX_SUPPLY = 'maxSupply';
     private const TOTAL_SUPPLY = 'totalSupply';
     private const FROZEN_BALANCES = 'frozenBalances';
@@ -32,6 +34,7 @@ class Ethernum extends Base
       if (empty($provider)) {
         throw new InvalidArgumentException("ethernum node uri cannot be empty");
       }
+
      if(isset($_POST['account']) && !empty($_POST['account'])) {
         $this->setUserAccount($_POST['account']);
       }
@@ -46,9 +49,10 @@ class Ethernum extends Base
     }
 
     public function init(): void
-    {        
+    {    
         if($this->isLogged())
         {
+          $this->getFreezeEndDate();
           $this->getTokenFrozenBalances();
           $this->getFreezingReward();
           $this->getAllowance();
@@ -69,6 +73,7 @@ class Ethernum extends Base
 
       $result = array();
       $result[self::FROZEN_BALANCES] = 0;
+      $result[self::FREEZE_END] = 0;
       $result[self::FREEZING_REWARD] = 0;
       $result[self::ALLOWANCE] = 0;
       $result[self::LOCKED_TOKEN] = 0;
@@ -91,6 +96,7 @@ class Ethernum extends Base
         $result[self::TOTAL_SUPPLY] = $_SESSION[self::TOTAL_SUPPLY];
         $result[self::MAX_SUPPLY] = $_SESSION[self::MAX_SUPPLY];
         $result[self::ACCOUNT_BALANCE] = $_SESSION[self::ACCOUNT_BALANCE];
+        $result[self::FREEZE_END] = $_SESSION[self::FREEZE_END];
         
       }
 
@@ -109,6 +115,41 @@ class Ethernum extends Base
         } catch (Exception $e) {
             return false;
         }
+    }
+
+
+    private function getFreezeDatetimeDiff(string $start): string {
+
+      $now = strtotime();
+      $freezeEnd = strtotime("+7 day", $start);
+      $diff = $freezeEnd - $now;
+      
+    }
+
+    private function getFreezeEndDate(): void {
+
+      if ($this->isLogged()) {
+        $this->moneyInstance->call('frozen', $this->getUserAccount(), function ($err, $result) {
+
+          if(!empty($err))  {
+            throw new InvalidArgumentException($err);
+          }
+          else {
+            if (count($result) > 0){
+              $start = $result["freezeStartTimestamp"]->value;             
+
+              if (gettype($start) == 'string') {
+                $_SESSION[self::FREEZE_END] = $start; 
+              }
+              else {
+                $_SESSION[self::FREEZE_END] = gmp_intval($start); 
+              }
+
+            }
+          }
+        });        
+      }
+
     }
 
     private function setUserAccount(string $address): void
@@ -354,4 +395,3 @@ class Ethernum extends Base
 
 $ethernum = new Ethernum(new Config);
 $ethernum->init();
- 
